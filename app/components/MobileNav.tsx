@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 
-/** Change this to your brand name if needed */
-const BRAND_NAME = "Form1";
+/** Brand name */
+const BRAND_NAME = "LocalLink Digital";
 
 /* Inline logo */
 function LogoMark({ size = 28 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" aria-label="Form1 logo">
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-label="LocalLink Digital logo">
       <defs>
         <linearGradient id="llg" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#23B8A5" />
@@ -30,14 +30,13 @@ function LogoMark({ size = 28 }: { size?: number }) {
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
 
-  // (Optional) lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black md:hidden shadow">
-      {/* Header row with logo + brand + hamburger */}
+      {/* Header row */}
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
           <LogoMark size={28} />
@@ -51,7 +50,6 @@ export default function MobileNav() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
-          aria-controls="mobile-drawer"
         >
           {open ? (
             <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
@@ -65,7 +63,7 @@ export default function MobileNav() {
         </button>
       </div>
 
-      {/* Click-away area (transparent, only active when open). Doesn't visually cover the screen. */}
+      {/* Click-away transparent overlay */}
       <button
         className={`fixed inset-0 z-40 md:hidden ${open ? "block" : "hidden"} bg-transparent`}
         onClick={() => setOpen(false)}
@@ -74,7 +72,6 @@ export default function MobileNav() {
 
       {/* Side drawer */}
       <aside
-        id="mobile-drawer"
         className={`fixed top-0 right-0 z-50 h-screen w-[78%] max-w-[320px] bg-black border-l border-neutral-800 transform transition-transform duration-300 ease-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
@@ -99,7 +96,7 @@ export default function MobileNav() {
         </div>
 
         {/* Drawer links */}
-        <nav className="flex flex-col px-4 py-4 gap-3 text-white text-base">
+        <nav className="flex flex-col px-4 py-6 gap-3 text-white text-base">
           <a
             href="#about"
             onClick={() => setOpen(false)}
@@ -129,8 +126,15 @@ export default function MobileNav() {
             Contact
           </a>
         </nav>
+
+        {/* Bottom branding */}
+        <div className="absolute bottom-6 left-0 w-full flex flex-col items-center justify-center">
+          <LogoMark size={40} />
+          <span className="text-white mt-2 text-sm font-semibold">{BRAND_NAME}</span>
+        </div>
       </aside>
     </nav>
   );
 }
+
 
