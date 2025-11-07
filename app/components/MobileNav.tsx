@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /** Brand name */
 const BRAND_NAME = "LocalLink Digital";
@@ -27,12 +28,31 @@ function LogoMark({ size = 28 }: { size?: number }) {
   );
 }
 
+/** Animation variants */
+const drawerVariants = {
+  hidden: { x: "100%" },
+  visible: { x: 0, transition: { type: "tween", duration: 0.25 } },
+  exit: { x: "100%", transition: { type: "tween", duration: 0.2 } },
+} as const;
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.06 } },
+} as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 6 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.2 } },
+} as const;
+
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
+
+  const close = () => setOpen(false);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black md:hidden shadow">
@@ -63,78 +83,87 @@ export default function MobileNav() {
         </button>
       </div>
 
-      {/* Click-away transparent overlay */}
-      <button
-        className={`fixed inset-0 z-40 md:hidden ${open ? "block" : "hidden"} bg-transparent`}
-        onClick={() => setOpen(false)}
-        aria-label="Close menu backdrop"
-      />
+      {/* Animated overlay + drawer */}
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Fade overlay (transparent click-away with soft fade for polish) */}
+            <motion.button
+              className="fixed inset-0 z-40 md:hidden bg-black/0"
+              onClick={close}
+              aria-label="Close menu backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.15 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            />
 
-      {/* Side drawer */}
-      <aside
-        className={`fixed top-0 right-0 z-50 h-screen w-[78%] max-w-[320px] bg-black border-l border-neutral-800 transform transition-transform duration-300 ease-out ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
-        role="dialog"
-        aria-modal="true"
-      >
-        {/* Drawer header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
-          <div className="flex items-center gap-2">
-            <LogoMark size={22} />
-            <span className="text-white text-sm font-semibold">{BRAND_NAME}</span>
-          </div>
-          <button
-            className="text-white"
-            onClick={() => setOpen(false)}
-            aria-label="Close menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
+            {/* Side drawer */}
+            <motion.aside
+              className="fixed top-0 right-0 z-50 h-screen w-[78%] max-w-[320px] bg-black border-l border-neutral-800"
+              role="dialog"
+              aria-modal="true"
+              variants={drawerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
+                <div className="flex items-center gap-2">
+                  <LogoMark size={22} />
+                  <span className="text-white text-sm font-semibold">{BRAND_NAME}</span>
+                </div>
+                <button className="text-white" onClick={close} aria-label="Close menu">
+                  <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
 
-        {/* Drawer links */}
-        <nav className="flex flex-col px-4 py-6 gap-3 text-white text-base">
-          <a
-            href="#about"
-            onClick={() => setOpen(false)}
-            className="py-2 px-2 rounded hover:bg-neutral-900 transition"
-          >
-            About
-          </a>
-          <a
-            href="#services"
-            onClick={() => setOpen(false)}
-            className="py-2 px-2 rounded hover:bg-neutral-900 transition"
-          >
-            Services
-          </a>
-          <a
-            href="#portfolio"
-            onClick={() => setOpen(false)}
-            className="py-2 px-2 rounded hover:bg-neutral-900 transition"
-          >
-            Portfolio
-          </a>
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className="py-2 px-2 rounded hover:bg-neutral-900 transition"
-          >
-            Contact
-          </a>
-        </nav>
+              {/* Drawer links (staggered fade/slide) */}
+              <motion.nav
+                className="flex flex-col px-4 py-6 gap-3 text-white text-base"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {[
+                  { href: "#about", label: "About" },
+                  { href: "#services", label: "Services" },
+                  { href: "#portfolio", label: "Portfolio" },
+                  { href: "#contact", label: "Contact" },
+                ].map((link) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={close}
+                    className="py-2 px-2 rounded hover:bg-neutral-900 transition"
+                    variants={itemVariants}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </motion.nav>
 
-        {/* Bottom branding */}
-        <div className="absolute bottom-6 left-0 w-full flex flex-col items-center justify-center">
-          <LogoMark size={40} />
-          <span className="text-white mt-2 text-sm font-semibold">{BRAND_NAME}</span>
-        </div>
-      </aside>
+              {/* Bottom branding (gentle fade/slide up) */}
+              <motion.div
+                className="absolute bottom-6 left-0 w-full flex flex-col items-center justify-center"
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.1 }}
+              >
+                <LogoMark size={40} />
+                <span className="text-white mt-2 text-sm font-semibold">{BRAND_NAME}</span>
+              </motion.div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
+
 
 
