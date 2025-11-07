@@ -8,7 +8,7 @@ const BRAND_NAME = "LocalLink Digital";
 /* Inline logo */
 function LogoMark({ size = 28 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" aria-label="LocalLink Digital logo">
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-label={`${BRAND_NAME} logo`}>
       <defs>
         <linearGradient id="llg" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#23B8A5" />
@@ -47,23 +47,43 @@ const itemVariants = {
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
+  const [hasShadow, setHasShadow] = useState(false);
 
+  // Lock body scroll when the drawer is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
+  // Scroll shadow under top bar
+  useEffect(() => {
+    const onScroll = () => setHasShadow(window.scrollY > 2);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const close = () => setOpen(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black md:hidden shadow">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 md:hidden bg-black transition-shadow ${
+        hasShadow ? "shadow-md" : "shadow-none"
+      }`}
+    >
       {/* Header row */}
       <div className="flex items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-2">
+        {/* Header logo + name (page-load fade/slide) */}
+        <motion.div
+          className="flex items-center gap-2"
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+        >
           <LogoMark size={28} />
           <span className="text-white text-base font-semibold tracking-wide">
             {BRAND_NAME}
           </span>
-        </div>
+        </motion.div>
 
         <button
           className="text-white focus:outline-none"
@@ -87,20 +107,20 @@ export default function MobileNav() {
       <AnimatePresence>
         {open && (
           <>
-            {/* Fade overlay (transparent click-away with soft fade for polish) */}
+            {/* Blurred, faint backdrop (click-away) */}
             <motion.button
-              className="fixed inset-0 z-40 md:hidden bg-black/0"
+              className="fixed inset-0 z-40 md:hidden bg-black/20 backdrop-blur-md"
               onClick={close}
               aria-label="Close menu backdrop"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.15 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             />
 
             {/* Side drawer */}
             <motion.aside
-              className="fixed top-0 right-0 z-50 h-screen w-[78%] max-w-[320px] bg-black border-l border-neutral-800"
+              className="fixed top-0 right-0 z-50 h-screen w-[78%] max-w-[320px] bg-black/95 border-l border-neutral-800 backdrop-blur-sm"
               role="dialog"
               aria-modal="true"
               variants={drawerVariants}
@@ -164,6 +184,7 @@ export default function MobileNav() {
     </nav>
   );
 }
+
 
 
 
