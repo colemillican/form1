@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /** Brand name */
@@ -49,10 +49,23 @@ export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
 
-  // Lock body scroll when the drawer is open
+  // Lock body scroll when the drawer is open (restore previous value on close)
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "auto";
+    const prev = document.body.style.overflow;
+    if (open) document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [open]);
+
+  // Esc to close
+  const close = useCallback(() => setOpen(false), []);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, close]);
 
   // Scroll shadow under top bar
   useEffect(() => {
@@ -62,7 +75,14 @@ export default function MobileNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const close = () => setOpen(false);
+  const LINKS = [
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/process", label: "Process" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
     <nav
@@ -72,17 +92,17 @@ export default function MobileNav() {
     >
       {/* Header row */}
       <div className="flex items-center justify-between px-4 py-3">
-        {/* Header logo + name (page-load fade/slide) */}
+        {/* Header logo + name */}
         <motion.div
           className="flex items-center gap-2"
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <LogoMark size={28} />
-          <span className="text-white text-base font-semibold tracking-wide">
-            {BRAND_NAME}
-          </span>
+          <a href="/" className="flex items-center gap-2">
+            <LogoMark size={28} />
+            <span className="text-white text-base font-semibold tracking-wide">{BRAND_NAME}</span>
+          </a>
         </motion.div>
 
         <button
@@ -107,7 +127,7 @@ export default function MobileNav() {
       <AnimatePresence>
         {open && (
           <>
-            {/* Blurred, faint backdrop (click-away) */}
+            {/* Backdrop (click-away) */}
             <motion.button
               className="fixed inset-0 z-40 md:hidden bg-black/20 backdrop-blur-md"
               onClick={close}
@@ -130,10 +150,10 @@ export default function MobileNav() {
             >
               {/* Drawer header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
-                <div className="flex items-center gap-2">
+                <a href="/" className="flex items-center gap-2" onClick={close}>
                   <LogoMark size={22} />
                   <span className="text-white text-sm font-semibold">{BRAND_NAME}</span>
-                </div>
+                </a>
                 <button className="text-white" onClick={close} aria-label="Close menu">
                   <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -141,19 +161,14 @@ export default function MobileNav() {
                 </button>
               </div>
 
-              {/* Drawer links (staggered fade/slide) */}
+              {/* Drawer links */}
               <motion.nav
                 className="flex flex-col px-4 py-6 gap-3 text-white text-base"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
-                {[
-                  { href: "#about", label: "About" },
-                  { href: "#services", label: "Services" },
-                  { href: "#portfolio", label: "Portfolio" },
-                  { href: "#contact", label: "Contact" },
-                ].map((link) => (
+                {LINKS.map((link) => (
                   <motion.a
                     key={link.href}
                     href={link.href}
@@ -166,7 +181,7 @@ export default function MobileNav() {
                 ))}
               </motion.nav>
 
-              {/* Bottom branding (gentle fade/slide up) */}
+              {/* Bottom branding */}
               <motion.div
                 className="absolute bottom-6 left-0 w-full flex flex-col items-center justify-center"
                 variants={itemVariants}
@@ -184,6 +199,7 @@ export default function MobileNav() {
     </nav>
   );
 }
+
 
 
 

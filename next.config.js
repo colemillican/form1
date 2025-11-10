@@ -1,12 +1,8 @@
-﻿const path = require("path");
-
+﻿// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  experimental: {
-    outputFileTracingRoot: path.join(__dirname),
-    appDir: true,
-  },
+  // If you needed this for a monorepo, keep it here at TOP LEVEL. Otherwise delete it.
+  // outputFileTracingRoot: __dirname,
 };
 
 module.exports = nextConfig;
