@@ -12,13 +12,6 @@ import {
   Smartphone,
 } from "lucide-react";
 import MobileNav from "./components/MobileNav";
-import { Space_Grotesk } from "next/font/google";
-
-/* ---------------------------------- Fonts --------------------------------- */
-const headlineFont = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-});
 
 /* ---------------------------------- Brand --------------------------------- */
 const BRAND = "LocalLink Digital";
@@ -35,7 +28,14 @@ function LogoInline({ size = 28 }: { size?: number }) {
       </defs>
       <rect x="4" y="4" width="56" height="56" rx="14" fill="#22c55e" />
       <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#lld-desktop)" />
-      <path d="M20 20v24h12M32 44h12V20" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path
+        d="M20 20v24h12M32 44h12V20"
+        stroke="white"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </svg>
   );
 }
@@ -104,18 +104,18 @@ export default function Page() {
 
           <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
             <div className="max-w-2xl">
-              <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">LOCAL SITES // GLOBAL STANDARDS</p>
+              <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">
+                LOCAL SITES // GLOBAL STANDARDS
+              </p>
 
-              {/* NEW HEADLINE with Space Grotesk + gradient accents */}
-              <h1
-                className={`${headlineFont.className} text-[clamp(36px,6vw,64px)] font-bold leading-[1.05] tracking-tight`}
-              >
+              {/* Original Headline */}
+              <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
                 <G>Empowering</G> local businesses
                 <br />
                 through <G>modern technology</G>.
               </h1>
 
-              {/* NEW SUBHEADLINE */}
+              {/* Subheadline */}
               <p className="mt-4 max-w-xl text-zinc-300">
                 LocalLink Digital turns your local business into a digital powerhouse — building,
                 maintaining, and optimizing a high-performance website that helps you attract
@@ -179,20 +179,45 @@ export default function Page() {
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
             <div className="mb-6 flex items-end justify-between">
               <h3 className="text-2xl font-semibold tracking-tight">Recent Launches</h3>
-              <a href="#contact" className="hidden sm:inline-flex items-center text-sm font-semibold text-zinc-300 hover:text-white">
+              <a
+                href="#contact"
+                className="hidden sm:inline-flex items-center text-sm font-semibold text-zinc-300 hover:text-white"
+              >
                 Request a preview <ArrowRight className="ml-1 h-4 w-4" />
               </a>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                { tag: "HOME SERVICES", title: "Precision HVAC", img: panel, blurb: "High-contrast landing + sticky call CTA." },
-                { tag: "FITNESS", title: "IronForge Gym", img: panel, blurb: "Hero video, class schedule, simple join flow." },
-                { tag: "AUTO DETAIL", title: "Ceramic Pro Studio", img: panel, blurb: "Glossy visuals, package matrix, lead form." },
+                {
+                  tag: "HOME SERVICES",
+                  title: "Precision HVAC",
+                  img: panel,
+                  blurb: "High-contrast landing + sticky call CTA.",
+                },
+                {
+                  tag: "FITNESS",
+                  title: "IronForge Gym",
+                  img: panel,
+                  blurb: "Hero video, class schedule, simple join flow.",
+                },
+                {
+                  tag: "AUTO DETAIL",
+                  title: "Ceramic Pro Studio",
+                  img: panel,
+                  blurb: "Glossy visuals, package matrix, lead form.",
+                },
               ].map((c, i) => (
-                <article key={i} className="group overflow-hidden rounded-2xl border border-white/10 bg-black">
+                <article
+                  key={i}
+                  className="group overflow-hidden rounded-2xl border border-white/10 bg-black"
+                >
                   <div className="relative">
-                    <img alt={`${c.title} preview`} src={c.img} className="aspect-[4/3] w-full object-cover opacity-90 transition group-hover:opacity-100" />
+                    <img
+                      alt={`${c.title} preview`}
+                      src={c.img}
+                      className="aspect-[4/3] w-full object-cover opacity-90 transition group-hover:opacity-100"
+                    />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
                   </div>
                   <div className="p-5">
@@ -221,7 +246,10 @@ export default function Page() {
         </section>
 
         {/* =============================== CONTACT ============================== */}
-        <section id="contact" className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950">
+        <section
+          id="contact"
+          className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950"
+        >
           <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-10 px-6 py-16 sm:grid-cols-2 sm:px-8">
             <div>
               <h3 className="text-2xl font-semibold tracking-tight">Start your free preview</h3>
@@ -242,15 +270,35 @@ export default function Page() {
             </div>
 
             <form className="max-w-xl space-y-3">
-              <input className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" placeholder="Business name" />
-              <input className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" placeholder="Your name" />
-              <input className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" type="email" placeholder="Email" />
-              <input className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" type="tel" inputMode="tel" placeholder="Phone" />
-              <textarea className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" placeholder="What do you do? What’s the main goal of this site?" />
+              <input
+                className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                placeholder="Business name"
+              />
+              <input
+                className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                placeholder="Your name"
+              />
+              <input
+                className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                type="email"
+                placeholder="Email"
+              />
+              <input
+                className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                type="tel"
+                inputMode="tel"
+                placeholder="Phone"
+              />
+              <textarea
+                className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                placeholder="What do you do? What’s the main goal of this site?"
+              />
               <button className="h-11 w-full rounded-full bg-white font-semibold text-black hover:bg-zinc-200 transition">
                 Request Preview
               </button>
-              <p className="text-xs text-zinc-500">By submitting, you agree to be contacted about your project.</p>
+              <p className="text-xs text-zinc-500">
+                By submitting, you agree to be contacted about your project.
+              </p>
             </form>
           </div>
         </section>
@@ -267,13 +315,23 @@ export default function Page() {
                 </div>
               </div>
               <nav className="flex flex-wrap items-center gap-5 text-sm">
-                <a href="#services" className="text-zinc-300 hover:text-white">Services</a>
-                <a href="#work" className="text-zinc-300 hover:text-white">Work</a>
-                <a href="#process" className="text-zinc-300 hover:text-white">Process</a>
-                <a href="#contact" className="text-zinc-300 hover:text-white">Contact</a>
+                <a href="#services" className="text-zinc-300 hover:text-white">
+                  Services
+                </a>
+                <a href="#work" className="text-zinc-300 hover:text-white">
+                  Work
+                </a>
+                <a href="#process" className="text-zinc-300 hover:text-white">
+                  Process
+                </a>
+                <a href="#contact" className="text-zinc-300 hover:text-white">
+                  Contact
+                </a>
               </nav>
             </div>
-            <div className="mt-6 text-xs text-zinc-500">© {new Date().getFullYear()} {BRAND}. All rights reserved.</div>
+            <div className="mt-6 text-xs text-zinc-500">
+              © {new Date().getFullYear()} {BRAND}. All rights reserved.
+            </div>
           </div>
         </footer>
       </main>
@@ -316,6 +374,7 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
     </div>
   );
 }
+
 
 
 
