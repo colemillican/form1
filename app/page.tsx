@@ -110,7 +110,7 @@ export default function Page() {
               <p className="mt-4 max-w-xl text-zinc-300">
                 LocalLink Digital turns your local business into a digital powerhouse — building,
                 maintaining, and optimizing a high-performance website that helps you attract
-                customers, stay visible, and grow in the modern market.
+                customers, stay visible, and save time.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
