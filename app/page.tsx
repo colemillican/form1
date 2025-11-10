@@ -12,6 +12,13 @@ import {
   Smartphone,
 } from "lucide-react";
 import MobileNav from "./components/MobileNav";
+import { Space_Grotesk } from "next/font/google";
+
+/* ---------------------------------- Fonts --------------------------------- */
+const headlineFont = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+});
 
 /* ---------------------------------- Brand --------------------------------- */
 const BRAND = "LocalLink Digital";
@@ -99,8 +106,10 @@ export default function Page() {
             <div className="max-w-2xl">
               <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">LOCAL SITES // GLOBAL STANDARDS</p>
 
-              {/* NEW HEADLINE with gradient accents */}
-              <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
+              {/* NEW HEADLINE with Space Grotesk + gradient accents */}
+              <h1
+                className={`${headlineFont.className} text-[clamp(36px,6vw,64px)] font-bold leading-[1.05] tracking-tight`}
+              >
                 <G>Empowering</G> local businesses
                 <br />
                 through <G>modern technology</G>.
@@ -307,6 +316,7 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
     </div>
   );
 }
+
 
 
 
