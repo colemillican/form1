@@ -51,12 +51,28 @@ const G = ({ children }: { children: React.ReactNode }) => (
 const headline = "font-[family-name:var(--font-headline,inherit)]";
 
 /* ----------------------------- Hero Carousel ------------------------------ */
+/** Curated, on-brand imagery: space, nature, local business aesthetics, local downtown, light tech */
 const HERO_IMAGES = [
-  // Futuristic, professional — no aliens :)
-  "https://images.unsplash.com/photo-1482192505345-5655af888cc4?q=80&w=2000&auto=format&fit=crop", // neon skyline
-  "https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=2000&auto=format&fit=crop", // abstract light trails
-  "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=2000&auto=format&fit=crop", // circuitry vibe
-  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop", // modern dev workspace
+  // Local downtown night street (warm/neon vibe)
+  "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=2000&auto=format&fit=crop",
+  // Cozy local business aesthetic (coffee shop interior)
+  "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2000&auto=format&fit=crop",
+  // Barbershop tools (clean craft aesthetic)
+  "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2000&auto=format&fit=crop",
+  // Milky Way over landscape (inspiring space)
+  "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=2000&auto=format&fit=crop",
+  // Earth/space glow (no aliens—purely inspirational)
+  "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2000&auto=format&fit=crop",
+  // Forest mist (calm, premium nature)
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop",
+  // Ocean cliffs (open, airy)
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop",
+  // Mountain sunrise (ambition/clarity)
+  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=2000&auto=format&fit=crop",
+  // Subtle technology (circuitry macro)
+  "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=2000&auto=format&fit=crop",
+  // Modern workspace (professional)
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop",
 ];
 
 function HeroCarousel() {
@@ -64,7 +80,7 @@ function HeroCarousel() {
   useEffect(() => {
     const id = setInterval(() => {
       setIdx((i) => (i + 1) % HERO_IMAGES.length);
-    }, 6000); // ~6s gentle rotation
+    }, 10000); // rotate roughly every 10 seconds
     return () => clearInterval(id);
   }, []);
 
@@ -392,6 +408,7 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
     </div>
   );
 }
+
 
 
 
