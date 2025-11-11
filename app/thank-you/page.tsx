@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import SiteChrome, { G } from "../components/SiteChrome";
+import SiteChrome from "../components/SiteChrome";
 import { ArrowRight } from "lucide-react";
 
 export default function ThankYouPage() {
