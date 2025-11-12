@@ -53,7 +53,7 @@ export default function ServicesPage() {
             {/* Cinematic Design */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1607082350914-003bb52b8b3b?q=80&w=1600&auto=format&fit=crop"
+                src="https://source.unsplash.com/1600x900/?web,design,ui"
                 alt="Cinematic design interface"
                 className="w-full aspect-[16/9] object-cover"
               />
@@ -73,8 +73,8 @@ export default function ServicesPage() {
             {/* Performance */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1581091012184-7f3dd241c2f6?q=80&w=1600&auto=format&fit=crop"
-                alt="Speed and performance"
+                src="https://source.unsplash.com/1600x900/?technology,speed,server"
+                alt="Fast technology imagery"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -93,8 +93,8 @@ export default function ServicesPage() {
             {/* SEO */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"
-                alt="SEO optimization graphic"
+                src="https://source.unsplash.com/1600x900/?seo,analytics,marketing"
+                alt="Search visibility"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -113,8 +113,8 @@ export default function ServicesPage() {
             {/* Management */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1627454826584-c990b8ed4c1e?q=80&w=1600&auto=format&fit=crop"
-                alt="Ongoing website management"
+                src="https://source.unsplash.com/1600x900/?computer,workflow,management"
+                alt="Ongoing management"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -144,6 +144,7 @@ export default function ServicesPage() {
     </div>
   );
 }
+
 
 
 
