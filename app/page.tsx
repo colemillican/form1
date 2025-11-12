@@ -149,7 +149,7 @@ export default function Page() {
   <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-8">
     <div className="mx-auto max-w-2xl text-center">
       <p className="mb-3 text-xs tracking-[0.35em] text-zinc-300">
-        LOCAL SITES // GLOBAL STANDARDS
+        
       </p>
 
       {/* Headline */}
