@@ -58,7 +58,6 @@ const heroFont = Exo_2({
 /* ----------------------------- Hero Carousel ------------------------------ */
 /** Grand + bright nature only (vast skies, oceans, mountains, aurora; one starscape) */
 const HERO_IMAGES = [
-  
   "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop", // expansive coastline
   "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop", // snowy ridge
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop", // rolling meadow
@@ -138,80 +137,78 @@ export default function Page() {
       </header>
 
       <main className="pt-16 sm:pt-0">
-       {/* ============================== HERO ============================== */}
-<section
-  className="relative isolate flex min-h-[86vh] items-end overflow-hidden"
-  style={{
-    backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.65)), url(${heroImg})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
-  {/* ambient glows */}
-  <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
-  <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
+        {/* ============================== HERO ============================== */}
+        <section className="relative isolate flex min-h-[86vh] items-end overflow-hidden">
+          {/* Carousel (background) */}
+          <HeroCarousel />
 
-  <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
-    <div className="max-w-2xl text-left sm:text-left">
-      <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400 text-center sm:text-left">
-        LOCAL SITES // GLOBAL STANDARDS
-      </p>
+          {/* ambient glows */}
+          <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
 
-      {/* Headline */}
-      <h1 className="text-[clamp(32px,6vw,60px)] font-black leading-[1.05] tracking-tight text-center sm:text-left">
-        <G>Stories that connect.</G><br />
-        <G>Websites that perform.</G>
-      </h1>
+          <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
+            <div className="max-w-2xl text-left sm:text-left">
+              <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400 text-center sm:text-left">
+                LOCAL SITES // GLOBAL STANDARDS
+              </p>
 
-      {/* Subheadline */}
-      <p className="mt-4 max-w-xl text-zinc-300 text-center sm:text-left">
-        LocalLink Digital turns your local business into a digital powerhouse — building,
-        maintaining, and optimizing a high-performance website that helps you attract customers,
-        stay visible, and save time.
-      </p>
+              {/* Headline (Exo_2) */}
+              <h1
+                className={`${heroFont.className} text-[clamp(32px,6vw,60px)] font-bold leading-[1.05] tracking-tight text-center sm:text-left`}
+              >
+                <G>Stories that connect.</G>
+                <br />
+                <G>Websites that perform.</G>
+              </h1>
 
-      {/* Input + Buttons */}
-      <div className="mt-8 flex flex-col items-center sm:items-start sm:flex-row sm:gap-3">
-        {/* Primary field on mobile */}
-        <input
-          type="text"
-          placeholder="Start your project..."
-          className="h-12 w-full sm:w-72 rounded-full border border-white/15 bg-white/10 px-5 text-[15px] placeholder:text-zinc-400 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/70 transition"
-        />
+              {/* Subheadline */}
+              <p className="mt-4 max-w-xl text-zinc-300 text-center sm:text-left">
+                LocalLink Digital turns your local business into a digital powerhouse — building,
+                maintaining, and optimizing a high-performance website that helps you attract
+                customers, stay visible, and save time.
+              </p>
 
-        {/* Buttons */}
-        <div className="mt-3 flex w-full flex-col gap-3 sm:mt-0 sm:w-auto sm:flex-row">
-          <a
-            href="#contact"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition w-full sm:w-auto"
-          >
-            Begin
-          </a>
-          <a
-            href="#work"
-            className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition w-full sm:w-auto"
-          >
-            See our work
-          </a>
-        </div>
-      </div>
+              {/* Input + Buttons */}
+              <div className="mt-8 flex flex-col items-center sm:items-start sm:flex-row sm:gap-3">
+                {/* Primary field on mobile */}
+                <input
+                  type="text"
+                  placeholder="Start your project..."
+                  className="h-12 w-full sm:w-72 rounded-full border border-white/15 bg-white/10 px-5 text-[15px] placeholder:text-zinc-400 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/70 transition"
+                />
 
-      {/* key signals */}
-      <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
-        <span className="inline-flex items-center gap-2">
-          <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
-        </span>
-        <span className="inline-flex items-center gap-2">
-          <ShieldCheck className="h-4 w-4 text-emerald-400" /> Fully managed
-        </span>
-        <span className="inline-flex items-center gap-2">
-          <Smartphone className="h-4 w-4 text-emerald-400" /> Mobile-first
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
+                {/* Buttons */}
+                <div className="mt-3 flex w-full flex-col gap-3 sm:mt-0 sm:w-auto sm:flex-row">
+                  <a
+                    href="/contact"
+                    className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition w-full sm:w-auto"
+                  >
+                    Begin
+                  </a>
+                  <a
+                    href="#work"
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition w-full sm:w-auto"
+                  >
+                    See our work
+                  </a>
+                </div>
+              </div>
 
+              {/* key signals */}
+              <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
+                <span className="inline-flex items-center gap-2">
+                  <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck className="h-4 w-4 text-emerald-400" /> Fully managed
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Smartphone className="h-4 w-4 text-emerald-400" /> Mobile-first
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* ============================ FEATURE STRIP ============================ */}
         <section id="services" className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
