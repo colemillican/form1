@@ -138,72 +138,80 @@ export default function Page() {
       </header>
 
       <main className="pt-16 sm:pt-0">
-        {/* ============================== HERO (Centered + Input) ============================== */}
-        <section className="relative isolate flex min-h-[88vh] flex-col items-center justify-center overflow-hidden text-center">
-          {/* rotating backgrounds */}
-          <HeroCarousel />
+       {/* ============================== HERO ============================== */}
+<section
+  className="relative isolate flex min-h-[86vh] items-end overflow-hidden"
+  style={{
+    backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.65)), url(${heroImg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+  {/* ambient glows */}
+  <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
+  <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
 
-          {/* ambient color glows */}
-          <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
+  <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
+    <div className="max-w-2xl text-left sm:text-left">
+      <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400 text-center sm:text-left">
+        LOCAL SITES // GLOBAL STANDARDS
+      </p>
 
-          <div className="relative z-10 mx-auto w-full max-w-screen-lg px-6 sm:px-8">
-            {/* tagline */}
-            <p className="mb-3 text-xs tracking-[0.35em] text-zinc-200">
-        
-            </p>
+      {/* Headline */}
+      <h1 className="text-[clamp(32px,6vw,60px)] font-black leading-[1.05] tracking-tight text-center sm:text-left">
+        <G>Stories that connect.</G><br />
+        <G>Websites that perform.</G>
+      </h1>
 
-            {/* headline */}
-            <h1
-              className={`${heroFont.className} text-[clamp(26px,4.2vw,44px)] font-bold leading-[1.12] tracking-tight max-w-3xl mx-auto`}
-            >
-              Stories that connect. <G>Websites that perform.</G>
-            </h1>
+      {/* Subheadline */}
+      <p className="mt-4 max-w-xl text-zinc-300 text-center sm:text-left">
+        LocalLink Digital turns your local business into a digital powerhouse — building,
+        maintaining, and optimizing a high-performance website that helps you attract customers,
+        stay visible, and save time.
+      </p>
 
-            {/* subhead */}
-            <p className="mt-4 text-zinc-100/90 max-w-2xl mx-auto text-[15px] leading-relaxed">
-              We blend the clarity and scale of the natural world with modern web engineering —
-              turning your brand’s story into a fast, cinematic site that drives real results.
-            </p>
+      {/* Input + Buttons */}
+      <div className="mt-8 flex flex-col items-center sm:items-start sm:flex-row sm:gap-3">
+        {/* Primary field on mobile */}
+        <input
+          type="text"
+          placeholder="Start your project..."
+          className="h-12 w-full sm:w-72 rounded-full border border-white/15 bg-white/10 px-5 text-[15px] placeholder:text-zinc-400 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/70 transition"
+        />
 
-            {/* interactive input */}
-            <div className="mt-8 flex w-full max-w-md mx-auto flex-col sm:flex-row items-center justify-center gap-3">
-              <input
-                className="flex-1 h-12 rounded-full border border-white/15 bg-white/10 px-5 text-[15px] text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 backdrop-blur-sm transition"
-                placeholder="Start your project — what’s your business called?"
-              />
-              <a
-                href="/contact"
-                className="h-12 w-full sm:w-auto rounded-full bg-white text-black px-6 font-semibold hover:bg-zinc-200 transition inline-flex items-center justify-center"
-              >
-                Begin
-              </a>
-            </div>
+        {/* Buttons */}
+        <div className="mt-3 flex w-full flex-col gap-3 sm:mt-0 sm:w-auto sm:flex-row">
+          <a
+            href="#contact"
+            className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition w-full sm:w-auto"
+          >
+            Begin
+          </a>
+          <a
+            href="#work"
+            className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition w-full sm:w-auto"
+          >
+            See our work
+          </a>
+        </div>
+      </div>
 
-            {/* signals */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13px] text-zinc-200">
-              <span className="inline-flex items-center gap-2">
-                <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                Built fast
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                Fully managed
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="7" y="2" width="10" height="20" rx="2" />
-                  <path d="M11 18h2" />
-                </svg>
-                Mobile-first
-              </span>
-            </div>
-          </div>
-        </section>
+      {/* key signals */}
+      <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
+        <span className="inline-flex items-center gap-2">
+          <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
+        </span>
+        <span className="inline-flex items-center gap-2">
+          <ShieldCheck className="h-4 w-4 text-emerald-400" /> Fully managed
+        </span>
+        <span className="inline-flex items-center gap-2">
+          <Smartphone className="h-4 w-4 text-emerald-400" /> Mobile-first
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* ============================ FEATURE STRIP ============================ */}
         <section id="services" className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
