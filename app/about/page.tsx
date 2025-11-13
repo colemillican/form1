@@ -24,9 +24,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CONTENT + VISUAL */}
+      {/* CONTENT + SMALLER VISUAL */}
       <section className="bg-black">
-        <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-10 md:grid-cols-[1.2fr,1fr] items-center">
+        <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-10 md:grid-cols-[1.5fr,1fr] items-center">
+          
           {/* Copy side */}
           <div className="space-y-5 text-zinc-300 leading-relaxed">
             <p>
@@ -42,28 +43,22 @@ export default function AboutPage() {
             <p>
               Instead of “one and done” builds, we think in long-term partnerships. Your business
               will evolve, and your site should evolve with it—without you needing to dive into
-              dashboards, updates, or plugins.
+              dashboards or plugins.
             </p>
           </div>
 
-          {/* Visual / stats card */}
+          {/* Visual */}
           <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
-              alt="Team collaborating around a laptop"
-              className="w-full aspect-[4/3] object-cover"
+              alt="Team collaborating"
+              className="w-full aspect-[5/3] object-cover"   // << SHRUNK IMAGE
             />
-            <div className="p-5 text-sm text-zinc-200 space-y-2">
+            <div className="p-4 text-xs sm:text-sm text-zinc-200 space-y-2">
               <div className="font-semibold text-base">How we think about “good”</div>
-              <p>
-                • A site should feel effortless to use, even on a bad connection.
-              </p>
-              <p>
-                • Every section should have a clear job: explain, build trust, or drive action.
-              </p>
-              <p>
-                • The design should quietly make you look sharp—never cheesy or overdone.
-              </p>
+              <p>• A site should feel effortless to use, even on a bad connection.</p>
+              <p>• Every section should have a clear job: explain, build trust, or drive action.</p>
+              <p>• The design should quietly make you look sharp—never cheesy or overdone.</p>
             </div>
           </div>
         </div>
@@ -71,6 +66,7 @@ export default function AboutPage() {
     </SiteChrome>
   );
 }
+
 
 
 
