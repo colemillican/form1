@@ -40,7 +40,8 @@ export default function ProcessPage() {
 
       {/* STEPS + VISUAL */}
       <section className="bg-black">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-10 lg:grid-cols-[1.1fr,1fr] items-start">
+        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-10 lg:grid-cols-[1.3fr,1fr] items-start">
+          {/* Steps */}
           <div className="grid gap-5 sm:grid-cols-3">
             <Step
               n={1}
@@ -59,17 +60,18 @@ export default function ProcessPage() {
             />
           </div>
 
+          {/* Tech visual */}
           <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?q=80&w=1600&auto=format&fit=crop"
-              alt="Workflow board and laptop"
+              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop"
+              alt="Team planning digital product workflow"
               className="w-full aspect-[21/9] object-cover"
             />
-            <div className="p-5 text-sm text-zinc-200 space-y-2">
+            <div className="p-4 text-xs sm:text-sm text-zinc-200 space-y-2">
               <div className="font-semibold text-base">What we need from you</div>
               <p>• 30–45 minutes for an initial kickoff conversation.</p>
               <p>• Any existing logo, photos, or brand pieces you want us to use.</p>
-              <p>• Straightforward feedback at 1–2 key checkpoints. We’ll guide the rest.</p>
+              <p>• Straightforward feedback at 1–2 checkpoints. We guide the rest.</p>
             </div>
           </div>
         </div>
@@ -77,6 +79,7 @@ export default function ProcessPage() {
     </SiteChrome>
   );
 }
+
 
 
 
