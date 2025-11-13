@@ -63,7 +63,7 @@ export default function ProcessPage() {
             <img
               src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?q=80&w=1600&auto=format&fit=crop"
               alt="Workflow board and laptop"
-              className="w-full aspect-[4/3] object-cover"
+              className="w-full aspect-[21/9] object-cover"
             />
             <div className="p-5 text-sm text-zinc-200 space-y-2">
               <div className="font-semibold text-base">What we need from you</div>
