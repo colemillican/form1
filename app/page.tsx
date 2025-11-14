@@ -53,8 +53,9 @@ function HeroCarousel() {
             i === idx ? "opacity-100" : "opacity-0"
           }`}
           style={{
+            // LIGHTER overlay than before
             backgroundImage: `
-              radial-gradient(circle at center, rgba(0,0,0,0.08), rgba(0,0,0,0.18)),
+              radial-gradient(circle at center, rgba(0,0,0,0.03), rgba(0,0,0,0.10)),
               url(${src})
             `,
             backgroundSize: "cover",
@@ -110,31 +111,31 @@ export default function Page() {
 
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            {/* Headline with separate mobile/desktop layouts */}
+            {/* Headline – bigger, and forced to 2 lines on mobile */}
             <h1
               className={`
                 ${heroFont.className}
-                text-[clamp(30px,7vw,56px)]
+                text-[clamp(36px,8.5vw,60px)]
                 font-bold
-                leading-[1.05]
+                leading-[1.04]
                 tracking-[0.02em]
                 mx-auto
                 text-center
-                max-w-[340px]
+                max-w-[430px]
                 sm:max-w-none
               `}
               style={{
-                textShadow: "0 6px 22px rgba(0,0,0,0.42)",
+                textShadow: "0 6px 22px rgba(0,0,0,0.35)",
               }}
             >
-              {/* MOBILE: force 2 lines */}
-              <span className="sm:hidden block">
+              {/* MOBILE: exactly 2 lines, second line uses non-breaking spaces */}
+              <span className="block sm:hidden">
                 <G>Stories that connect.</G>
                 <br />
-                <G>Websites that perform.</G>
+                <G>Websites&nbsp;that&nbsp;perform.</G>
               </span>
 
-              {/* DESKTOP: same copy, desktop layout control */}
+              {/* DESKTOP: same copy, normal spacing */}
               <span className="hidden sm:block">
                 <G>Stories that connect.</G>
                 <br />
@@ -142,7 +143,7 @@ export default function Page() {
               </span>
             </h1>
 
-            <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+            <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.30)]">
               We bring your story to life online — designing, building, and
               managing beautiful, high-performing websites that help local
               customers find you, trust you, and reach you.
@@ -160,7 +161,7 @@ export default function Page() {
             </div>
 
             {/* Badges */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-[13px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-[13px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.30)]">
               <span className="inline-flex items-center gap-2">
                 <Bolt className="h-4 w-4 text-emerald-300" />
                 Built for local businesses
@@ -359,6 +360,7 @@ export default function Page() {
     </SiteChrome>
   );
 }
+
 
 
 
