@@ -21,7 +21,7 @@ const heroFont = Exo_2({
   display: "swap",
 });
 
-/* Hero carousel images (your original scenic set) */
+/* Hero carousel images (your scenic set) */
 const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop",
@@ -53,9 +53,8 @@ function HeroCarousel() {
             i === idx ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            // LIGHT, subtle overlay so the image stays bright
             backgroundImage: `
-              radial-gradient(circle at center, rgba(0,0,0,0.02), rgba(0,0,0,0.08)),
+              radial-gradient(circle at center, rgba(0,0,0,0.08), rgba(0,0,0,0.18)),
               url(${src})
             `,
             backgroundSize: "cover",
@@ -111,17 +110,16 @@ export default function Page() {
 
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            {/* Headline – big, simple, and responsive */}
             <h1
               className={`
                 ${heroFont.className}
-                text-[32px] sm:text-[46px] lg:text-[60px]
+                text-[40px] sm:text-[48px] lg:text-[60px]
                 font-bold
                 leading-[1.05]
-                tracking-tight
+                tracking-[0.01em]
                 text-center
                 text-white
-                drop-shadow-[0_6px_22px_rgba(0,0,0,0.35)]
+                drop-shadow-[0_8px_26px_rgba(0,0,0,0.35)]
               `}
             >
               <G>Stories that connect.</G>
@@ -129,7 +127,7 @@ export default function Page() {
               <G>Websites that perform.</G>
             </h1>
 
-            <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]">
+            <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
               We bring your story to life online — designing, building, and
               managing beautiful, high-performing websites that help local
               customers find you, trust you, and reach you.
@@ -147,7 +145,7 @@ export default function Page() {
             </div>
 
             {/* Badges */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-[13px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-[13px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
               <span className="inline-flex items-center gap-2">
                 <Bolt className="h-4 w-4 text-emerald-300" />
                 Built for local businesses
@@ -346,6 +344,7 @@ export default function Page() {
     </SiteChrome>
   );
 }
+
 
 
 
