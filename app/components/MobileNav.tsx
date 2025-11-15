@@ -1,14 +1,17 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-/** Brand name */
-const BRAND_NAME = "LocalLink Digital";
+import { useEffect, useState } from "react";
 
-/* Inline logo */
+/* Inline logo mark */
 function LogoMark({ size = 28 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" aria-label={`${BRAND_NAME} logo`}>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      aria-label="LocalLink Digital logo"
+      role="img"
+    >
       <defs>
         <linearGradient id="llg" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#23B8A5" />
@@ -28,177 +31,86 @@ function LogoMark({ size = 28 }: { size?: number }) {
   );
 }
 
-/** Animation variants */
-const drawerVariants = {
-  hidden: { x: "100%" },
-  visible: { x: 0, transition: { type: "tween", duration: 0.25 } },
-  exit: { x: "100%", transition: { type: "tween", duration: 0.2 } },
-} as const;
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.06 } },
-} as const;
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 6 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.2 } },
-} as const;
-
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
-  const [hasShadow, setHasShadow] = useState(false);
 
-  // Lock body scroll when the drawer is open (restore previous value on close)
   useEffect(() => {
-    const prev = document.body.style.overflow;
-    if (open) document.body.style.overflow = "hidden";
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = "";
     };
   }, [open]);
 
-  // Esc to close
-  const close = useCallback(() => setOpen(false), []);
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, close]);
-
-  // Scroll shadow under top bar
-  useEffect(() => {
-    const onScroll = () => setHasShadow(window.scrollY > 2);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const LINKS = [
-    { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
-    { href: "/process", label: "Process" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/faq", label: "FAQ" },
-    { href: "/contact", label: "Contact" },
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 md:hidden bg-black transition-shadow ${
-        hasShadow ? "shadow-md" : "shadow-none"
-      }`}
-    >
-      {/* Header row */}
-      <div className="flex items-center justify-between px-4 py-3">
-        {/* Header logo + name */}
-        <motion.div
-          className="flex items-center gap-2"
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-        >
-          <a href="/" className="flex items-center gap-2">
-            <LogoMark size={28} />
-            <span className="text-white text-base font-semibold tracking-wide">{BRAND_NAME}</span>
-          </a>
-        </motion.div>
+    <>
+      {/* Top header – very minimal, transparent/gradient like Apple/ChatGPT */}
+      <header className="fixed inset-x-0 top-0 z-50">
+        <div className="bg-gradient-to-b from-black/50 via-black/20 to-transparent">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-4 pt-4 pb-3 sm:px-6">
+            <LogoMark size={26} />
 
-        <button
-          className="text-white focus:outline-none"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          {open ? (
-            <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
-        </button>
-      </div>
-
-      {/* Animated overlay + drawer */}
-      <AnimatePresence>
-        {open && (
-          <>
-            {/* Backdrop (click-away) */}
-            <motion.button
-              className="fixed inset-0 z-40 md:hidden bg-black/20 backdrop-blur-md"
-              onClick={close}
-              aria-label="Close menu backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            />
-
-            {/* Side drawer */}
-            <motion.aside
-              className="fixed top-0 right-0 z-50 h-screen w-[78%] max-w-[320px] bg-black/95 border-l border-neutral-800 backdrop-blur-sm"
-              role="dialog"
-              aria-modal="true"
-              variants={drawerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm"
+              aria-label="Open navigation"
             >
-              {/* Drawer header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
-                <a href="/" className="flex items-center gap-2" onClick={close}>
-                  <LogoMark size={22} />
-                  <span className="text-white text-sm font-semibold">{BRAND_NAME}</span>
-                </a>
-                <button className="text-white" onClick={close} aria-label="Close menu">
-                  <svg className="w-6 h-6" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+              <span className="sr-only">Open navigation</span>
+              <div className="flex flex-col gap-1.5">
+                <span className="block h-0.5 w-5 rounded-full bg-white" />
+                <span className="block h-0.5 w-5 rounded-full bg-white" />
+                <span className="block h-0.5 w-5 rounded-full bg-white" />
               </div>
+            </button>
+          </div>
+        </div>
+      </header>
 
-              {/* Drawer links */}
-              <motion.nav
-                className="flex flex-col px-4 py-6 gap-3 text-white text-base"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
+      {/* Full-screen mobile menu */}
+      {open && (
+        <div className="fixed inset-0 z-50 bg-neutral-950/95 backdrop-blur">
+          <div className="mx-auto flex max-w-5xl flex-col px-4 pt-4 sm:px-6">
+            <div className="flex items-center justify-between pb-4">
+              <LogoMark size={26} />
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40"
+                aria-label="Close navigation"
               >
-                {LINKS.map((link) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={close}
-                    className="py-2 px-2 rounded hover:bg-neutral-900 transition"
-                    variants={itemVariants}
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-              </motion.nav>
+                <span className="sr-only">Close navigation</span>
+                <div className="relative h-4 w-4">
+                  <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 rotate-45 rounded-full bg-white" />
+                  <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 -rotate-45 rounded-full bg-white" />
+                </div>
+              </button>
+            </div>
 
-              {/* Bottom branding */}
-              <motion.div
-                className="absolute bottom-6 left-0 w-full flex flex-col items-center justify-center"
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.1 }}
-              >
-                <LogoMark size={40} />
-                <span className="text-white mt-2 text-sm font-semibold">{BRAND_NAME}</span>
-              </motion.div>
-            </motion.aside>
-          </>
-        )}
-      </AnimatePresence>
-    </nav>
+            <nav className="mt-6 flex flex-col gap-4 text-lg font-medium text-white">
+              <a href="#services" onClick={() => setOpen(false)} className="opacity-90 hover:opacity-100">
+                Services
+              </a>
+              <a href="#process" onClick={() => setOpen(false)} className="opacity-90 hover:opacity-100">
+                Process
+              </a>
+              <a href="#about" onClick={() => setOpen(false)} className="opacity-90 hover:opacity-100">
+                About
+              </a>
+              <a href="#contact" onClick={() => setOpen(false)} className="opacity-90 hover:opacity-100">
+                Contact
+              </a>
+            </nav>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
+
 
 
 
