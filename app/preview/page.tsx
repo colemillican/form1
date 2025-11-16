@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, FormEvent } from "react";
+import Link from "next/link";
 
 type StyleVibe = "cinematic" | "warm" | "minimal" | "playful";
 type PreviewPhase = "form" | "loading" | "concept";
@@ -39,6 +40,8 @@ const loadingPhrases = [
   "Designing a digital first impression that feels like you…",
 ];
 
+/* ---------------------- Concept builder (no API) ---------------------- */
+
 function buildConcept(form: FormState): Concept {
   const safeName = form.businessName || "Your Business";
   const safeIndustry = form.industry || "your field";
@@ -53,7 +56,6 @@ function buildConcept(form: FormState): Concept {
 
   // Visual direction based on style vibe
   let visualDirection: string;
-  let primaryAccent = "emerald";
 
   switch (form.styleVibe) {
     case "cinematic":
@@ -62,7 +64,6 @@ function buildConcept(form: FormState): Concept {
         "The page should feel premium and modern, with full-width sections, strong focal points, and just enough motion to feel alive without becoming noisy.",
         "Photography or visuals should feel real and intentional — think dramatic lighting, clean compositions, and a focus on people and outcomes, not generic stock.",
       ].join(" ");
-      primaryAccent = "emerald";
       break;
     case "warm":
       visualDirection = [
@@ -70,7 +71,6 @@ function buildConcept(form: FormState): Concept {
         "The page should feel approachable and trustworthy, with plenty of white space, gentle gradients, and imagery that feels human and grounded.",
         "Visuals should highlight real people, real spaces, and the emotions behind your work rather than just the surface-level product.",
       ].join(" ");
-      primaryAccent = "amber";
       break;
     case "minimal":
       visualDirection = [
@@ -78,7 +78,6 @@ function buildConcept(form: FormState): Concept {
         "The page should feel sharp, focused, and uncluttered — every section has a job, and nothing feels extra.",
         "Typography will do more of the heavy lifting, with crisp hierarchy and small, intentional moments of color.",
       ].join(" ");
-      primaryAccent = "sky";
       break;
     case "playful":
       visualDirection = [
@@ -86,7 +85,6 @@ function buildConcept(form: FormState): Concept {
         "The page should feel energetic but still professional, with clear structure underneath the creativity.",
         "Imagery can highlight people in motion, candid moments, and visuals that feel dynamic and fun.",
       ].join(" ");
-      primaryAccent = "violet";
       break;
     default:
       visualDirection = "";
@@ -110,9 +108,7 @@ function buildConcept(form: FormState): Concept {
       description:
         "A quick hit of proof that you’re real, established, and reliable.",
       bullets: [
-        "Logos, certifications, or quick stats (‘100+ clients served in " +
-          safeLocation +
-          "’).",
+        `Logos, certifications, or quick stats (“100+ clients served in ${safeLocation}”).`,
         "1–3 short bullets explaining why people choose you.",
         "Language that feels confident but never over-hyped.",
       ],
@@ -142,8 +138,8 @@ function buildConcept(form: FormState): Concept {
       description:
         "A quick, honest window into who’s behind the business and what you stand for.",
       bullets: [
-        "Short founder or team intro (not a resume, but a perspective).",
-        "Why you started " + safeName + " and what you believe should change.",
+        `Short founder or team intro (not a resume, but a perspective).`,
+        `Why you started ${safeName} and what you believe should change.`,
         "A line or two about your approach and values.",
       ],
     },
@@ -167,9 +163,9 @@ function buildConcept(form: FormState): Concept {
   ];
 
   const heroSublines: string[] = [
-    `Designed to build trust, explain your value quickly, and guide people to take action.`,
-    `No templates. No fluff. Just a clear story and layout built around your real goals.`,
-    `From first scroll to final click, every section is there to move the right people closer to working with you.`,
+    "Designed to build trust, explain your value quickly, and guide people to take action.",
+    "No templates. No fluff. Just a clear story and layout built around your real goals.",
+    "From first scroll to final click, every section is there to move the right people closer to working with you.",
   ];
 
   const ctas: string[] = [
@@ -195,6 +191,32 @@ function buildConcept(form: FormState): Concept {
     whyThisWorks,
   };
 }
+
+/* --------------------------- Shared Page Shell -------------------------- */
+
+function PageShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <header className="flex h-14 items-center justify-between border-b border-white/10 bg-black/80 px-5 backdrop-blur">
+        {/* Make logo + brand clickable back to home */}
+        <Link href="/" className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500">
+            <div className="h-3 w-3 rounded-md border-2 border-white/90 border-b-transparent" />
+          </div>
+          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">
+            LocalLink Digital
+          </span>
+        </Link>
+        <span className="rounded-full border border-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-zinc-400">
+          Preview Portal
+        </span>
+      </header>
+      {children}
+    </div>
+  );
+}
+
+/* ----------------------------- Loading Screen ---------------------------- */
 
 function LoadingScreen() {
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -238,6 +260,8 @@ function LoadingScreen() {
     </main>
   );
 }
+
+/* ---------------------------- Main Page Logic ---------------------------- */
 
 export default function PreviewPage() {
   const [phase, setPhase] = useState<PreviewPhase>("form");
@@ -284,34 +308,14 @@ export default function PreviewPage() {
     e.preventDefault();
 
     setPhase("loading");
-
     const built = buildConcept(form);
 
     // Fake cinematic load
     setTimeout(() => {
       setConcept(built);
       setPhase("concept");
-    }, 8000); // ~8 seconds, feels intentional but not painful
+    }, 8000);
   };
-
-  const PageShell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <div className="min-h-screen bg-black text-white">
-      <header className="flex h-14 items-center justify-between border-b border-white/10 bg-black/80 px-5 backdrop-blur">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500">
-            <div className="h-3 w-3 rounded-md border-2 border-white/90 border-b-transparent" />
-          </div>
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">
-            LocalLink Digital
-          </span>
-        </div>
-        <span className="rounded-full border border-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-zinc-400">
-          Preview Portal
-        </span>
-      </header>
-      {children}
-    </div>
-  );
 
   if (phase === "loading") {
     return (
@@ -477,7 +481,7 @@ export default function PreviewPage() {
     );
   }
 
-  // Default: form
+  // Default: form phase
   return (
     <PageShell>
       <main className="mx-auto flex min-h-[calc(100vh-56px)] max-w-4xl flex-col px-5 py-10 lg:px-8">
