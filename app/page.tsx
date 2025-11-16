@@ -138,7 +138,7 @@ export default function Page() {
             {/* Centered CTA */}
             <div className="mt-8 flex justify-center">
               <a
-                href="/contact"
+                href="/preview"
                 className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-12 py-4 text-[16px] font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.45)] transition hover:from-emerald-300 hover:to-emerald-200 hover:shadow-[0_18px_40px_rgba(16,185,129,0.55)]"
               >
                 Get my free website outline
