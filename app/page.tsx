@@ -130,9 +130,8 @@ export default function Page() {
             </h1>
 
             <p className="mt-5 text-[15px] leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
-              We bring your story to life online — designing, building, and
-              managing beautiful, high-performing websites that help local
-              customers find you, trust you, and reach you.
+              We bring your story to life online — designing, building, and managing beautiful,
+              high-performing websites that help local customers find you, trust you, and reach you.
             </p>
 
             {/* Centered CTA */}
@@ -189,68 +188,126 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ============== WORK (SAMPLE PROJECTS) ============== */}
-      <section id="work" className="bg-zinc-950">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
-          <div className="mb-6 flex items-end justify-between">
-            <h3 className="text-2xl font-semibold tracking-tight">
-              Recent launches
-            </h3>
-            <a
-              href="/contact"
-              className="hidden items-center text-sm font-semibold text-zinc-300 hover:text-white sm:inline-flex"
-            >
-              Request a preview
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </a>
+      {/* ============== AI STACK / FUTURE-FOCUSED ============== */}
+      <section className="border-t border-white/10 bg-black">
+        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 space-y-10">
+          {/* Cinematic AI mission card */}
+          <div className="rounded-2xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/10 via-cyan-400/10 to-zinc-900/80 p-5 sm:p-6 relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_0%_0%,rgba(52,211,153,0.4),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(56,189,248,0.35),transparent_55%)]" />
+            <div className="relative z-10 max-w-3xl">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-300/90">
+                The LocalLink AI stack
+              </p>
+              <h2
+                className={`${heroFont.className} mt-2 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-white`}
+              >
+                Websites that perform today. AI tools that prepare you for tomorrow.
+              </h2>
+              <p className="mt-3 text-sm sm:text-[15px] text-emerald-50/90">
+                We&apos;re a startup out of Auburn, Alabama, building not just websites—but a
+                practical AI toolkit for real local businesses. The goal: make your small team feel
+                like it has extra employees without adding extra payroll.
+              </p>
+              <p className="mt-3 text-xs sm:text-sm text-emerald-100/80">
+                As an early partner, you get a modern site, fully managed—and a front-row seat to
+                the AI tools we&apos;re rolling out next.
+              </p>
+            </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                tag: "HOME SERVICES",
-                title: "Precision HVAC",
-                img: "https://images.unsplash.com/photo-1520975922284-9b9a45d43f9a?q=80&w=1600&auto=format&fit=crop",
-                blurb:
-                  "High-contrast landing, service sections, and a sticky call CTA.",
-              },
-              {
-                tag: "FITNESS",
-                title: "IronForge Gym",
-                img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600&auto=format&fit=crop",
-                blurb:
-                  "Hero imagery, class schedule, and a simple join flow for new members.",
-              },
-              {
-                tag: "AUTO DETAIL",
-                title: "Ceramic Pro Studio",
-                img: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop",
-                blurb:
-                  "Glossy visuals, package matrix, and a lead capture form tuned for bookings.",
-              },
-            ].map((c, i) => (
-              <article
-                key={i}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-black"
-              >
-                <div className="relative">
-                  <img
-                    alt={`${c.title} preview`}
-                    src={c.img}
-                    className="aspect-[4/3] w-full object-cover opacity-90 transition group-hover:opacity-100"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/15" />
-                </div>
-                <div className="p-5">
-                  <span className="inline-block rounded-md border border-white/15 bg-white/5 px-2 py-1 text-[11px] font-medium tracking-wide text-zinc-300">
-                    {c.tag}
+          {/* AI tools grid */}
+          <div className="grid gap-5 md:grid-cols-2">
+            {/* Tool 1 */}
+            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
+                    ND
                   </span>
-                  <h4 className="mt-2 text-lg font-semibold">{c.title}</h4>
-                  <p className="mt-1 text-sm text-zinc-400">{c.blurb}</p>
                 </div>
-              </article>
-            ))}
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                    NovaDesk AI
+                  </div>
+                  <p className="text-[11px] text-zinc-400">AI front desk assistant</p>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-200">
+                An AI “employee” that can answer common questions, handle simple booking requests,
+                and route real leads to you—so fewer messages slip through the cracks.
+              </p>
+            </div>
+
+            {/* Tool 2 */}
+            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-400">
+                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
+                    PL
+                  </span>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                    PulseLead Engine
+                  </div>
+                  <p className="text-[11px] text-zinc-400">Lead generator & qualifier</p>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-200">
+                Smart lead flows that ask the right questions, qualify interest, and tag leads so
+                you can see at a glance who&apos;s serious—and follow up with confidence.
+              </p>
+            </div>
+
+            {/* Tool 3 */}
+            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-400 to-emerald-400">
+                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
+                    EF
+                  </span>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                    EchoFlow Assistant
+                  </div>
+                  <p className="text-[11px] text-zinc-400">AI admin & follow-up helper</p>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-200">
+                Drafts follow-up emails, reminders, and check-ins based on how people interact with
+                your site—helping you stay present without manually chasing every lead.
+              </p>
+            </div>
+
+            {/* Tool 4 */}
+            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-300 to-emerald-400">
+                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
+                    LL
+                  </span>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                    LocalLens Insights
+                  </div>
+                  <p className="text-[11px] text-zinc-400">Local insights & reporting</p>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-200">
+                Simple, human-readable summaries of how your site and funnels are performing:
+                what&apos;s working, what&apos;s dropping off, and where a small tweak could unlock
+                more customers.
+              </p>
+            </div>
           </div>
+
+          <p className="max-w-2xl text-xs sm:text-sm text-zinc-400">
+            We&apos;re intentionally partnering with a small number of local businesses to shape
+            this stack. If you&apos;d rather be early, prepared, and supported than playing catch-up
+            later, we&apos;d love to talk.
+          </p>
         </div>
       </section>
 
@@ -280,79 +337,53 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ============== CONTACT TEASER ============== */}
+      {/* ============== BOTTOM CTA (FUNNELS TO PREVIEW) ============== */}
       <section
         id="contact"
         className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950"
       >
-        <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-10 px-6 py-16 sm:grid-cols-2 sm:px-8">
-          <div>
-            <h3 className="text-2xl font-semibold tracking-tight">
-              Start your free preview
-            </h3>
-            <p className="mt-2 max-w-lg text-zinc-200">
-              Share a few details about your business. We’ll sketch a concept
-              that feels like tomorrow and converts today.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-zinc-200">
-              <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" />
-                No long-term contracts
-              </li>
-              <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" />
-                Clear pricing and timeline
-              </li>
-              <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" />
-                Fully managed after launch
-              </li>
-            </ul>
-          </div>
+        <div className="mx-auto w-full max-w-screen-2xl px-6 py-16 sm:px-8">
+          <div className="grid gap-8 sm:grid-cols-[1.4fr,1fr] items-center">
+            <div>
+              <h3 className="text-2xl font-semibold tracking-tight">
+                Start with a free homepage concept.
+              </h3>
+              <p className="mt-2 max-w-xl text-zinc-200">
+                Share a few details about your business and we&apos;ll sketch a homepage direction
+                tailored to you—story, structure, and visual feel. No pressure, no hard sell.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-zinc-200">
+                <li className="inline-flex items-center gap-2">
+                  <Check className="h-4 w-4 text-emerald-400" />
+                  No long-term contracts
+                </li>
+                <li className="inline-flex items-center gap-2">
+                  <Check className="h-4 w-4 text-emerald-400" />
+                  Clear monthly pricing and scope
+                </li>
+                <li className="inline-flex items-center gap-2">
+                  <Check className="h-4 w-4 text-emerald-400" />
+                  Option to grow into our AI suite over time
+                </li>
+              </ul>
+            </div>
 
-          <form className="max-w-xl space-y-3">
-            <input
-              className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
-              placeholder="Business name"
-            />
-            <input
-              className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
-              placeholder="Your name"
-            />
-            <input
-              className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
-              type="email"
-              placeholder="Email"
-            />
-            <input
-              className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
-              type="tel"
-              inputMode="tel"
-              placeholder="Phone"
-            />
-            <textarea
-              className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
-              placeholder="What do you do? What’s the main goal of this site?"
-            />
-            <button className="h-11 w-full rounded-full bg-white font-semibold text-black transition hover:bg-zinc-200">
-              Request preview
-            </button>
-            <p className="text-xs text-zinc-500">
-              By submitting, you agree to be contacted about your project.
-            </p>
-          </form>
+            <div className="flex flex-col items-start sm:items-end gap-3">
+              <a
+                href="/preview"
+                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(250,250,250,0.3)] transition hover:bg-zinc-200"
+              >
+                Start my free preview
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+              <p className="text-xs text-zinc-500 max-w-xs text-left sm:text-right">
+                We&apos;re currently taking on a small number of new partners. If it&apos;s a good
+                fit, we&apos;ll walk you through next steps and timing after your preview.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </SiteChrome>
   );
 }
-
-
-
-
-
-
-
-
-
-
