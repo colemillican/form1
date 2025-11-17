@@ -166,7 +166,7 @@ export default function FAQPage() {
             <div className="p-5 text-xs sm:text-sm text-zinc-200">
               <div className="font-semibold mb-1">A small team, thinking long-term</div>
               <p>
-                LocalLink Digital is a young company on purpose. We&apos;re not here to churn out
+                LocalLink Studio is a young company on purpose. We&apos;re not here to churn out
                 quick templates and disappear—we&apos;re looking for a handful of local partners to
                 grow with as the web and AI keep evolving.
               </p>
