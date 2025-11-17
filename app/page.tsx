@@ -10,6 +10,8 @@ import {
   Monitor,
   Search,
   Check,
+  Bot,
+  BarChart3,
 } from "lucide-react";
 import { Exo_2 } from "next/font/google";
 import SiteChrome, { G } from "./components/SiteChrome";
@@ -124,14 +126,15 @@ export default function Page() {
                 drop-shadow-[0_8px_26px_rgba(0,0,0,0.35)]
               `}
             >
-              <G>Stories that connect.</G>
+              <G>Modern websites.</G>
               <br />
-              <G>Websites that perform.</G>
+              <G>Proven funnels. Practical AI.</G>
             </h1>
 
             <p className="mt-5 text-[15px] leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
-              We bring your story to life online — designing, building, and managing beautiful,
-              high-performing websites that help local customers find you, trust you, and reach you.
+              LocalLink Digital is a small startup out of Auburn, Alabama focused on one thing:
+              giving local businesses a sharp website, a clear path from visitor to customer, and a
+              simple way to tap into AI—without hiring a full tech team or living inside dashboards.
             </p>
 
             {/* Centered CTA */}
@@ -140,7 +143,7 @@ export default function Page() {
                 href="/preview"
                 className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-12 py-4 text-[16px] font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.45)] transition hover:from-emerald-300 hover:to-emerald-200 hover:shadow-[0_18px_40px_rgba(16,185,129,0.55)]"
               >
-                Get my free website outline
+                Get my free website & AI preview
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </div>
@@ -149,15 +152,15 @@ export default function Page() {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-[13px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
               <span className="inline-flex items-center gap-2">
                 <Bolt className="h-4 w-4 text-emerald-300" />
-                Built for local businesses
+                Built for real local businesses
               </span>
               <span className="inline-flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-emerald-300" />
-                Fully managed partnership
+                Fully managed, long-term partnership
               </span>
               <span className="inline-flex items-center gap-2">
                 <Smartphone className="h-4 w-4 text-emerald-300" />
-                Fast and mobile-first
+                Website + AI-ready stack from day one
               </span>
             </div>
           </div>
@@ -172,142 +175,19 @@ export default function Page() {
         <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-4 px-6 py-10 sm:grid-cols-3 sm:px-8">
           <Feature
             icon={<Monitor className="h-5 w-5 text-emerald-400" />}
-            title="Cinematic design"
-            text="Bold type, bright imagery, and layouts built to feel premium on any screen."
-          />
-          <Feature
-            icon={<Globe className="h-5 w-5 text-emerald-400" />}
-            title="Modern performance"
-            text="Fast-loading, Next.js-powered builds tuned for Core Web Vitals."
+            title="Cinematic websites"
+            text="Story-driven layouts that feel premium on any screen and actually match the quality of your work."
           />
           <Feature
             icon={<Search className="h-5 w-5 text-emerald-400" />}
-            title="Local SEO ready"
-            text="Clean structure, metadata, and content strategy for local visibility."
+            title="Local SEO & funnels"
+            text="Pages and flows mapped around one clear goal: turning visitors into trial members, calls, or booked jobs."
           />
-        </div>
-      </section>
-
-      {/* ============== AI STACK / FUTURE-FOCUSED ============== */}
-      <section className="border-t border-white/10 bg-black">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 space-y-10">
-          {/* Cinematic AI mission card */}
-          <div className="rounded-2xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/10 via-cyan-400/10 to-zinc-900/80 p-5 sm:p-6 relative overflow-hidden">
-            <div className="pointer-events-none absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_0%_0%,rgba(52,211,153,0.4),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(56,189,248,0.35),transparent_55%)]" />
-            <div className="relative z-10 max-w-3xl">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-300/90">
-                The LocalLink AI stack
-              </p>
-              <h2
-                className={`${heroFont.className} mt-2 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-white`}
-              >
-                Websites that perform today. AI tools that prepare you for tomorrow.
-              </h2>
-              <p className="mt-3 text-sm sm:text-[15px] text-emerald-50/90">
-                We&apos;re a startup out of Auburn, Alabama, building not just websites—but a
-                practical AI toolkit for real local businesses. The goal: make your small team feel
-                like it has extra employees without adding extra payroll.
-              </p>
-              <p className="mt-3 text-xs sm:text-sm text-emerald-100/80">
-                As an early partner, you get a modern site, fully managed—and a front-row seat to
-                the AI tools we&apos;re rolling out next.
-              </p>
-            </div>
-          </div>
-
-          {/* AI tools grid */}
-          <div className="grid gap-5 md:grid-cols-2">
-            {/* Tool 1 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    ND
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    NovaDesk AI
-                  </div>
-                  <p className="text-[11px] text-zinc-400">AI front desk assistant</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                An AI “employee” that can answer common questions, handle simple booking requests,
-                and route real leads to you—so fewer messages slip through the cracks.
-              </p>
-            </div>
-
-            {/* Tool 2 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    PL
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    PulseLead Engine
-                  </div>
-                  <p className="text-[11px] text-zinc-400">Lead generator & qualifier</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                Smart lead flows that ask the right questions, qualify interest, and tag leads so
-                you can see at a glance who&apos;s serious—and follow up with confidence.
-              </p>
-            </div>
-
-            {/* Tool 3 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-400 to-emerald-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    EF
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    EchoFlow Assistant
-                  </div>
-                  <p className="text-[11px] text-zinc-400">AI admin & follow-up helper</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                Drafts follow-up emails, reminders, and check-ins based on how people interact with
-                your site—helping you stay present without manually chasing every lead.
-              </p>
-            </div>
-
-            {/* Tool 4 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-300 to-emerald-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    LL
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    LocalLens Insights
-                  </div>
-                  <p className="text-[11px] text-zinc-400">Local insights & reporting</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                Simple, human-readable summaries of how your site and funnels are performing:
-                what&apos;s working, what&apos;s dropping off, and where a small tweak could unlock
-                more customers.
-              </p>
-            </div>
-          </div>
-
-          <p className="max-w-2xl text-xs sm:text-sm text-zinc-400">
-            We&apos;re intentionally partnering with a small number of local businesses to shape
-            this stack. If you&apos;d rather be early, prepared, and supported than playing catch-up
-            later, we&apos;d love to talk.
-          </p>
+          <Feature
+            icon={<Bot className="h-5 w-5 text-emerald-400" />}
+            title="AI tools (as you grow)"
+            text="Optional AI assistants and lead engines that plug into your site without making your life more complicated."
+          />
         </div>
       </section>
 
@@ -315,72 +195,173 @@ export default function Page() {
       <section id="process" className="border-t border-white/10 bg-black">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <h3 className="text-2xl font-semibold tracking-tight">
-            A simple three-step build
+            A simple four-step path from idea to launch
           </h3>
-          <div className="mt-6 grid gap-5 sm:grid-cols-3">
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <Step
               n={1}
-              title="Discover"
-              text="We learn your story, audience, and goals so the site feels like an extension of your business."
+              title="Preview"
+              text="You fill out a short form. We build a free homepage concept that shows your story, structure, and visual direction."
             />
             <Step
               n={2}
-              title="Design"
-              text="We build a cinematic, conversion-focused layout tailored to your brand and offers."
+              title="Plan"
+              text="If it feels like a fit, we lock in a plan and subscription tier that matches your scope and goals."
             />
             <Step
               n={3}
-              title="Launch"
-              text="We deploy, monitor, and manage your site so it stays fast, secure, and up to date."
+              title="Build"
+              text="We design, write, and build your site on a modern stack—then review it together before launch."
+            />
+            <Step
+              n={4}
+              title="Grow"
+              text="We keep your site updated and tuned, layering in AI tools and funnel tweaks as your business grows."
             />
           </div>
         </div>
       </section>
 
-      {/* ============== BOTTOM CTA (FUNNELS TO PREVIEW) ============== */}
+      {/* ============== AI TOOLS SECTION ============== */}
+      <section className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950">
+        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
+          <div className="mb-6 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300/80">
+              LOCAL AI SUITE (GROWTH & PRO PLANS)
+            </p>
+            <h3
+              className={`${heroFont.className} mt-2 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight`}
+            >
+              AI tools built for local businesses, not tech companies.
+            </h3>
+            <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-zinc-300">
+              Our higher tiers unlock a focused stack of AI tools designed to feel like extra hands
+              for your team—answering questions, qualifying leads, and keeping you in the loop—
+              without you having to learn a new piece of software.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <Bot className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">NovaDesk AI</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    WEBSITE FRONT DESK
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                An AI “front desk” on your site that can answer common questions, collect contact
+                details, and route real leads to you—so fewer calls and messages slip through the
+                cracks.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <BarChart3 className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">PulseLead Engine</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    LEAD CAPTURE & SCORING
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                Every form submission flows into a simple lead engine that scores interest,
+                highlights the best opportunities, and sends you clean summaries instead of messy
+                inbox noise.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <Bot className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">EchoFlow Assistant</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    FOLLOW-UP SUPPORT
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                Light-touch follow-up help for leads—drafted emails and messages you can approve or
+                personalize so you stay in front of people without having to remember every thread.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <Globe className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">LocalLens Insights</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    SIMPLE PERFORMANCE SNAPSHOTS
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                Plain-language snapshots of what your site and funnels are doing for you—no
+                analytics degree required. Just clear signals on what&apos;s working and what we
+                should tweak next.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============== CONTACT / PREVIEW CTA ============== */}
       <section
         id="contact"
         className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950"
       >
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-16 sm:px-8">
-          <div className="grid gap-8 sm:grid-cols-[1.4fr,1fr] items-center">
-            <div>
-              <h3 className="text-2xl font-semibold tracking-tight">
-                Start with a free homepage concept.
-              </h3>
-              <p className="mt-2 max-w-xl text-zinc-200">
-                Share a few details about your business and we&apos;ll sketch a homepage direction
-                tailored to you—story, structure, and visual feel. No pressure, no hard sell.
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-200">
-                <li className="inline-flex items-center gap-2">
-                  <Check className="h-4 w-4 text-emerald-400" />
-                  No long-term contracts
-                </li>
-                <li className="inline-flex items-center gap-2">
-                  <Check className="h-4 w-4 text-emerald-400" />
-                  Clear monthly pricing and scope
-                </li>
-                <li className="inline-flex items-center gap-2">
-                  <Check className="h-4 w-4 text-emerald-400" />
-                  Option to grow into our AI suite over time
-                </li>
-              </ul>
-            </div>
+        <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-10 px-6 py-16 sm:grid-cols-2 sm:px-8">
+          <div>
+            <h3 className="text-2xl font-semibold tracking-tight">
+              Start with a free website & AI preview
+            </h3>
+            <p className="mt-2 max-w-lg text-zinc-200">
+              Share a few details about your business. We&apos;ll sketch a concept that shows how
+              your website, funnels, and AI tools could work together—then you decide if it feels
+              right.
+            </p>
+            <ul className="mt-4 space-y-2 text-sm text-zinc-200">
+              <li className="inline-flex items-center gap-2">
+                <Check className="h-4 w-4 text-emerald-400" />
+                No long-term contracts
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <Check className="h-4 w-4 text-emerald-400" />
+                Clear monthly pricing, no hidden fees
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <Check className="h-4 w-4 text-emerald-400" />
+                Fully managed after launch, AI optional as you grow
+              </li>
+            </ul>
+          </div>
 
-            <div className="flex flex-col items-start sm:items-end gap-3">
-              <a
-                href="/preview"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(250,250,250,0.3)] transition hover:bg-zinc-200"
-              >
-                Start my free preview
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-              <p className="text-xs text-zinc-500 max-w-xs text-left sm:text-right">
-                We&apos;re currently taking on a small number of new partners. If it&apos;s a good
-                fit, we&apos;ll walk you through next steps and timing after your preview.
-              </p>
-            </div>
+          <div className="max-w-xl">
+            <a
+              href="/preview"
+              className="inline-flex h-11 w-full items-center justify-center rounded-full bg-white font-semibold text-black transition hover:bg-zinc-200"
+            >
+              Go to the free preview form
+            </a>
+            <p className="mt-2 text-xs text-zinc-500">
+              The preview is free and no-pressure. It&apos;s the fastest way for both of us to see
+              whether we&apos;re a good fit.
+            </p>
           </div>
         </div>
       </section>
