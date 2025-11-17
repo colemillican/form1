@@ -34,8 +34,8 @@ type ProjectFormState = {
   phone: string;
   businessName: string;
   websiteUrl: string;
-  budgetRange: string;
-  timeline: string;
+  businessAddress: string;
+  logoUrl: string;
   projectNotes: string;
 };
 
@@ -46,8 +46,8 @@ export default function StartProjectPage() {
     phone: "",
     businessName: "",
     websiteUrl: "",
-    budgetRange: "",
-    timeline: "",
+    businessAddress: "",
+    logoUrl: "",
     projectNotes: "",
   });
 
@@ -260,39 +260,28 @@ export default function StartProjectPage() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-xs font-medium text-zinc-300">
-                    Estimated budget
+                    Business address
                   </label>
-                  <select
-                    name="budgetRange"
-                    value={form.budgetRange}
+                  <textarea
+                    name="businessAddress"
+                    value={form.businessAddress}
                     onChange={handleChange}
-                    required
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
-                  >
-                    <option value="">Select a range</option>
-                    <option value="under-1500">$0 – $1,500</option>
-                    <option value="1500-3000">$1,500 – $3,000</option>
-                    <option value="3000-5000">$3,000 – $5,000</option>
-                    <option value="5000-plus">$5,000+</option>
-                  </select>
+                    rows={3}
+                    placeholder="123 Main Street, City, ST 12345"
+                    className="mt-1 w-full rounded-lg border border-white/15 bg-black/40 p-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                  />
                 </div>
                 <div>
                   <label className="text-xs font-medium text-zinc-300">
-                    Ideal timeline
+                    Logo (URL)
                   </label>
-                  <select
-                    name="timeline"
-                    value={form.timeline}
+                  <input
+                    name="logoUrl"
+                    value={form.logoUrl}
                     onChange={handleChange}
-                    required
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
-                  >
-                    <option value="">Select a timeline</option>
-                    <option value="asap">ASAP (0–2 weeks)</option>
-                    <option value="this-month">This month</option>
-                    <option value="this-quarter">This quarter</option>
-                    <option value="flexible">Flexible</option>
-                  </select>
+                    placeholder="Paste a link to your logo file"
+                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                  />
                 </div>
               </div>
 
