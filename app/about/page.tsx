@@ -97,104 +97,100 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* AI TOOL PREVIEW */}
-      <section className="bg-black border-t border-white/10">
-        <div className="mx-auto max-w-screen-xl px-6 py-16 sm:px-8">
-          <h2
-            className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white text-center mb-10`}
-          >
-            A growing suite of <G>practical AI tools</G> for local business.
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-            {/* NovaDesk AI */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-400/20 border border-emerald-400/60 text-emerald-300">
-                <Headphones className="h-6 w-6" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">NovaDesk AI</div>
-                <div className="text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-1">
-                  Website Front Desk
-                </div>
-                <p className="text-sm text-zinc-300">
-                  An AI “front desk” on your site that can answer common questions, collect contact
-                  details, and route real leads to you — so fewer calls and messages slip through
-                  the cracks.
-                </p>
-              </div>
-            </div>
-
-            {/* PulseLead Engine */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-400/20 border border-emerald-400/60 text-emerald-300">
-                <Activity className="h-6 w-6" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">PulseLead Engine</div>
-                <div className="text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-1">
-                  Lead Capture &amp; Scoring
-                </div>
-                <p className="text-sm text-zinc-300">
-                  Turns every form submission into a simple lead engine that scores interest,
-                  highlights the best opportunities, and sends you clean summaries instead of messy
-                  inbox noise.
-                </p>
-              </div>
-            </div>
-
-            {/* EchoFlow Assistant */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-400/20 border border-emerald-400/60 text-emerald-300">
-                <MailSearch className="h-6 w-6" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">EchoFlow Assistant</div>
-                <div className="text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-1">
-                  Follow-Up Support
-                </div>
-                <p className="text-sm text-zinc-300">
-                  Light-touch follow-up help for leads — drafted emails and messages you can approve
-                  or personalize so you stay in front of people without having to remember every
-                  thread.
-                </p>
-              </div>
-            </div>
-
-            {/* LocalLens Insights */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-400/20 border border-emerald-400/60 text-emerald-300">
-                <BarChart3 className="h-6 w-6" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">LocalLens Insights</div>
-                <div className="text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-1">
-                  Simple Performance Snapshots
-                </div>
-                <p className="text-sm text-zinc-300">
-                  Plain-language snapshots of what your site and funnels are doing for you — no
-                  analytics degree required. Just clear signals on what’s working and what we should
-                  tweak next.
-                </p>
-              </div>
-            </div>
+       {/* ============== AI TOOLS SECTION ============== */}
+      <section className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950">
+        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
+          <div className="mb-6 max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300/80">
+              LOCAL AI SUITE (GROWTH & PRO PLANS)
+            </p>
+            <h3
+              className={`${heroFont.className} mt-2 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight`}
+            >
+              AI tools built for local businesses, not tech companies.
+            </h3>
+            <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-zinc-300">
+              Our higher tiers unlock a focused stack of AI tools designed to feel like extra hands
+              for your team—answering questions, qualifying leads, and keeping you in the loop—
+              without you having to learn a new piece of software.
+            </p>
           </div>
 
-          {/* CTA */}
-          <div className="text-center mt-12">
-            <a
-              href="/preview"
-              className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
-            >
-              Start your free preview
-            </a>
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <Bot className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">NovaDesk AI</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    WEBSITE FRONT DESK
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                An AI “front desk” on your site that can answer common questions, collect contact
+                details, and route real leads to you—so fewer calls and messages slip through the
+                cracks.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <BarChart3 className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">PulseLead Engine</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    LEAD CAPTURE & SCORING
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                Every form submission flows into a simple lead engine that scores interest,
+                highlights the best opportunities, and sends you clean summaries instead of messy
+                inbox noise.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <Bot className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">EchoFlow Assistant</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    FOLLOW-UP SUPPORT
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                Light-touch follow-up help for leads—drafted emails and messages you can approve or
+                personalize so you stay in front of people without having to remember every thread.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
+                  <Globe className="h-4 w-4 text-black" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">LocalLens Insights</div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
+                    SIMPLE PERFORMANCE SNAPSHOTS
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-zinc-300">
+                Plain-language snapshots of what your site and funnels are doing for you—no
+                analytics degree required. Just clear signals on what&apos;s working and what we
+                should tweak next.
+              </p>
+            </div>
           </div>
         </div>
       </section>
-    </SiteChrome>
-  );
-}
