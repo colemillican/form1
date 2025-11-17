@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Exo_2 } from "next/font/google";
-import { Headphones, Activity, MailSearch, BarChart3 } from "lucide-react";
+import { Bot, BarChart3, Globe } from "lucide-react";
 import SiteChrome, { G } from "../components/SiteChrome";
 
 const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
@@ -97,7 +97,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-       {/* ============== AI TOOLS SECTION ============== */}
+      {/* ============== AI TOOLS SECTION (MATCHING HOME) ============== */}
       <section className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <div className="mb-6 max-w-3xl">
@@ -117,6 +117,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
+            {/* NovaDesk AI */}
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
               <div className="mb-3 inline-flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
@@ -136,6 +137,7 @@ export default function AboutPage() {
               </p>
             </div>
 
+            {/* PulseLead Engine */}
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
               <div className="mb-3 inline-flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
@@ -155,6 +157,7 @@ export default function AboutPage() {
               </p>
             </div>
 
+            {/* EchoFlow Assistant */}
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
               <div className="mb-3 inline-flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
@@ -173,6 +176,7 @@ export default function AboutPage() {
               </p>
             </div>
 
+            {/* LocalLens Insights */}
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
               <div className="mb-3 inline-flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
@@ -192,5 +196,18 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
+
+          {/* CTA */}
+          <div className="text-center mt-12">
+            <a
+              href="/preview"
+              className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
+            >
+              Start your free preview
+            </a>
+          </div>
         </div>
       </section>
+    </SiteChrome>
+  );
+}
