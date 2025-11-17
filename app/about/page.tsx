@@ -113,6 +113,13 @@ export default function AboutPage() {
               Our higher tiers unlock a focused stack of AI tools designed to feel like extra hands
               for your team—answering questions, qualifying leads, and keeping you in the loop—
               without you having to learn a new piece of software.
+              <br />
+              <br />
+              <span className="text-emerald-300/80">
+                These tools are an actively developing feature of LocalLink Studio. Early partners
+                get new capabilities as we build them—smarter automations, deeper insights, and
+                simple AI assistants designed specifically for local business workflows.
+              </span>
             </p>
           </div>
 
