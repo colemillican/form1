@@ -321,21 +321,26 @@ export default function PreviewPage() {
     // Send lead data to Supabase via API route
     try {
       const res = await fetch("/api/preview-lead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(form),
+});
 
-      if (res.ok) {
-        const json = await res.json();
-        if (json.id) {
-          setPreviewLeadId(json.id); // save preview_leads.id
-        }
-      } else {
-        console.error("Failed to submit preview lead:", await res.text());
-      }
+if (res.ok) {
+  const json = await res.json();
+  // Handle both shapes: { id } and { data: { id } }
+  const id = json.id ?? json.data?.id;
+  if (id) {
+    setPreviewLeadId(id);
+  } else {
+    console.warn("No ID returned from /api/preview-lead:", json);
+  }
+} else {
+  console.error("Failed to submit preview lead:", await res.text());
+}
+
     } catch (error) {
       console.error("Failed to submit preview lead:", error);
       // We still continue to show the concept even if the lead save fails
