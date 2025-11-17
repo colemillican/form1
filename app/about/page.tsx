@@ -32,6 +32,7 @@ export default function AboutPage() {
       {/* MISSION COPY */}
       <section className="bg-black">
         <div className="mx-auto max-w-screen-xl px-6 py-14 sm:px-8 space-y-8 text-zinc-300 leading-relaxed">
+          {/* Long-term partnerships */}
           <div className="space-y-4">
             <h2
               className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
@@ -54,6 +55,32 @@ export default function AboutPage() {
             </p>
           </div>
 
+          {/* Mission-focused section */}
+          <div className="space-y-4">
+            <h2
+              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
+            >
+              Our mission: modern technology, human-first business.
+            </h2>
+
+            <p>
+              In a world flooded with cheap AI tools, generic templates, and “plug it in yourself”
+              platforms, we exist to be something different: a long-term partner that keeps you
+              modern while protecting the human touch in your business. We stay on top of the AI and
+              technology landscape for you — testing, refining, and building tools that actually fit
+              how you work.
+            </p>
+
+            <p>
+              We exist to serve the heart of American business: small business. We want local
+              businesses to have the same level of technology and leverage as big brands, without
+              losing the face-to-face care, relationships, and reputation that make communities
+              thrive. Our job is to help you save time, stay current, and still feel proud of how
+              human your business is.
+            </p>
+          </div>
+
+          {/* Ownership & control */}
           <div className="space-y-4">
             <h2
               className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
@@ -74,6 +101,7 @@ export default function AboutPage() {
             </p>
           </div>
 
+          {/* Modern, clear, competitive */}
           <div className="space-y-4">
             <h2
               className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
