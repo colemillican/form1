@@ -64,7 +64,7 @@ export default function ServicesPage() {
           {/* Performance + infrastructure */}
           <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
             <img
-              src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop"
               alt="Developer working with code and devices"
               className="w-full aspect-[16/9] object-cover"
             />
