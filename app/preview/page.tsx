@@ -157,7 +157,7 @@ function buildConcept(form: FormState): Concept {
     },
   ];
 
-  // Messaging concepts
+  // Messaging concepts (still built, even if not displayed)
   const heroHeadlines: string[] = [
     `A modern website for ${safeLocation}’s ${safeIndustry.toLowerCase()}.`,
     `Turn more visitors into customers with a site built for ${safeName}.`,
@@ -349,7 +349,7 @@ export default function PreviewPage() {
     return (
       <PageShell>
         <main className="mx-auto flex min-h-[calc(100vh-56px)] max-w-6xl flex-col gap-8 px-5 py-10 lg:px-8">
-          {/* Header */}
+          {/* Header with early CTA */}
           <section>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300/80">
               Concept direction
@@ -362,6 +362,26 @@ export default function PreviewPage() {
               from your answers — the story, structure, and feel we&apos;d use
               as the starting point for your full custom build.
             </p>
+
+            {/* EARLY CTA */}
+            <div className="mt-5 rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-4 sm:p-5">
+              <p className="text-[11px] uppercase font-semibold tracking-[0.28em] text-emerald-300">
+                Ready when you are
+              </p>
+              <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="max-w-md text-sm text-zinc-200">
+                  Like the direction so far? You can lock this in and continue
+                  to the project start funnel whenever you’re ready.
+                </p>
+
+                <a
+                  href="/start"
+                  className="inline-flex h-10 items-center justify-center rounded-full bg-gradient-to-r from-white to-emerald-200 px-6 text-xs font-semibold text-black shadow-[0_10px_35px_rgba(255,255,255,0.25)] hover:bg-white/90 transition"
+                >
+                  Continue →
+                </a>
+              </div>
+            </div>
           </section>
 
           {/* Brand Story + Visual Direction */}
@@ -432,46 +452,6 @@ export default function PreviewPage() {
             </div>
           </section>
 
-          {/* Messaging concepts */}
-          <section className="grid gap-5 md:grid-cols-3">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-              <h2 className="text-sm font-semibold text-zinc-50">
-                Hero Headlines
-              </h2>
-              <ul className="mt-2 space-y-2 text-sm text-zinc-300">
-                {concept.heroHeadlines.map((h, i) => (
-                  <li key={i} className="rounded-lg bg-black/40 p-2">
-                    “{h}”
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-              <h2 className="text-sm font-semibold text-zinc-50">
-                Supporting Sublines
-              </h2>
-              <ul className="mt-2 space-y-2 text-sm text-zinc-300">
-                {concept.heroSublines.map((s, i) => (
-                  <li key={i} className="rounded-lg bg-black/40 p-2">
-                    “{s}”
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-              <h2 className="text-sm font-semibold text-zinc-50">
-                Call-to-Action Ideas
-              </h2>
-              <ul className="mt-2 space-y-2 text-sm text-zinc-300">
-                {concept.ctas.map((c, i) => (
-                  <li key={i} className="rounded-lg bg-black/40 p-2">
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
           {/* Why this works */}
           <section className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-sm font-semibold text-zinc-50">
@@ -482,19 +462,29 @@ export default function PreviewPage() {
             </p>
           </section>
 
-          {/* Next step */}
-          <section className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
-            <div className="max-w-xl text-sm text-zinc-300">
-              Ready to turn this into a real site? This concept becomes our
-              starting point — from here, we refine every section, then build it
-              out as a fully custom, production-ready website.
+          {/* Big, high-visibility Next Step CTA */}
+          <section className="mt-2 rounded-2xl border border-emerald-400/40 bg-gradient-to-r from-emerald-500/15 via-emerald-400/10 to-cyan-400/10 p-6 sm:p-8">
+            <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+              <div className="max-w-xl">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-300">
+                  Next step
+                </p>
+                <h2 className="mt-2 text-lg font-semibold text-white sm:text-xl">
+                  Ready to move forward with this direction?
+                </h2>
+                <p className="mt-2 text-sm text-zinc-100">
+                  This concept becomes our blueprint. Click below to lock in
+                  this direction and walk through the next step of the project
+                  start funnel.
+                </p>
+              </div>
+              <a
+                href="/start"
+                className="inline-flex h-11 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-white via-zinc-100 to-emerald-200 px-7 sm:px-9 text-xs sm:text-sm font-semibold text-black shadow-[0_18px_45px_rgba(250,250,250,0.35)] hover:from-zinc-200 hover:via-white hover:to-emerald-300 hover:-translate-y-[1px] transition-transform"
+              >
+                Start a project with this direction
+              </a>
             </div>
-            <a
-              href="/start"
-              className="inline-flex h-10 items-center justify-center rounded-full bg-white px-6 text-xs font-semibold text-black hover:bg-zinc-200"
-            >
-              Start a project with this direction
-            </a>
           </section>
         </main>
       </PageShell>
