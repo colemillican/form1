@@ -10,7 +10,7 @@ type FormState = {
   businessName: string;
   industry: string;
   location: string;
-  email: string;
+  email: string;F
   phone: string;
   styleVibe: StyleVibe;
   primaryGoal: string;
@@ -330,16 +330,20 @@ export default function PreviewPage() {
 
 if (res.ok) {
   const json = await res.json();
-  // Handle both shapes: { id } and { data: { id } }
+
+  // Handle both possible API shapes
   const id = json.id ?? json.data?.id;
+
   if (id) {
+    console.log("Captured previewId:", id);
     setPreviewLeadId(id);
   } else {
-    console.warn("No ID returned from /api/preview-lead:", json);
+    console.warn("No id returned from preview-lead route:", json);
   }
 } else {
-  console.error("Failed to submit preview lead:", await res.text());
+  console.error("Failed submitting preview lead", await res.text());
 }
+
 
     } catch (error) {
       console.error("Failed to submit preview lead:", error);
