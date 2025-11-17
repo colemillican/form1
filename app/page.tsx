@@ -160,7 +160,7 @@ export default function Page() {
               </span>
               <span className="inline-flex items-center gap-2">
                 <Smartphone className="h-4 w-4 text-emerald-300" />
-                Website + AI-ready stack from day one
+                Website + AI stack
               </span>
             </div>
           </div>
