@@ -29,59 +29,89 @@ export default function ProcessPage() {
           <h1
             className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight`}
           >
-            A <G>simple process</G> built around your time.
+            A <G>simple process</G> built for busy owners.
           </h1>
           <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            We keep things tight and clear: a few key checkpoints, quick feedback loops, and
-            no bloated calls. You always know what’s happening and what’s next.
+            We start with a free homepage concept, confirm it&apos;s a fit, then handle the build,
+            launch, and ongoing updates (plus AI as you grow). Clear checkpoints, minimal lift on
+            your side, and no guesswork about what&apos;s next.
           </p>
         </div>
       </section>
 
-      {/* STEPS + VISUAL */}
+      {/* STEPS + SUMMARY */}
       <section className="bg-black">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-10 lg:grid-cols-[1.3fr,1fr] items-start">
+        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 space-y-10">
           {/* Steps */}
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <Step
               n={1}
-              title="Discover"
-              text="We gather your goals, services, and brand tone—plus any examples you like. This sets the target for the build."
+              title="Preview"
+              text="You fill out a short form and we build a free homepage concept: story, structure, and visual direction tailored to your business."
             />
             <Step
               n={2}
-              title="Design"
-              text="We craft the hero, layout, and core sections. You review a live concept instead of squinting at wireframes."
+              title="Project Start"
+              text="If you like the direction, we finalize scope, pick a plan, and send a clear payment link. No surprises, no hidden line items."
             />
             <Step
               n={3}
-              title="Launch"
-              text="We refine, then ship to production. Analytics are wired, SEO basics are set, and we handle ongoing updates."
+              title="Build & Launch"
+              text="We design, write, and build your site on a modern stack. You review at 1–2 key checkpoints before we launch to production."
+            />
+            <Step
+              n={4}
+              title="Ongoing Care & AI"
+              text="After launch, we keep the site updated, tuned, and aligned with your offers—layering in AI tools as you grow into our higher tiers."
             />
           </div>
 
-          {/* Tech visual */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop"
-              alt="Team planning digital product workflow"
-              className="w-full aspect-[21/9] object-cover"
-            />
-            <div className="p-4 text-xs sm:text-sm text-zinc-200 space-y-2">
-              <div className="font-semibold text-base">What we need from you</div>
-              <p>• 30–45 minutes for an initial kickoff conversation.</p>
-              <p>• Any existing logo, photos, or brand pieces you want us to use.</p>
-              <p>• Straightforward feedback at 1–2 checkpoints. We guide the rest.</p>
+          {/* What we need vs what we handle */}
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-400 mb-3">
+                What we need from you
+              </h2>
+              <p className="text-[14px] leading-6 text-zinc-300 mb-3">
+                The goal is to get you a sharp, effective digital presence without eating your whole
+                week. Here&apos;s what we typically ask for:
+              </p>
+              <ul className="space-y-2 text-[14px] text-zinc-300">
+                <li>• 15–30 minutes to fill out the preview form.</li>
+                <li>• 30–45 minutes for a kickoff call once you&apos;re ready to start.</li>
+                <li>• Your logo, any photos you like, and basic service details.</li>
+                <li>• Honest, straightforward feedback at 1–2 review checkpoints.</li>
+              </ul>
             </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-400 mb-3">
+                What we handle for you
+              </h2>
+              <p className="text-[14px] leading-6 text-zinc-300 mb-3">
+                Our job is to take the digital side off your plate so you can stay focused on the
+                work you&apos;re actually in business to do.
+              </p>
+              <ul className="space-y-2 text-[14px] text-zinc-300">
+                <li>• Story, layout, and design for your core pages.</li>
+                <li>• Modern build, hosting, performance, and basic SEO foundations.</li>
+                <li>• Ongoing content tweaks, updates, and refinements over time.</li>
+                <li>• For higher tiers, rollout and tuning of our LocalLink AI tools.</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="flex justify-center pt-2">
+            <a
+              href="/preview"
+              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(250,250,250,0.3)] transition hover:bg-zinc-200"
+            >
+              Start with a free homepage preview
+            </a>
           </div>
         </div>
       </section>
     </SiteChrome>
   );
 }
-
-
-
-
-
-
