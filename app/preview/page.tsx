@@ -10,7 +10,7 @@ type FormState = {
   businessName: string;
   industry: string;
   location: string;
-  email: string;F
+  email: string;
   phone: string;
   styleVibe: StyleVibe;
   primaryGoal: string;
