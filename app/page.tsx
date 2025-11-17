@@ -132,7 +132,7 @@ export default function Page() {
             </h1>
 
             <p className="mt-5 text-[15px] leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
-              LocalLink Digital is a small startup out of Auburn, Alabama focused on one thing:
+              LocalLink Studio is a small startup out of Auburn, Alabama focused on one thing:
               giving local businesses a sharp website, a clear path from visitor to customer, and a
               simple way to tap into AI—without hiring a full tech team or living inside dashboards.
             </p>
