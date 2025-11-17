@@ -79,7 +79,7 @@ export default function StartProjectPage() {
       }
 
       // ✅ After project details are saved, send them to the plan selection page
-      router.push("/page.tsx");
+      router.push("/plans");
     } catch (error) {
       console.error("Error:", error);
       setLoading(false);
