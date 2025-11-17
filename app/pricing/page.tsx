@@ -23,6 +23,8 @@ export default function PricingPage() {
         "Local SEO-ready structure & metadata",
         "Hosting, security & performance monitoring",
       ],
+      // 🔗 Replace with your real Stripe payment link
+      buyLink: "https://buy.stripe.com/launch-plan-placeholder",
     },
     {
       name: "Growth",
@@ -39,6 +41,8 @@ export default function PricingPage() {
         "Starter AI tools (NovaDesk & PulseLead basics)",
         "Monthly improvements to copy, layout & UX",
       ],
+      // 🔗 Replace with your real Stripe payment link
+      buyLink: "https://buy.stripe.com/growth-plan-placeholder",
     },
     {
       name: "LocalLink AI Suite",
@@ -55,6 +59,8 @@ export default function PricingPage() {
         "Custom automations for your workflows",
         "Quarterly strategy check-ins on site & AI",
       ],
+      // 🔗 Replace with your real Stripe payment link
+      buyLink: "https://buy.stripe.com/ai-suite-plan-placeholder",
     },
   ];
 
@@ -111,6 +117,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
+                {/* Primary CTA – preview */}
                 <a
                   href="/preview"
                   className={`mt-5 inline-flex h-10 items-center justify-center rounded-full text-sm font-semibold transition
@@ -121,6 +128,16 @@ export default function PricingPage() {
                     }`}
                 >
                   Start with a free preview
+                </a>
+
+                {/* Secondary CTA – Buy now */}
+                <a
+                  href={tier.buyLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex h-10 items-center justify-center rounded-full border border-emerald-400/70 text-sm font-semibold text-emerald-300 hover:bg-emerald-500/10 transition"
+                >
+                  Buy now
                 </a>
               </div>
             );
