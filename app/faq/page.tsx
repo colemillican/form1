@@ -49,7 +49,7 @@ export default function FAQPage() {
                 How long does a typical site take to launch?
               </div>
               <p className="mt-1">
-                Most sites go live in about 2–3 weeks after we start the project. That includes
+                Sites go live within 7 days after we start the project. That includes
                 design, build, and a round or two of feedback. If you have a tight deadline, we&apos;ll
                 tell you exactly what&apos;s realistic based on scope.
               </p>
