@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import Link from "next/link";
 
 /* --------------------------- Shared Page Shell -------------------------- */
@@ -51,50 +51,8 @@ export default function StartProjectPage() {
     projectNotes: "",
   });
 
-  const [previewLeadId, setPreviewLeadId] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [prefillError, setPrefillError] = useState<string | null>(null);
-
-  // 🔹 Read previewId from the URL and prefill from /api/preview-lead
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("previewId");
-
-    if (!id) return;
-
-    setPreviewLeadId(id);
-
-    const fetchPreview = async () => {
-      try {
-        const res = await fetch(`/api/preview-lead?id=${id}`);
-        if (!res.ok) {
-          console.error("Failed to fetch preview lead:", await res.text());
-          setPrefillError("Could not prefill from your preview data.");
-          return;
-        }
-
-        const json = await res.json();
-        const lead = json.data; // because our route returns { ok, data }
-
-        if (!lead) return;
-
-        setForm((prev) => ({
-          ...prev,
-          businessName: prev.businessName || lead.business_name || "",
-          email: prev.email || lead.email || "",
-          phone: prev.phone || lead.phone || "",
-        }));
-      } catch (err) {
-        console.error("Error fetching preview lead:", err);
-        setPrefillError("Could not prefill from your preview data.");
-      }
-    };
-
-    fetchPreview();
-  }, []);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -106,41 +64,35 @@ export default function StartProjectPage() {
     setLoading(true);
 
     try {
-      const payload = {
-        ...form,
-        previewLeadId, // 🔹 link this project to the preview lead
-      };
-
       const res = await fetch("/api/start-project", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
 
       if (!res.ok) {
-        console.error("Failed to submit project details:", await res.text());
+        console.error("Error submitting:", await res.text());
         setLoading(false);
         return;
       }
 
       setSubmitted(true);
+
+      // ⭐ Auto-redirect to Stripe after brief delay
+      setTimeout(() => {
+        window.location.href =
+          "https://buy.stripe.com/test_aFa00c0z98Fh56R45b3Nm00";
+      }, 1200);
     } catch (error) {
-      console.error("Error submitting project details:", error);
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
-
-    // Later, you can redirect to a payment page here if you want:
-    // window.location.href = "/payment";
   };
 
   const scrollToForm = () => {
     const el = document.getElementById("project-form");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -163,25 +115,23 @@ export default function StartProjectPage() {
 
         {/* TWO GIANT CTA CARDS */}
         <section className="mb-16 grid gap-6 md:grid-cols-2">
-          {/* BOOK A CALL CARD */}
+          {/* BOOK A CALL */}
           <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition hover:border-emerald-400/40 hover:bg-white/10">
             <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 to-cyan-400/10 opacity-0 blur-xl transition group-hover:opacity-100" />
             <div className="relative z-10 flex h-full flex-col">
-              <h2 className="text-2xl font-semibold text-white">
-                📞 Book a Call
-              </h2>
+              <h2 className="text-2xl font-semibold text-white">📞 Book a Call</h2>
               <p className="mt-3 text-sm text-zinc-300">
                 A focused 20–30 minute intro call to walk through your concept,
                 confirm scope, and lock in timelines.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-zinc-400">
                 <li>• Review your concept live</li>
-                <li>• Get clear pricing &amp; timeline</li>
+                <li>• Get clear pricing & timeline</li>
                 <li>• Ask questions and explore options</li>
               </ul>
 
               <a
-                href="https://calendly.com/your-link/intro-call" // TODO: replace with your real booking link
+                href="https://calendly.com/your-link/intro-call"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(250,250,250,0.35)] hover:bg-zinc-200"
@@ -194,19 +144,17 @@ export default function StartProjectPage() {
             </div>
           </div>
 
-          {/* START WITH FORM CARD */}
+          {/* START WITH FORM */}
           <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition hover:border-emerald-400/40 hover:bg-white/10">
             <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 to-cyan-400/10 opacity-0 blur-xl transition group-hover:opacity-100" />
             <div className="relative z-10 flex h-full flex-col">
-              <h2 className="text-2xl font-semibold text-white">
-                📝 Start With a Form
-              </h2>
+              <h2 className="text-2xl font-semibold text-white">📝 Start With a Form</h2>
               <p className="mt-3 text-sm text-zinc-300">
                 Prefer to skip the call for now? Share your project details and
                 we&apos;ll follow up with a clear outline and next steps.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-                <li>• Ideal if you&apos;re busy</li>
+                <li>• Ideal if you're busy</li>
                 <li>• Put everything in writing</li>
                 <li>• Get a structured project breakdown</li>
               </ul>
@@ -214,7 +162,7 @@ export default function StartProjectPage() {
               <button
                 type="button"
                 onClick={scrollToForm}
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-emerald-400 px-5 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.55)] hover:bg-emerald-300"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-emerald-400 px-5 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgrgba(16,185,129,0.55)] hover:bg-emerald-300"
               >
                 Fill Out Project Form
               </button>
@@ -236,22 +184,18 @@ export default function StartProjectPage() {
           </h2>
           <p className="mt-2 max-w-2xl text-sm text-zinc-300">
             This helps us scope your build properly and line it up with the
-            homepage direction you just saw. The more detail you share, the
-            smoother and faster the project will move.
+            homepage direction you just saw.
           </p>
-
-          {prefillError && (
-            <p className="mt-3 text-xs text-red-400">{prefillError}</p>
-          )}
 
           {submitted ? (
             <div className="mt-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-4 text-sm text-emerald-100">
-              Thanks for sharing your project details. We&apos;ll review
-              everything alongside your concept preview and follow up with next
-              steps and a payment link.
+              Thanks! Your project details have been received.  
+              Redirecting you to the secure payment page…
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+
+              {/* ROW 1 */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-xs font-medium text-zinc-300">
@@ -263,9 +207,10 @@ export default function StartProjectPage() {
                     onChange={handleChange}
                     required
                     placeholder="Jane Doe"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
                   />
                 </div>
+
                 <div>
                   <label className="text-xs font-medium text-zinc-300">
                     Email
@@ -277,11 +222,12 @@ export default function StartProjectPage() {
                     onChange={handleChange}
                     required
                     placeholder="you@business.com"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
                   />
                 </div>
               </div>
 
+              {/* ROW 2 */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="text-xs font-medium text-zinc-300">
@@ -294,9 +240,10 @@ export default function StartProjectPage() {
                     onChange={handleChange}
                     required
                     placeholder="(555) 123-4567"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
                   />
                 </div>
+
                 <div>
                   <label className="text-xs font-medium text-zinc-300">
                     Business name
@@ -307,52 +254,54 @@ export default function StartProjectPage() {
                     onChange={handleChange}
                     required
                     placeholder="Your Business Name"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
                   />
                 </div>
               </div>
 
+              {/* WEBSITE */}
               <div>
                 <label className="text-xs font-medium text-zinc-300">
-                  Current website (if you have one)
+                  Current website
                 </label>
                 <input
                   name="websiteUrl"
                   value={form.websiteUrl}
                   onChange={handleChange}
-                  placeholder="https://yourcurrentwebsite.com"
-                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                  placeholder="https://yourwebsite.com"
+                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
                 />
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="text-xs font-medium text-zinc-300">
-                    Business address
-                  </label>
-                  <textarea
-                    name="businessAddress"
-                    value={form.businessAddress}
-                    onChange={handleChange}
-                    rows={3}
-                    placeholder="123 Main Street, City, ST 12345"
-                    className="mt-1 w-full rounded-lg border border-white/15 bg-black/40 p-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs font-medium text-zinc-300">
-                    Logo (URL)
-                  </label>
-                  <input
-                    name="logoUrl"
-                    value={form.logoUrl}
-                    onChange={handleChange}
-                    placeholder="Paste a link to your logo file"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
-                  />
-                </div>
+              {/* BUSINESS ADDRESS */}
+              <div>
+                <label className="text-xs font-medium text-zinc-300">
+                  Business address
+                </label>
+                <input
+                  name="businessAddress"
+                  value={form.businessAddress}
+                  onChange={handleChange}
+                  placeholder="123 Main St, City, State"
+                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
+                />
               </div>
 
+              {/* LOGO URL */}
+              <div>
+                <label className="text-xs font-medium text-zinc-300">
+                  Logo URL
+                </label>
+                <input
+                  name="logoUrl"
+                  value={form.logoUrl}
+                  onChange={handleChange}
+                  placeholder="https://yourdomain.com/logo.png"
+                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
+                />
+              </div>
+
+              {/* NOTES */}
               <div>
                 <label className="text-xs font-medium text-zinc-300">
                   Anything else we should know?
@@ -362,15 +311,16 @@ export default function StartProjectPage() {
                   value={form.projectNotes}
                   onChange={handleChange}
                   rows={4}
-                  placeholder="Specific pages you need, special features (booking, forms, menus, etc.), or anything else that would help us scope this properly."
-                  className="mt-1 w-full rounded-lg border border-white/15 bg-black/40 p-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                  placeholder="Special features, pages needed, etc."
+                  className="mt-1 w-full rounded-lg border border-white/15 bg-black/40 p-3 text-sm"
                 />
               </div>
 
+              {/* SUBMIT */}
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-8 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.45)] hover:from-emerald-300 hover:to-emerald-200 hover:shadow-[0_18px_40px_rgba(16,185,129,0.55)] disabled:opacity-60"
+                className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-8 text-sm font-semibold text-black disabled:opacity-60"
               >
                 {loading ? "Submitting..." : "Submit project details"}
               </button>
