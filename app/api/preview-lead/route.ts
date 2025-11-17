@@ -17,6 +17,8 @@ export async function POST(request: Request) {
       differentiator,
       email,
       phone,
+      businessAddress,
+      logoUrl,
     } = body;
 
     const { data, error } = await supabase
@@ -32,6 +34,9 @@ export async function POST(request: Request) {
         differentiator: differentiator || null,
         email: email || null,
         phone: phone || null,
+        // 🔹 Only keep these if you've added these columns in Supabase:
+        business_address: businessAddress || null,
+        logo_url: logoUrl || null,
       })
       .select()
       .single();
@@ -44,13 +49,68 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({ ok: true, data }, { status: 200 });
+    // 🔹 Return the id explicitly so the frontend can grab previewId
+    return NextResponse.json(
+      {
+        ok: true,
+        id: data.id,
+        data,
+      },
+      { status: 200 }
+    );
   } catch (err: any) {
     console.error("preview-lead route error:", err);
     return NextResponse.json(
       {
         ok: false,
         message: "Server error in preview-lead route",
+        details: err?.message ?? String(err),
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// GET /api/preview-lead?id=...
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { ok: false, message: "Missing id query parameter" },
+        { status: 400 }
+      );
+    }
+
+    const { data, error } = await supabase
+      .from("preview_leads")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.error("Supabase select error (preview_leads):", error);
+      return NextResponse.json(
+        { ok: false, message: "Supabase error", details: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        ok: true,
+        data,
+      },
+      { status: 200 }
+    );
+  } catch (err: any) {
+    console.error("preview-lead GET route error:", err);
+    return NextResponse.json(
+      {
+        ok: false,
+        message: "Server error in preview-lead GET route",
         details: err?.message ?? String(err),
       },
       { status: 500 }
