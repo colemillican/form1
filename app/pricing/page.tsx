@@ -33,12 +33,12 @@ export default function PricingPage() {
       highlight: true,
       badge: "Recommended",
       blurb:
-        "Everything in Launch plus funnels and starter AI tools to reliably turn traffic into leads and booked work.",
+        "Everything in Launch plus funnels and an AI-enabled website that helps visitors ask, explore, and take action—without digging through menus.",
       points: [
         "Everything in Launch",
-        "Optimized sales funnels & landing pages",
+        "Conversion-focused landing pages & funnels",
         "Lead forms wired into simple tracking/CRM",
-        "Starter AI tools (NovaDesk & PulseLead basics)",
+        "AI-enabled website experience (visitors can ask, not just click)",
         "Monthly improvements to copy, layout & UX",
       ],
       // 🔗 Replace with your real Stripe payment link
