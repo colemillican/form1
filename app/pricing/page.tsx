@@ -2,6 +2,7 @@
 import React from "react";
 import { Exo_2 } from "next/font/google";
 import SiteChrome, { G } from "../components/SiteChrome";
+import { Check } from "lucide-react";
 
 const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
@@ -18,8 +19,8 @@ export default function PricingPage() {
             Clear <G>monthly pricing</G>. No surprise invoices.
           </h1>
           <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            One predictable subscription gets you design, build, hosting, and ongoing updates. As you
-            grow, you can layer in funnels and AI tools—without rebuilding everything from scratch.
+            One predictable subscription gets you design, build, hosting, updates, funnels, and AI
+            capabilities—depending on what stage your business is in.
           </p>
         </div>
       </section>
@@ -32,42 +33,41 @@ export default function PricingPage() {
               name: "Launch",
               price: "$149/mo",
               tag: "Best for getting online",
-              blurb:
-                "A modern, managed website that finally matches the quality of your business.",
+              blurb: "A modern, managed website that finally matches the quality of your business.",
               points: [
-                "Custom-designed website build",
+                "Custom website build",
                 "Ongoing updates & upkeep",
-                "Mobile-first, fast-loading pages",
-                "Local SEO-ready structure & metadata",
-                "Hosting, security & performance monitoring",
+                "Fast, mobile-first pages",
+                "Local SEO-ready structure",
+                "Hosting & security included",
               ],
             },
             {
               name: "Growth",
               price: "$249/mo",
-              tag: "For growing lead flow",
+              tag: "Most popular",
               blurb:
-                "Everything in Launch plus funnels and starter AI tools to turn traffic into real leads.",
+                "Everything in Launch plus funnels and starter AI tools to reliably turn traffic into leads.",
               points: [
                 "Everything in Launch",
-                "Optimized sales funnels & landing pages",
-                "Lead capture forms wired into simple tracking",
-                "Starter AI tools (NovaDesk & PulseLead basics)",
-                "Monthly iteration on copy & layout",
+                "Optimized sales funnels",
+                "Lead forms wired into simple CRM",
+                "Starter AI tools (NovaDesk + PulseLead basics)",
+                "Monthly improvements & content updates",
               ],
             },
             {
               name: "LocalLink AI Suite",
-              price: "$399/mo",
-              tag: "For serious, systems-based teams",
+              price: "$499/mo",
+              tag: "For serious scaling",
               blurb:
-                "Priority partnership with full AI capabilities and ongoing optimization as you scale.",
+                "Priority partnership with full AI automation, custom workflows, and first access to new tools.",
               points: [
                 "Everything in Growth",
                 "Full LocalLink AI Suite (NovaDesk, PulseLead, EchoFlow, LocalLens)",
                 "Priority support & faster turnaround",
-                "Custom automations for your workflows",
-                "First access to new AI tools & experiments",
+                "Custom automations for your business",
+                "First access to new AI tools & updates",
               ],
             },
           ].map((tier) => (
@@ -96,7 +96,7 @@ export default function PricingPage() {
           ))}
         </div>
 
-        {/* What’s included in every plan */}
+        {/* What's included in every plan */}
         <div className="mx-auto max-w-screen-lg px-6 pb-16 text-center">
           <h2
             className={`${heroFont.className} text-[clamp(22px,3vw,30px)] font-semibold tracking-tight mb-3`}
@@ -105,11 +105,42 @@ export default function PricingPage() {
           </h2>
           <p className="mx-auto max-w-3xl text-sm sm:text-[15px] leading-relaxed text-zinc-300">
             No matter which tier you choose, you get a modern website, built on a solid technical
-            foundation, hosted and maintained for you. We handle design, performance, basic SEO
-            setup, security updates, and small content tweaks—so your site keeps feeling sharp as your
-            business grows. As you move up tiers, we add funnels and AI capabilities on top of that
-            same foundation, instead of making you start over.
+            foundation, hosted and maintained for you. As you move up tiers, we add funnels,
+            automations, and AI capabilities on top of that foundation—so you never outgrow your
+            system.
           </p>
+        </div>
+      </section>
+
+      {/* CTA SECTION */}
+      <section className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950">
+        <div className="mx-auto max-w-screen-lg px-6 py-16 text-center">
+          <h3 className="text-2xl font-semibold tracking-tight text-white">
+            Not sure which plan is right for you?
+          </h3>
+          <p className="mt-2 max-w-2xl mx-auto text-zinc-300">
+            Start with a free website concept. We'll show you the direction we’d take, outline what
+            you need, and recommend the best plan based on your goals.
+          </p>
+
+          <a
+            href="/preview"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 text-[15px] hover:bg-zinc-200 transition"
+          >
+            Get my free preview
+          </a>
+
+          <ul className="mt-6 space-y-1 text-xs text-zinc-500">
+            <li className="inline-flex items-center gap-2 justify-center">
+              <Check className="h-3 w-3 text-emerald-400" /> No contracts
+            </li>
+            <li className="inline-flex items-center gap-2 justify-center">
+              <Check className="h-3 w-3 text-emerald-400" /> No pressure
+            </li>
+            <li className="inline-flex items-center gap-2 justify-center">
+              <Check className="h-3 w-3 text-emerald-400" /> Simple, fast process
+            </li>
+          </ul>
         </div>
       </section>
     </SiteChrome>
