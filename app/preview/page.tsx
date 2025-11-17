@@ -52,7 +52,10 @@ function buildConcept(form: FormState): Concept {
   // Brand story
   const brandStory = [
     `${safeName} exists to give people in ${safeLocation} a clear, trustworthy option when it comes to ${safeIndustry.toLowerCase()}.`,
-    `From what you shared, your core focus is on ${form.primaryGoal || "delivering real results and a better experience than the status quo"}.`,
+    `From what you shared, your core focus is on ${
+      form.primaryGoal ||
+      "delivering real results and a better experience than the status quo"
+    }.`,
     `Your website should capture that — not as a random template, but as a focused story that instantly shows the right people why you’re the obvious choice.`,
   ].join(" ");
 
@@ -157,7 +160,6 @@ function buildConcept(form: FormState): Concept {
     },
   ];
 
-  // Messaging concepts (still built, even if not displayed)
   const heroHeadlines: string[] = [
     `A modern website for ${safeLocation}’s ${safeIndustry.toLowerCase()}.`,
     `Turn more visitors into customers with a site built for ${safeName}.`,
@@ -282,7 +284,7 @@ export default function PreviewPage() {
     differentiator: "",
   });
 
-  const [previewLeadId, setPreviewLeadId] = useState<string | null>(null); // NEW
+  const [previewLeadId, setPreviewLeadId] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -318,39 +320,35 @@ export default function PreviewPage() {
     setPhase("loading");
     const built = buildConcept(form);
 
-    // Send lead data to Supabase via API route
     try {
       const res = await fetch("/api/preview-lead", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(form),
-});
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-if (res.ok) {
-  const json = await res.json();
-
-  // Handle both possible API shapes
-  const id = json.id ?? json.data?.id;
-
-  if (id) {
-    console.log("Captured previewId:", id);
-    setPreviewLeadId(id);
-  } else {
-    console.warn("No id returned from preview-lead route:", json);
-  }
-} else {
-  console.error("Failed submitting preview lead", await res.text());
-}
-
-
+      if (res.ok) {
+        const json = await res.json();
+        // Support both { id } and { data: { id } }
+        const id = json.id ?? json.data?.id;
+        if (id) {
+          console.log("Captured previewLeadId:", id);
+          setPreviewLeadId(id);
+        } else {
+          console.warn("No id returned from /api/preview-lead:", json);
+        }
+      } else {
+        console.error(
+          "Failed to submit preview lead:",
+          await res.text()
+        );
+      }
     } catch (error) {
       console.error("Failed to submit preview lead:", error);
-      // We still continue to show the concept even if the lead save fails
     }
 
-    // Keep the cinematic load feel
     setTimeout(() => {
       setConcept(built);
       setPhase("concept");
@@ -387,7 +385,6 @@ if (res.ok) {
               as the starting point for your full custom build.
             </p>
 
-            {/* EARLY CTA */}
             <div className="mt-5 rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-4 sm:p-5">
               <p className="text-[11px] uppercase font-semibold tracking-[0.28em] text-emerald-300">
                 Ready when you are
@@ -486,7 +483,7 @@ if (res.ok) {
             </p>
           </section>
 
-          {/* Big, high-visibility Next Step CTA */}
+          {/* Big CTA */}
           <section className="mt-2 rounded-2xl border border-emerald-400/40 bg-gradient-to-r from-emerald-500/15 via-emerald-400/10 to-cyan-400/10 p-6 sm:p-8">
             <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
               <div className="max-w-xl">
@@ -590,7 +587,6 @@ if (res.ok) {
             </div>
           </div>
 
-          {/* New contact fields */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="text-xs font-medium text-zinc-300">
