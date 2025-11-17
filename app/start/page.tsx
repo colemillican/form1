@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 /* --------------------------- Shared Page Shell -------------------------- */
 
@@ -40,6 +41,8 @@ type ProjectFormState = {
 };
 
 export default function StartProjectPage() {
+  const searchParams = useSearchParams();
+
   const [form, setForm] = useState<ProjectFormState>({
     name: "",
     email: "",
@@ -51,22 +54,95 @@ export default function StartProjectPage() {
     projectNotes: "",
   });
 
+  const [previewLeadId, setPreviewLeadId] = useState<string | null>(null);
+  const [prefillLoading, setPrefillLoading] = useState(false);
+  const [prefillError, setPrefillError] = useState<string | null>(null);
+
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  /* ------------------------- Prefill from preview ------------------------- */
+
+  useEffect(() => {
+    const id = searchParams?.get("previewId");
+    if (!id) return;
+
+    setPreviewLeadId(id);
+    setPrefillLoading(true);
+    setPrefillError(null);
+
+    const fetchPreview = async () => {
+      try {
+        const res = await fetch(`/api/preview-lead?id=${id}`);
+        if (!res.ok) {
+          console.error("Failed to fetch preview lead:", await res.text());
+          setPrefillError("Could not load your previous answers, but you can still fill this form manually.");
+          return;
+        }
+
+        const json = await res.json();
+        const data = json?.data;
+
+        if (!data) return;
+
+        // Map Supabase columns → form fields
+        setForm((prev) => ({
+          ...prev,
+          businessName:
+            prev.businessName || data.business_name || "",
+          email: prev.email || data.email || "",
+          phone: prev.phone || data.phone || "",
+          // Optional: if you added these columns to preview_leads
+          businessAddress:
+            prev.businessAddress || data.business_address || "",
+          logoUrl: prev.logoUrl || data.logo_url || "",
+        }));
+      } catch (err) {
+        console.error("Error fetching preview lead:", err);
+        setPrefillError("Could not load your previous answers, but you can still fill this form manually.");
+      } finally {
+        setPrefillLoading(false);
+      }
+    };
+
+    fetchPreview();
+  }, [searchParams]);
+
+  /* ----------------------------- Handlers ----------------------------- */
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    // TODO: when you're ready, send `form` to Supabase / API route here.
+    try {
+      const res = await fetch("/api/start-project", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          previewLeadId, // 🔹 link to preview_leads
+        }),
+      });
 
-    setSubmitted(true);
-    setLoading(false);
+      if (!res.ok) {
+        console.error("Failed to submit project details:", await res.text());
+        setLoading(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Error submitting project details:", error);
+    } finally {
+      setLoading(false);
+    }
 
     // Later, you can redirect to a payment page here if you want:
     // window.location.href = "/payment";
@@ -175,6 +251,18 @@ export default function StartProjectPage() {
             homepage direction you just saw. The more detail you share, the
             smoother and faster the project will move.
           </p>
+
+          {previewLeadId && (
+            <p className="mt-2 text-[11px] text-emerald-300/80">
+              We&apos;ve linked this form to your concept preview
+              {prefillLoading ? " and are loading your details..." : "."}
+            </p>
+          )}
+          {prefillError && (
+            <p className="mt-2 text-[11px] text-amber-300/80">
+              {prefillError}
+            </p>
+          )}
 
           {submitted ? (
             <div className="mt-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-4 text-sm text-emerald-100">
