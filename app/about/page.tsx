@@ -97,74 +97,104 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* AI TOOL PREVIEW */}
-      <section className="bg-black border-t border-white/10">
-        <div className="mx-auto max-w-screen-xl px-6 py-16 sm:px-8">
-          <h2
-            className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white text-center mb-8`}
-          >
-            A growing suite of <G>practical AI tools</G> for local business.
-          </h2>
+     {/* AI TOOL PREVIEW */}
+<section className="bg-black border-t border-white/10">
+  <div className="mx-auto max-w-screen-xl px-6 py-16 sm:px-8">
+    <h2
+      className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white text-center mb-8`}
+    >
+      A growing suite of <G>practical AI tools</G> for local business.
+    </h2>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-            {/* Tool 1 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-emerald-300 font-bold text-lg mb-2">Nexus AI Assistant</div>
-              <p className="text-sm text-zinc-300">
-                A friendly AI “team member” that answers questions, organizes info, and handles
-                tedious admin tasks so you can stay focused on your work.
-              </p>
-            </div>
-
-            {/* Tool 2 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-emerald-300 font-bold text-lg mb-2">LeadFlow Finder</div>
-              <p className="text-sm text-zinc-300">
-                AI-powered lead generator that captures inquiries, qualifies customers, and makes 
-                sure you never miss an opportunity.
-              </p>
-            </div>
-
-            {/* Tool 3 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-emerald-300 font-bold text-lg mb-2">Insight Engine</div>
-              <p className="text-sm text-zinc-300">
-                Simple analytics interpreted for humans — weekly updates that explain what’s working 
-                on your site and what could convert better.
-              </p>
-            </div>
-
-            {/* Tool 4 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-emerald-300 font-bold text-lg mb-2">TaskPilot Automations</div>
-              <p className="text-sm text-zinc-300">
-                Lightweight automations that send reminders, confirm bookings, follow up with 
-                customers, and streamline repetitive work.
-              </p>
-            </div>
-
-            {/* Tool 5 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-emerald-300 font-bold text-lg mb-2">StudioSync Updates</div>
-              <p className="text-sm text-zinc-300">
-                Automatic content and performance updates to keep your website modern without you 
-                lifting a finger.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mt-12">
-            <a
-              href="/preview"
-              className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
-            >
-              Start your free preview
-            </a>
-          </div>
+      {/* Tool 1 */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        {/* Futuristic logo */}
+        <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
+          <div className="h-5 w-5 rounded-sm bg-emerald-300/80 shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
         </div>
-      </section>
-    </SiteChrome>
-  );
-}
+
+        {/* Text */}
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">Nexus AI Assistant</div>
+          <p className="text-sm text-zinc-300">
+            A friendly AI “team member” that answers questions, organizes info,
+            and handles tedious admin tasks so you can stay focused on what matters.
+          </p>
+        </div>
+      </div>
+
+      {/* Tool 2 */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
+          <div className="h-5 w-5 border-2 border-emerald-300 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
+        </div>
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">LeadFlow Finder</div>
+          <p className="text-sm text-zinc-300">
+            AI-powered lead generator that captures inquiries, qualifies customers,
+            and ensures you never miss an opportunity.
+          </p>
+        </div>
+      </div>
+
+      {/* Tool 3 */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
+          <div className="h-5 w-5 bg-gradient-to-br from-emerald-200 to-emerald-400 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.75)]" />
+        </div>
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">Insight Engine</div>
+          <p className="text-sm text-zinc-300">
+            Simple analytics interpreted for humans — weekly insights that explain
+            what’s working and what could convert better.
+          </p>
+        </div>
+      </div>
+
+      {/* Tool 4 */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
+          <div className="h-5 w-5 border border-emerald-300 rotate-45 shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
+        </div>
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">TaskPilot Automations</div>
+          <p className="text-sm text-zinc-300">
+            Lightweight automations that confirm bookings, send reminders,
+            follow up with leads, and streamline your workflow.
+          </p>
+        </div>
+      </div>
+
+      {/* Tool 5 */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
+          <div className="h-5 w-8 border-2 border-emerald-300 rounded-md shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
+        </div>
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">StudioSync Updates</div>
+          <p className="text-sm text-zinc-300">
+            Automatic content and performance updates that keep your site modern,
+            secure, and always up to date.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* CTA */}
+    <div className="text-center mt-12">
+      <a
+        href="/preview"
+        className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
+      >
+        Start your free preview
+      </a>
+    </div>
+  </div>
+</section>
+
