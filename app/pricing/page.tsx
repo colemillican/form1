@@ -18,8 +18,8 @@ export default function PricingPage() {
             Clear <G>monthly pricing</G>. No surprise invoices.
           </h1>
           <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            One predictable subscription gets you design, build, hosting, and ongoing updates.
-            No giant upfront project fee, no nickel-and-diming for small changes.
+            One predictable subscription gets you design, build, hosting, and ongoing updates. As you
+            grow, you can layer in funnels and AI tools—without rebuilding everything from scratch.
           </p>
         </div>
       </section>
@@ -30,38 +30,44 @@ export default function PricingPage() {
           {[
             {
               name: "Launch",
-              price: "$99/mo",
-              tag: "For getting online",
+              price: "$149/mo",
+              tag: "Best for getting online",
               blurb:
-                "A modern, managed website that covers the essentials for your local business.",
+                "A modern, managed website that finally matches the quality of your business.",
               points: [
-                "Custom-designed website with ongoing upkeep",
-                "SEO management for local search visibility",
-                "Optimized sales funnel for your core offer",
+                "Custom-designed website build",
+                "Ongoing updates & upkeep",
+                "Mobile-first, fast-loading pages",
+                "Local SEO-ready structure & metadata",
+                "Hosting, security & performance monitoring",
               ],
             },
             {
-              name: "Growth + AI",
-              price: "$199/mo",
-              tag: "Best value",
+              name: "Growth",
+              price: "$249/mo",
+              tag: "For growing lead flow",
               blurb:
-                "Everything in Launch plus AI capabilities to help you capture, qualify, and convert more leads.",
+                "Everything in Launch plus funnels and starter AI tools to turn traffic into real leads.",
               points: [
-                "All Launch features included",
-                "AI-enhanced lead capture & inquiry handling",
-                "Smart, conversion-focused funnel refinements over time",
+                "Everything in Launch",
+                "Optimized sales funnels & landing pages",
+                "Lead capture forms wired into simple tracking",
+                "Starter AI tools (NovaDesk & PulseLead basics)",
+                "Monthly iteration on copy & layout",
               ],
             },
             {
-              name: "Pro AI Suite",
-              price: "$349/mo",
-              tag: "For serious teams",
+              name: "LocalLink AI Suite",
+              price: "$399/mo",
+              tag: "For serious, systems-based teams",
               blurb:
-                "Priority support, advanced AI capabilities, and first access to our evolving AI tool stack for local businesses.",
+                "Priority partnership with full AI capabilities and ongoing optimization as you scale.",
               points: [
-                "All Growth + AI features included",
-                "Priority support & faster turnaround on updates",
-                "First in line for our LocalLink AI suite and future AI tools",
+                "Everything in Growth",
+                "Full LocalLink AI Suite (NovaDesk, PulseLead, EchoFlow, LocalLens)",
+                "Priority support & faster turnaround",
+                "Custom automations for your workflows",
+                "First access to new AI tools & experiments",
               ],
             },
           ].map((tier) => (
@@ -72,7 +78,7 @@ export default function PricingPage() {
               <div className="text-xs uppercase tracking-[0.25em] text-emerald-300">
                 {tier.tag}
               </div>
-              <div className="mt-2 text-lg font-semibold">{tier.name}</div>
+              <div className="mt-2 text-lg font-semibold text-white">{tier.name}</div>
               <div className="mt-1 text-emerald-300 font-semibold">{tier.price}</div>
               <p className="mt-2 text-sm text-zinc-300">{tier.blurb}</p>
               <ul className="mt-4 text-sm text-zinc-300 space-y-1 flex-1">
@@ -84,7 +90,7 @@ export default function PricingPage() {
                 href="/preview"
                 className="mt-5 inline-flex h-10 items-center justify-center rounded-full bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition"
               >
-                Start a project with this plan
+                Start with a free preview
               </a>
             </div>
           ))}
@@ -99,9 +105,10 @@ export default function PricingPage() {
           </h2>
           <p className="mx-auto max-w-3xl text-sm sm:text-[15px] leading-relaxed text-zinc-300">
             No matter which tier you choose, you get a modern website, built on a solid technical
-            foundation, hosted and maintained for you. Every plan includes website design and
-            ongoing upkeep, SEO management, and optimized sales funnels so your site doesn&apos;t
-            just look good—it quietly works in the background to bring you more customers.
+            foundation, hosted and maintained for you. We handle design, performance, basic SEO
+            setup, security updates, and small content tweaks—so your site keeps feeling sharp as your
+            business grows. As you move up tiers, we add funnels and AI capabilities on top of that
+            same foundation, instead of making you start over.
           </p>
         </div>
       </section>
