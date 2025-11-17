@@ -208,7 +208,7 @@ function PageShell({ children }: { children: React.ReactNode }) {
             <div className="h-3 w-3 rounded-md border-2 border-white/90 border-b-transparent" />
           </div>
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">
-            LocalLink Digital
+            LocalLink Studio
           </span>
         </Link>
         <span className="rounded-full border border-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-zinc-400">
