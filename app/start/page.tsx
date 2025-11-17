@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, FormEvent } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 /* --------------------------- Shared Page Shell -------------------------- */
 
@@ -41,8 +40,6 @@ type ProjectFormState = {
 };
 
 export default function StartProjectPage() {
-  const searchParams = useSearchParams();
-
   const [form, setForm] = useState<ProjectFormState>({
     name: "",
     email: "",
@@ -55,60 +52,49 @@ export default function StartProjectPage() {
   });
 
   const [previewLeadId, setPreviewLeadId] = useState<string | null>(null);
-  const [prefillLoading, setPrefillLoading] = useState(false);
-  const [prefillError, setPrefillError] = useState<string | null>(null);
-
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [prefillError, setPrefillError] = useState<string | null>(null);
 
-  /* ------------------------- Prefill from preview ------------------------- */
-
+  // 🔹 Read previewId from the URL and prefill from /api/preview-lead
   useEffect(() => {
-    const id = searchParams?.get("previewId");
+    if (typeof window === "undefined") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("previewId");
+
     if (!id) return;
 
     setPreviewLeadId(id);
-    setPrefillLoading(true);
-    setPrefillError(null);
 
     const fetchPreview = async () => {
       try {
         const res = await fetch(`/api/preview-lead?id=${id}`);
         if (!res.ok) {
           console.error("Failed to fetch preview lead:", await res.text());
-          setPrefillError("Could not load your previous answers, but you can still fill this form manually.");
+          setPrefillError("Could not prefill from your preview data.");
           return;
         }
 
         const json = await res.json();
-        const data = json?.data;
+        const lead = json.data; // because our route returns { ok, data }
 
-        if (!data) return;
+        if (!lead) return;
 
-        // Map Supabase columns → form fields
         setForm((prev) => ({
           ...prev,
-          businessName:
-            prev.businessName || data.business_name || "",
-          email: prev.email || data.email || "",
-          phone: prev.phone || data.phone || "",
-          // Optional: if you added these columns to preview_leads
-          businessAddress:
-            prev.businessAddress || data.business_address || "",
-          logoUrl: prev.logoUrl || data.logo_url || "",
+          businessName: prev.businessName || lead.business_name || "",
+          email: prev.email || lead.email || "",
+          phone: prev.phone || lead.phone || "",
         }));
       } catch (err) {
         console.error("Error fetching preview lead:", err);
-        setPrefillError("Could not load your previous answers, but you can still fill this form manually.");
-      } finally {
-        setPrefillLoading(false);
+        setPrefillError("Could not prefill from your preview data.");
       }
     };
 
     fetchPreview();
-  }, [searchParams]);
-
-  /* ----------------------------- Handlers ----------------------------- */
+  }, []);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -120,15 +106,17 @@ export default function StartProjectPage() {
     setLoading(true);
 
     try {
+      const payload = {
+        ...form,
+        previewLeadId, // 🔹 link this project to the preview lead
+      };
+
       const res = await fetch("/api/start-project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...form,
-          previewLeadId, // 🔹 link to preview_leads
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
@@ -252,16 +240,8 @@ export default function StartProjectPage() {
             smoother and faster the project will move.
           </p>
 
-          {previewLeadId && (
-            <p className="mt-2 text-[11px] text-emerald-300/80">
-              We&apos;ve linked this form to your concept preview
-              {prefillLoading ? " and are loading your details..." : "."}
-            </p>
-          )}
           {prefillError && (
-            <p className="mt-2 text-[11px] text-amber-300/80">
-              {prefillError}
-            </p>
+            <p className="mt-3 text-xs text-red-400">{prefillError}</p>
           )}
 
           {submitted ? (
