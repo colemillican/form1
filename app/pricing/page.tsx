@@ -18,8 +18,8 @@ export default function PricingPage() {
             Clear <G>monthly pricing</G>. No surprise invoices.
           </h1>
           <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            One predictable subscription gets you design, build, hosting, and ongoing updates. No
-            giant upfront project fee, no nickel-and-diming for small changes.
+            One predictable subscription gets you design, build, hosting, and ongoing updates.
+            No giant upfront project fee, no nickel-and-diming for small changes.
           </p>
         </div>
       </section>
@@ -30,35 +30,38 @@ export default function PricingPage() {
           {[
             {
               name: "Launch",
-              price: "$149/mo",
-              tag: "Best for new sites",
-              blurb: "A clean, modern brochure site with everything managed for you.",
+              price: "$99/mo",
+              tag: "For getting online",
+              blurb:
+                "A modern, managed website that covers the essentials for your local business.",
               points: [
-                "Up to 5 core pages",
-                "Modern, conversion-focused design",
-                "Hosting & technical upkeep included",
+                "Custom-designed website with ongoing upkeep",
+                "SEO management for local search visibility",
+                "Optimized sales funnel for your core offer",
               ],
             },
             {
-              name: "Growth",
-              price: "$249/mo",
-              tag: "For growing teams",
-              blurb: "Extra depth, more sections, and a little more room to experiment.",
+              name: "Growth + AI",
+              price: "$199/mo",
+              tag: "Best value",
+              blurb:
+                "Everything in Launch plus AI capabilities to help you capture, qualify, and convert more leads.",
               points: [
-                "Up to 8–10 pages",
-                "Richer layouts and sections",
-                "More frequent content updates",
+                "All Launch features included",
+                "AI-enhanced lead capture & inquiry handling",
+                "Smart, conversion-focused funnel refinements over time",
               ],
             },
             {
-              name: "Pro",
-              price: "$399/mo",
-              tag: "For serious digital presence",
-              blurb: "Priority support and a higher ceiling for complexity and polish.",
+              name: "Pro AI Suite",
+              price: "$349/mo",
+              tag: "For serious teams",
+              blurb:
+                "Priority support, advanced AI capabilities, and first access to our evolving AI tool stack for local businesses.",
               points: [
-                "Custom sections & integrations",
-                "Priority edits & refinements",
-                "Closer ongoing collaboration",
+                "All Growth + AI features included",
+                "Priority support & faster turnaround on updates",
+                "First in line for our LocalLink AI suite and future AI tools",
               ],
             },
           ].map((tier) => (
@@ -78,10 +81,10 @@ export default function PricingPage() {
                 ))}
               </ul>
               <a
-                href="/contact"
+                href="/preview"
                 className="mt-5 inline-flex h-10 items-center justify-center rounded-full bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition"
               >
-                Talk about this plan
+                Start a project with this plan
               </a>
             </div>
           ))}
@@ -96,14 +99,12 @@ export default function PricingPage() {
           </h2>
           <p className="mx-auto max-w-3xl text-sm sm:text-[15px] leading-relaxed text-zinc-300">
             No matter which tier you choose, you get a modern website, built on a solid technical
-            foundation, hosted and maintained for you. We handle performance, basic SEO setup,
-            security updates, and small content tweaks so the site keeps feeling fresh as your
-            business grows.
+            foundation, hosted and maintained for you. Every plan includes website design and
+            ongoing upkeep, SEO management, and optimized sales funnels so your site doesn&apos;t
+            just look good—it quietly works in the background to bring you more customers.
           </p>
         </div>
       </section>
     </SiteChrome>
   );
 }
-
-
