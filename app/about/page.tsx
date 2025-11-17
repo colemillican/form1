@@ -18,7 +18,7 @@ export default function AboutPage() {
             A startup out of <G>Auburn, Alabama</G> building the next wave of local business tech.
           </h1>
           <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            LocalLink Digital is a small, focused team in Auburn, AL on a mission to help local
+            LocalLink Studio is a small, focused team in Auburn, AL on a mission to help local
             businesses keep up with modern technology and the oncoming wave of AI—without having to
             become tech companies themselves.
           </p>
