@@ -17,8 +17,6 @@ type FormState = {
   idealCustomer: string;
   keyOffers: string;
   differentiator: string;
-  businessAddress: string;
-  logoUrl: string;
 };
 
 type HomepageSectionConcept = {
@@ -282,9 +280,9 @@ export default function PreviewPage() {
     idealCustomer: "",
     keyOffers: "",
     differentiator: "",
-    businessAddress: "",
-    logoUrl: "",
   });
+
+  const [previewLeadId, setPreviewLeadId] = useState<string | null>(null); // NEW
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -311,8 +309,6 @@ export default function PreviewPage() {
         "Open gym memberships, small-group strength classes, and 1:1 performance coaching.",
       differentiator:
         "Serious coaching, measurable progress, and a no-gimmicks training culture.",
-      businessAddress: "123 Strength Lane, Birmingham, AL 35203",
-      logoUrl: "https://example.com/your-logo.png",
     });
   };
 
@@ -324,13 +320,22 @@ export default function PreviewPage() {
 
     // Send lead data to Supabase via API route
     try {
-      await fetch("/api/preview-lead", {
+      const res = await fetch("/api/preview-lead", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
       });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.id) {
+          setPreviewLeadId(json.id); // save preview_leads.id
+        }
+      } else {
+        console.error("Failed to submit preview lead:", await res.text());
+      }
     } catch (error) {
       console.error("Failed to submit preview lead:", error);
       // We still continue to show the concept even if the lead save fails
@@ -352,6 +357,10 @@ export default function PreviewPage() {
   }
 
   if (phase === "concept" && concept) {
+    const startHref = previewLeadId
+      ? `/start?previewId=${previewLeadId}`
+      : "/start";
+
     return (
       <PageShell>
         <main className="mx-auto flex min-h-[calc(100vh-56px)] max-w-6xl flex-col gap-8 px-5 py-10 lg:px-8">
@@ -381,7 +390,7 @@ export default function PreviewPage() {
                 </p>
 
                 <a
-                  href="/start"
+                  href={startHref}
                   className="inline-flex h-10 items-center justify-center rounded-full bg-gradient-to-r from-white to-emerald-200 px-6 text-xs font-semibold text-black shadow-[0_10px_35px_rgba(255,255,255,0.25)] hover:bg-white/90 transition"
                 >
                   Continue →
@@ -485,7 +494,7 @@ export default function PreviewPage() {
                 </p>
               </div>
               <a
-                href="/start"
+                href={startHref}
                 className="inline-flex h-11 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-white via-zinc-100 to-emerald-200 px-7 sm:px-9 text-xs sm:text-sm font-semibold text-black shadow-[0_18px_45px_rgba(250,250,250,0.35)] hover:from-zinc-200 hover:via-white hover:to-emerald-300 hover:-translate-y-[1px] transition-transform"
               >
                 Start a project with this direction
@@ -572,20 +581,6 @@ export default function PreviewPage() {
             </div>
           </div>
 
-          <div>
-            <label className="text-xs font-medium text-zinc-300">
-              Business address
-            </label>
-            <textarea
-              name="businessAddress"
-              value={form.businessAddress}
-              onChange={handleChange}
-              rows={2}
-              placeholder="123 Strength Lane, Birmingham, AL 35203"
-              className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 p-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
-            />
-          </div>
-
           {/* New contact fields */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
@@ -616,19 +611,6 @@ export default function PreviewPage() {
                 className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
               />
             </div>
-          </div>
-
-          <div>
-            <label className="text-xs font-medium text-zinc-300">
-              Logo (URL)
-            </label>
-            <input
-              name="logoUrl"
-              value={form.logoUrl}
-              onChange={handleChange}
-              placeholder="Paste a link to your logo file"
-              className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
-            />
           </div>
 
           <div>
