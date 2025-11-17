@@ -2,6 +2,7 @@
 
 import React, { useState, FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 /* --------------------------- Shared Page Shell -------------------------- */
 
@@ -40,6 +41,8 @@ type ProjectFormState = {
 };
 
 export default function StartProjectPage() {
+  const router = useRouter();
+
   const [form, setForm] = useState<ProjectFormState>({
     name: "",
     email: "",
@@ -51,7 +54,6 @@ export default function StartProjectPage() {
     projectNotes: "",
   });
 
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: any) => {
@@ -76,16 +78,10 @@ export default function StartProjectPage() {
         return;
       }
 
-      setSubmitted(true);
-
-      // ⭐ Auto-redirect to Stripe after brief delay
-      setTimeout(() => {
-        window.location.href =
-          "https://buy.stripe.com/test_aFa00c0z98Fh56R45b3Nm00";
-      }, 1200);
+      // ✅ After project details are saved, send them to the plan selection page
+      router.push("/plans");
     } catch (error) {
       console.error("Error:", error);
-    } finally {
       setLoading(false);
     }
   };
@@ -154,7 +150,7 @@ export default function StartProjectPage() {
                 we&apos;ll follow up with a clear outline and next steps.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-                <li>• Ideal if you're busy</li>
+                <li>• Ideal if you&apos;re busy</li>
                 <li>• Put everything in writing</li>
                 <li>• Get a structured project breakdown</li>
               </ul>
@@ -162,7 +158,7 @@ export default function StartProjectPage() {
               <button
                 type="button"
                 onClick={scrollToForm}
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-emerald-400 px-5 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgrgba(16,185,129,0.55)] hover:bg-emerald-300"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-emerald-400 px-5 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.55)] hover:bg-emerald-300"
               >
                 Fill Out Project Form
               </button>
@@ -187,145 +183,137 @@ export default function StartProjectPage() {
             homepage direction you just saw.
           </p>
 
-          {submitted ? (
-            <div className="mt-4 rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-4 text-sm text-emerald-100">
-              Thanks! Your project details have been received.  
-              Redirecting you to the secure payment page…
+          <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+            {/* ROW 1 */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className="text-xs font-medium text-zinc-300">
+                  Your name
+                </label>
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Jane Doe"
+                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-medium text-zinc-300">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="you@business.com"
+                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
+                />
+              </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="mt-5 space-y-4">
 
-              {/* ROW 1 */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="text-xs font-medium text-zinc-300">
-                    Your name
-                  </label>
-                  <input
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Jane Doe"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-zinc-300">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="you@business.com"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                  />
-                </div>
-              </div>
-
-              {/* ROW 2 */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="text-xs font-medium text-zinc-300">
-                    Phone number
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={form.phone}
-                    onChange={handleChange}
-                    required
-                    placeholder="(555) 123-4567"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-zinc-300">
-                    Business name
-                  </label>
-                  <input
-                    name="businessName"
-                    value={form.businessName}
-                    onChange={handleChange}
-                    required
-                    placeholder="Your Business Name"
-                    className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                  />
-                </div>
-              </div>
-
-              {/* WEBSITE */}
+            {/* ROW 2 */}
+            <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="text-xs font-medium text-zinc-300">
-                  Current website
+                  Phone number
                 </label>
                 <input
-                  name="websiteUrl"
-                  value={form.websiteUrl}
+                  type="tel"
+                  name="phone"
+                  value={form.phone}
                   onChange={handleChange}
-                  placeholder="https://yourwebsite.com"
+                  required
+                  placeholder="(555) 123-4567"
                   className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
                 />
               </div>
 
-              {/* BUSINESS ADDRESS */}
               <div>
                 <label className="text-xs font-medium text-zinc-300">
-                  Business address
+                  Business name
                 </label>
                 <input
-                  name="businessAddress"
-                  value={form.businessAddress}
+                  name="businessName"
+                  value={form.businessName}
                   onChange={handleChange}
-                  placeholder="123 Main St, City, State"
+                  required
+                  placeholder="Your Business Name"
                   className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
                 />
               </div>
+            </div>
 
-              {/* LOGO URL */}
-              <div>
-                <label className="text-xs font-medium text-zinc-300">
-                  Logo URL
-                </label>
-                <input
-                  name="logoUrl"
-                  value={form.logoUrl}
-                  onChange={handleChange}
-                  placeholder="https://yourdomain.com/logo.png"
-                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                />
-              </div>
+            {/* WEBSITE */}
+            <div>
+              <label className="text-xs font-medium text-zinc-300">
+                Current website
+              </label>
+              <input
+                name="websiteUrl"
+                value={form.websiteUrl}
+                onChange={handleChange}
+                placeholder="https://yourwebsite.com"
+                className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
+              />
+            </div>
 
-              {/* NOTES */}
-              <div>
-                <label className="text-xs font-medium text-zinc-300">
-                  Anything else we should know?
-                </label>
-                <textarea
-                  name="projectNotes"
-                  value={form.projectNotes}
-                  onChange={handleChange}
-                  rows={4}
-                  placeholder="Special features, pages needed, etc."
-                  className="mt-1 w-full rounded-lg border border-white/15 bg-black/40 p-3 text-sm"
-                />
-              </div>
+            {/* BUSINESS ADDRESS */}
+            <div>
+              <label className="text-xs font-medium text-zinc-300">
+                Business address
+              </label>
+              <input
+                name="businessAddress"
+                value={form.businessAddress}
+                onChange={handleChange}
+                placeholder="123 Main St, City, State"
+                className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
+              />
+            </div>
 
-              {/* SUBMIT */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-8 text-sm font-semibold text-black disabled:opacity-60"
-              >
-                {loading ? "Submitting..." : "Submit project details"}
-              </button>
-            </form>
-          )}
+            {/* LOGO URL */}
+            <div>
+              <label className="text-xs font-medium text-zinc-300">
+                Logo URL
+              </label>
+              <input
+                name="logoUrl"
+                value={form.logoUrl}
+                onChange={handleChange}
+                placeholder="https://yourdomain.com/logo.png"
+                className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
+              />
+            </div>
+
+            {/* NOTES */}
+            <div>
+              <label className="text-xs font-medium text-zinc-300">
+                Anything else we should know?
+              </label>
+              <textarea
+                name="projectNotes"
+                value={form.projectNotes}
+                onChange={handleChange}
+                rows={4}
+                placeholder="Special features, pages needed, AI tools you’re interested in, etc."
+                className="mt-1 w-full rounded-lg border border-white/15 bg-black/40 p-3 text-sm"
+              />
+            </div>
+
+            {/* SUBMIT */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-8 text-sm font-semibold text-black disabled:opacity-60"
+            >
+              {loading ? "Submitting..." : "Submit project details"}
+            </button>
+          </form>
         </section>
       </main>
     </PageShell>
