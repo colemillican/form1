@@ -97,29 +97,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ============== AI TOOLS SECTION (MATCHING HOME) ============== */}
+      {/* ============== AI TOOLS SECTION (ABOUT CONTEXT) ============== */}
       <section className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <div className="mb-6 max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300/80">
-              LOCAL AI SUITE (GROWTH & PRO PLANS)
+              LOCAL AI SUITE (IN ACTIVE DEVELOPMENT)
             </p>
             <h3
               className={`${heroFont.className} mt-2 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight`}
             >
-              AI tools built for local businesses, not tech companies.
+              Our long-term vision: practical AI that feels like extra people on your team.
             </h3>
             <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-zinc-300">
-              Our higher tiers unlock a focused stack of AI tools designed to feel like extra hands
-              for your team—answering questions, qualifying leads, and keeping you in the loop—
-              without you having to learn a new piece of software.
-              <br />
-              <br />
-              <span className="text-emerald-300/80">
-                These tools are an actively developing feature of LocalLink Studio. Early partners
-                get new capabilities as we build them—smarter automations, deeper insights, and
-                simple AI assistants designed specifically for local business workflows.
-              </span>
+              From day one, LocalLink Studio has been built with the future in mind. Websites and
+              funnels are the foundation — but the next layer is practical AI that helps small
+              businesses handle the busywork, stay responsive, and make better decisions without
+              becoming “a tech company.”
+            </p>
+            <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-zinc-300">
+              Our Local AI Suite is a developing part of that vision. These tools are being built
+              and refined alongside real clients, with a focus on simple, trustworthy workflows:
+              answering common questions, qualifying leads, summarizing activity, and giving you
+              clear signals on what matters. Early partners get access as we roll out new
+              capabilities — and help shape where the suite goes next.
             </p>
           </div>
 
