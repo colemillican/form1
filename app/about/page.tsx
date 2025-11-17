@@ -11,209 +11,156 @@ export default function AboutPage() {
       {/* HERO */}
       <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
         <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 text-center">
-          <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">WHO WE ARE</p>
+          <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">ABOUT US</p>
+
           <h1
             className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight`}
           >
-            A startup out of <G>Auburn, Alabama</G> building the next wave of local business tech.
+            A modern studio built for <G>small businesses</G>.
           </h1>
+
           <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            LocalLink Studio is a small, focused team in Auburn, AL on a mission to help local
-            businesses keep up with modern technology and the oncoming wave of AI—without having to
-            become tech companies themselves.
+            LocalLink Studio is a small, mission-driven digital studio out of Auburn, Alabama —
+            built to help local businesses stay modern, competitive, and confident in a rapidly
+            changing world of websites, marketing, and AI.
           </p>
         </div>
       </section>
 
-      {/* STORY / MISSION */}
+      {/* MISSION COPY */}
       <section className="bg-black">
-        <div className="mx-auto max-w-screen-lg px-6 py-14 sm:px-8 space-y-8 text-zinc-300 leading-relaxed">
-          <div className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-500">
-              Built for real local businesses
+        <div className="mx-auto max-w-screen-xl px-6 py-14 sm:px-8 space-y-8 text-zinc-300 leading-relaxed">
+          
+          <div className="space-y-4">
+            <h2
+              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
+            >
+              Built for long-term partnerships — not quick projects.
             </h2>
+
             <p>
-              You&apos;re great at what you do—running a gym, a service company, a local shop—but
-              the digital side of your business rarely gets the attention it deserves. The website is
-              dated, the tech stack is scattered, and AI feels like something only big companies can
-              use.
+              We don’t think like a freelance designer or a one-and-done agency. We act as a 
+              dedicated partner in your corner — keeping your website sharp, your funnels working, 
+              and your business aligned with the newest tech and AI tools. Your business keeps 
+              evolving, and our job is to make sure your digital presence evolves with it.
             </p>
+
             <p>
-              That&apos;s the gap we&apos;re here to fill. We design and maintain modern websites,
-              align them with clear sales funnels, and layer in AI where it actually helps—so you can
-              stay focused on the work that made your business successful in the first place.
+              Our mission isn’t to sell trends or overwhelm you with dashboards. We take care of 
+              the technical work, while you stay focused on what you do best: running your business, 
+              serving customers, and growing your team. Meanwhile, we keep an eye on what’s coming, 
+              and make sure you’re never falling behind.
             </p>
           </div>
 
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-zinc-500">
-              Long-term partnerships, not quick hits
-            </h3>
+          <div className="space-y-4">
+            <h2
+              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
+            >
+              You stay in control — always.
+            </h2>
+
             <p>
-              We&apos;re not here to throw a few tools at you, collect a fee, and disappear.
-              LocalLink is built around long-term partnerships with a small number of serious owners.
-              We want to be the team you trust with your digital presence and your AI roadmap as
-              technology keeps evolving.
+              Transparency is a core value at LocalLink Studio. You maintain full ownership of your 
+              content, your branding, your domain, and your direction. We don’t “lock you in,” hide 
+              access, or make changes behind your back. You stay in the driver’s seat; we simply provide 
+              the engine.
             </p>
+
             <p>
-              Your business will change. New offers, new locations, new seasons. Your website and AI
-              stack should evolve with you—without you having to wrestle with dashboards, plugins, or
-              complicated tools.
+              Every partnership involves shared decision-making. You’ll always know what’s happening, 
+              why it matters, and how it affects your business. We guide, support, build, and maintain — 
+              but you determine the path forward.
             </p>
           </div>
 
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-zinc-500">
-              Our mission in one line
-            </h3>
+          <div className="space-y-4">
+            <h2
+              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
+            >
+              Helping businesses stay modern, clear, and competitive.
+            </h2>
+
             <p>
-              <span className="font-semibold text-white">
-                We handle the modern tech and AI layer for local businesses so you can focus on what
-                you do best.
-              </span>{" "}
-              That means design, upkeep, SEO, funnels, and—increasingly—a practical stack of AI tools
-              that actually move the needle, not just sound impressive.
+              Most small businesses don’t have time to keep up with new marketing tools, website 
+              standards, AI workflows, automation, and customer funnel strategies. That’s where 
+              we come in — translating modern technology into simple, useful tools that genuinely 
+              help your business grow.
             </p>
+
             <p>
-              Right now, we&apos;re intentionally small. We&apos;re looking for a handful of
-              strategic partners to grow with: owners who care about their craft, who want to look
-              sharp online, and who are ready to tap into AI without losing their mind—or their
-              time—to it.
+              Whether it's a beautiful website, a streamlined booking flow, or practical AI that
+              handles your busywork — our goal is to give you the same digital leverage that big 
+              companies have, without the complexity or cost.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FUTURE + AI TOOLS */}
-      <section className="bg-black border-t border-white/5">
-        <div className="mx-auto max-w-screen-2xl px-6 pt-10 pb-16 sm:px-8 space-y-10">
-          {/* Cinematic / mission card */}
-          <div className="rounded-2xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/10 via-cyan-400/10 to-zinc-900/80 p-5 sm:p-6 relative overflow-hidden">
-            <div className="pointer-events-none absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_0%_0%,rgba(52,211,153,0.4),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(56,189,248,0.35),transparent_55%)]" />
-            <div className="relative z-10 max-w-3xl">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-300/90">
-                The LocalLink AI stack
-              </p>
-              <h2
-                className={`${heroFont.className} mt-2 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-white`}
-              >
-                Building a practical AI toolkit for real local businesses.
-              </h2>
-              <p className="mt-3 text-sm sm:text-[15px] text-emerald-50/90">
-                We&apos;re actively developing a stack of AI tools designed for one thing: helping
-                small, local teams feel like they have extra employees—without adding extra payroll.
-              </p>
-              <p className="mt-3 text-xs sm:text-sm text-emerald-100/80">
-                As an early partner, you don&apos;t just get a website. You get a front-row seat to
-                the tools we&apos;re building next—and a say in what we build for owners like you.
-              </p>
-            </div>
-          </div>
+      {/* AI TOOL PREVIEW */}
+      <section className="bg-black border-t border-white/10">
+        <div className="mx-auto max-w-screen-xl px-6 py-16 sm:px-8">
+          <h2
+            className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white text-center mb-8`}
+          >
+            A growing suite of <G>practical AI tools</G> for local business.
+          </h2>
 
-          {/* AI tools grid */}
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
             {/* Tool 1 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    ND
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    NovaDesk AI
-                  </div>
-                  <p className="text-[11px] text-zinc-400">AI front desk assistant</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                An AI “employee” that can answer common questions, handle simple booking requests,
-                and route real leads to you—whether they come in from your website, contact form, or
-                messaging.
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="text-emerald-300 font-bold text-lg mb-2">Nexus AI Assistant</div>
+              <p className="text-sm text-zinc-300">
+                A friendly AI “team member” that answers questions, organizes info, and handles
+                tedious admin tasks so you can stay focused on your work.
               </p>
             </div>
 
             {/* Tool 2 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    PL
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    PulseLead Engine
-                  </div>
-                  <p className="text-[11px] text-zinc-400">Lead generator & qualifier</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                Smart lead capture flows that ask the right questions, qualify interest, and tag
-                leads so you can quickly see who&apos;s serious—and follow up with the right message
-                at the right time.
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="text-emerald-300 font-bold text-lg mb-2">LeadFlow Finder</div>
+              <p className="text-sm text-zinc-300">
+                AI-powered lead generator that captures inquiries, qualifies customers, and makes 
+                sure you never miss an opportunity.
               </p>
             </div>
 
             {/* Tool 3 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-400 to-emerald-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    EF
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    EchoFlow Assistant
-                  </div>
-                  <p className="text-[11px] text-zinc-400">AI admin & follow-up helper</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                Tools that draft follow-up emails, reminders, and check-ins based on how people
-                interact with your site—helping you stay present without manually chasing every
-                lead.
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="text-emerald-300 font-bold text-lg mb-2">Insight Engine</div>
+              <p className="text-sm text-zinc-300">
+                Simple analytics interpreted for humans — weekly updates that explain what’s working 
+                on your site and what could convert better.
               </p>
             </div>
 
             {/* Tool 4 */}
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-4 sm:p-5 flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-300 to-emerald-400">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-black uppercase">
-                    LL
-                  </span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                    LocalLens Insights
-                  </div>
-                  <p className="text-[11px] text-zinc-400">Local insights & reporting</p>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-200">
-                Simple, human-readable summaries of how your site and funnels are performing:
-                what&apos;s working, what&apos;s dropping off, and where a small tweak could unlock
-                more customers.
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="text-emerald-300 font-bold text-lg mb-2">TaskPilot Automations</div>
+              <p className="text-sm text-zinc-300">
+                Lightweight automations that send reminders, confirm bookings, follow up with 
+                customers, and streamline repetitive work.
+              </p>
+            </div>
+
+            {/* Tool 5 */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="text-emerald-300 font-bold text-lg mb-2">StudioSync Updates</div>
+              <p className="text-sm text-zinc-300">
+                Automatic content and performance updates to keep your website modern without you 
+                lifting a finger.
               </p>
             </div>
           </div>
 
-          <div className="max-w-2xl text-xs sm:text-sm text-zinc-400">
-            We&apos;re actively looking for a few strategic partners who want to grow with us—
-            owners who see the wave of AI coming and would rather be early, prepared, and supported
-            than playing catch-up later.
-          </div>
-
           {/* CTA */}
-          <div className="pt-4 flex justify-center">
+          <div className="text-center mt-12">
             <a
               href="/preview"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-300 px-8 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.45)] hover:from-emerald-300 hover:via-emerald-200 hover:to-cyan-200 hover:-translate-y-[1px] transition-transform"
+              className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
             >
-              Become a strategic partner
+              Start your free preview
             </a>
           </div>
         </div>
