@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -51,15 +50,15 @@ export default function PlansPage() {
               $149<span className="text-sm text-zinc-400">/mo</span>
             </div>
             <p className="mt-2 text-sm text-zinc-300">
-              A modern, fully managed website so your business finally has a
-              sharp, trustworthy online home—without you touching the tech.
+              A modern, managed website that finally matches the quality of your
+              business—without you touching the tech.
             </p>
             <ul className="mt-4 text-sm text-zinc-300 space-y-1 flex-1">
-              <li>• Custom-designed homepage & core pages</li>
-              <li>• Hosting, maintenance & security handled for you</li>
-              <li>• Local SEO-ready structure & content framework</li>
-              <li>• Ongoing content tweaks & small updates</li>
-              <li>• Email support</li>
+              <li>• Custom website design & build</li>
+              <li>• Ongoing updates & upkeep</li>
+              <li>• Fast, mobile-first pages</li>
+              <li>• Local SEO-ready structure & metadata</li>
+              <li>• Hosting, security & performance monitoring</li>
             </ul>
             <a
               href={LAUNCH_LINK}
@@ -83,19 +82,19 @@ export default function PlansPage() {
             </div>
             <div className="mt-2 text-lg font-semibold">Growth</div>
             <div className="mt-1 text-emerald-200 font-semibold text-xl">
-              $299<span className="text-sm text-emerald-100/70">/mo</span>
+              $249<span className="text-sm text-emerald-100/70">/mo</span>
             </div>
             <p className="mt-2 text-sm text-emerald-50/90">
-              For owners who want a sharper site and practical AI tools that
-              save time and help capture more customers—without adding
-              complexity.
+              Everything in Launch plus funnels and an AI-enabled website that
+              helps visitors ask, explore, and take action—without digging
+              through menus.
             </p>
             <ul className="mt-4 text-sm text-emerald-50/90 space-y-1 flex-1">
               <li>• Everything in Launch</li>
-              <li>• Conversion-focused funnels & lead forms</li>
-              <li>• Access to core Local AI Suite tools</li>
-              <li>• Simple performance snapshots & recommendations</li>
-              <li>• Faster content & update turnaround</li>
+              <li>• Conversion-focused landing pages & funnels</li>
+              <li>• Lead forms wired into simple tracking/CRM</li>
+              <li>• AI-enabled website experience (visitors can ask, not just click)</li>
+              <li>• Monthly improvements to copy, layout & UX</li>
             </ul>
             <a
               href={GROWTH_LINK}
@@ -107,26 +106,28 @@ export default function PlansPage() {
             </a>
           </div>
 
-          {/* Pro AI Suite */}
+          {/* LocalLink AI Suite */}
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col">
             <div className="text-xs uppercase tracking-[0.25em] text-zinc-300">
               FULL AI SUITE
             </div>
-            <div className="mt-2 text-lg font-semibold">Pro AI Suite</div>
+            <div className="mt-2 text-lg font-semibold">LocalLink AI Suite</div>
             <div className="mt-1 text-emerald-300 font-semibold text-xl">
               $499<span className="text-sm text-zinc-400">/mo</span>
             </div>
             <p className="mt-2 text-sm text-zinc-300">
-              For teams that want Local Link Studio as a long-term tech partner:
-              full AI stack access, priority support, and deeper collaboration
-              on systems and strategy.
+              Priority partnership with full AI automation, custom workflows,
+              and first access to new tools as we build them.
             </p>
             <ul className="mt-4 text-sm text-zinc-300 space-y-1 flex-1">
               <li>• Everything in Growth</li>
-              <li>• Full Local AI Suite access as it evolves</li>
-              <li>• Priority support & quicker iteration loops</li>
-              <li>• Input on future tools tailored to your workflows</li>
-              <li>• Closer, long-term partnership on tech & AI</li>
+              <li>
+                • Full LocalLink AI Suite (NovaDesk, PulseLead, EchoFlow,
+                LocalLens)
+              </li>
+              <li>• Priority support & faster turnaround</li>
+              <li>• Custom automations for your workflows</li>
+              <li>• Quarterly strategy check-ins on site & AI</li>
             </ul>
             <a
               href={PRO_LINK}
@@ -134,7 +135,7 @@ export default function PlansPage() {
               rel="noreferrer"
               className="mt-5 inline-flex h-10 items-center justify-center rounded-full bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition"
             >
-              Start on Pro AI Suite
+              Start on LocalLink AI Suite
             </a>
           </div>
         </div>
