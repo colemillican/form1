@@ -97,104 +97,130 @@ export default function AboutPage() {
       </section>
 
       {/* AI TOOL PREVIEW */}
-      <section className="bg-black border-t border-white/10">
-        <div className="mx-auto max-w-screen-xl px-6 py-16 sm:px-8">
-          <h2
-            className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white text-center mb-8`}
+<section className="bg-black border-t border-white/10">
+  <div className="mx-auto max-w-screen-xl px-6 py-16 sm:px-8">
+    <h2
+      className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white text-center mb-10`}
+    >
+      A growing suite of <G>practical AI tools</G> for local business.
+    </h2>
+
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      
+      {/* NovaDesk AI */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-400/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 stroke-emerald-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
           >
-            A growing suite of <G>practical AI tools</G> for local business.
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Tool 1 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              {/* Futuristic logo */}
-              <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
-                <div className="h-5 w-5 rounded-sm bg-emerald-300/80 shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
-              </div>
-
-              {/* Text */}
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">Nexus AI Assistant</div>
-                <p className="text-sm text-zinc-300">
-                  A friendly AI “team member” that answers questions, organizes info, and handles
-                  tedious admin tasks so you can stay focused on what matters.
-                </p>
-              </div>
-            </div>
-
-            {/* Tool 2 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
-                <div className="h-5 w-5 border-2 border-emerald-300 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">LeadFlow Finder</div>
-                <p className="text-sm text-zinc-300">
-                  AI-powered lead generator that captures inquiries, qualifies customers, and
-                  ensures you never miss an opportunity.
-                </p>
-              </div>
-            </div>
-
-            {/* Tool 3 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
-                <div className="h-5 w-5 bg-gradient-to-br from-emerald-200 to-emerald-400 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.75)]" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">Insight Engine</div>
-                <p className="text-sm text-zinc-300">
-                  Simple analytics interpreted for humans — weekly insights that explain what’s
-                  working and what could convert better.
-                </p>
-              </div>
-            </div>
-
-            {/* Tool 4 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
-                <div className="h-5 w-5 border border-emerald-300 rotate-45 shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">TaskPilot Automations</div>
-                <p className="text-sm text-zinc-300">
-                  Lightweight automations that confirm bookings, send reminders, follow up with
-                  leads, and streamline your workflow.
-                </p>
-              </div>
-            </div>
-
-            {/* Tool 5 */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
-              <div className="h-12 w-12 rounded-xl bg-emerald-300/20 border border-emerald-300/40 flex items-center justify-center">
-                <div className="h-5 w-8 border-2 border-emerald-300 rounded-md shadow-[0_0_12px_rgba(16,185,129,0.65)]" />
-              </div>
-
-              <div>
-                <div className="text-emerald-300 font-bold text-lg">StudioSync Updates</div>
-                <p className="text-sm text-zinc-300">
-                  Automatic content and performance updates that keep your site modern, secure, and
-                  always up to date.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mt-12">
-            <a
-              href="/preview"
-              className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
-            >
-              Start your free preview
-            </a>
-          </div>
+            <path d="M12 2v20M17 7H7m10 5H7m10 5H7" />
+          </svg>
         </div>
-      </section>
-    </SiteChrome>
-  );
-}
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">NovaDesk AI</div>
+          <div className="text-[11px] tracking-widest uppercase text-zinc-400 mb-1">
+            Website Front Desk
+          </div>
+          <p className="text-sm text-zinc-300">
+            An AI “front desk” that answers questions, collects contact details, and routes real
+            leads — so fewer calls slip through the cracks.
+          </p>
+        </div>
+      </div>
+
+      {/* PulseLead Engine */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-400/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 stroke-emerald-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path d="M4 12h4l2 5 4-10 2 5h4" />
+          </svg>
+        </div>
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">PulseLead Engine</div>
+          <div className="text-[11px] tracking-widest uppercase text-zinc-400 mb-1">
+            Lead Capture & Scoring
+          </div>
+          <p className="text-sm text-zinc-300">
+            Turns every form submission into a clear, ranked lead summary — highlighting the best
+            opportunities instantly.
+          </p>
+        </div>
+      </div>
+
+      {/* EchoFlow Assistant */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-400/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 stroke-emerald-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path d="M5 12h14M5 6h9m-9 12h9" />
+          </svg>
+        </div>
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">EchoFlow Assistant</div>
+          <div className="text-[11px] tracking-widest uppercase text-zinc-400 mb-1">
+            Follow-Up Support
+          </div>
+          <p className="text-sm text-zinc-300">
+            Light-touch follow-up help for leads — drafted messages and reminders so you stay in
+            front of people without needing to track every conversation.
+          </p>
+        </div>
+      </div>
+
+      {/* LocalLens Insights */}
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex gap-4">
+        <div className="h-12 w-12 rounded-xl bg-emerald-400/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 stroke-emerald-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            <path d="M4 20V4m0 0h16m0 0v16m0 0H4" />
+          </svg>
+        </div>
+
+        <div>
+          <div className="text-emerald-300 font-bold text-lg">LocalLens Insights</div>
+          <div className="text-[11px] tracking-widest uppercase text-zinc-400 mb-1">
+            Simple Performance Snapshots
+          </div>
+          <p className="text-sm text-zinc-300">
+            Clear, plain-language summaries of what’s working — no analytics degree required.
+            Just real signals and recommendations.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* CTA */}
+    <div className="text-center mt-12">
+      <a
+        href="/preview"
+        className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
+      >
+        Start your free preview
+      </a>
+    </div>
+  </div>
+</section>
+
