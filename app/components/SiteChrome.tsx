@@ -80,7 +80,7 @@ export default function SiteChrome({ children }: SiteChromeProps) {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/preview"
               className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-black shadow-sm transition hover:bg-zinc-100"
             >
               Start a project
