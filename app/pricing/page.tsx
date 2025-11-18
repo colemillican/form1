@@ -24,14 +24,14 @@ export default function PricingPhilosophyPage() {
           <h1
             className={`${heroFont.className} text-[clamp(30px,4.5vw,48px)] font-bold tracking-tight`}
           >
-            An investment in systems, not software.
+            An investment in <G>systems</G>, not random software.
           </h1>
 
           <p className="mt-4 mx-auto max-w-2xl text-zinc-300 text-[15px] leading-relaxed">
-            Local Link Studio isn’t a freelancer marketplace, a website template shop, 
-            or a “one-and-done” project.  
-            We become your long-term technology and AI partner—building systems that 
-            replace bottlenecks, eliminate manual work, and scale with your business for years.
+            Local Link Studio is a startup focused on long-term partnerships—not quick projects.
+            We become your technical and AI partner, building systems that quietly save time, reduce
+            busywork, and make your business easier to run so you can stay focused on the work only
+            you can do.
           </p>
         </div>
       </section>
@@ -42,13 +42,14 @@ export default function PricingPhilosophyPage() {
           <h2
             className={`${heroFont.className} text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-white`}
           >
-            What you're actually investing in
+            What you&apos;re actually investing in
           </h2>
 
           <p className="mt-3 max-w-3xl text-zinc-300 text-sm leading-relaxed">
-            Most agencies charge for pages, hours, or “features.”  
-            We charge for transformation—removing the burden of technology from your plate 
-            and replacing it with systems that run consistently every day.
+            Most agencies charge for pages, hours, or features.  
+            We focus on outcomes: saved hours, smoother processes, clearer visibility, and fewer
+            balls dropped. Our work should feel like your operations getting lighter and more in
+            control month after month.
           </p>
 
           <div className="mt-8 grid gap-5 sm:grid-cols-3">
@@ -57,13 +58,13 @@ export default function PricingPhilosophyPage() {
               <div className="flex items-center gap-2">
                 <Bot className="h-5 w-5 text-emerald-300" />
                 <h3 className="text-sm font-semibold text-white">
-                  AI Employees
+                  AI “employees” that support your team
                 </h3>
               </div>
               <p className="mt-2 text-[14px] text-zinc-300 leading-relaxed">
-                Custom-built AI agents that take over real operational tasks—
-                answering customers, qualifying leads, dispatching jobs,
-                or following up automatically.
+                We call them AI employees—not because they replace people, but because they
+                take on repetitive, systemized tasks: answering common questions, qualifying leads,
+                routing inquiries, and helping your real team spend more time on high-value work.
               </p>
             </div>
 
@@ -72,12 +73,12 @@ export default function PricingPhilosophyPage() {
               <div className="flex items-center gap-2">
                 <Settings className="h-5 w-5 text-emerald-300" />
                 <h3 className="text-sm font-semibold text-white">
-                  Website + Funnel Infrastructure
+                  Website & funnel infrastructure
                 </h3>
               </div>
               <p className="mt-2 text-[14px] text-zinc-300 leading-relaxed">
-                A high-performing digital foundation designed to raise conversion rates,
-                centralize your tech, and allow your AI employees to plug in seamlessly.
+                A modern website and sales funnel built to convert—where calls, forms, and leads
+                flow into clean systems instead of scattered spreadsheets and inbox chaos.
               </p>
             </div>
 
@@ -86,13 +87,13 @@ export default function PricingPhilosophyPage() {
               <div className="flex items-center gap-2">
                 <Users className="h-5 w-5 text-emerald-300" />
                 <h3 className="text-sm font-semibold text-white">
-                  Long-Term Partnership
+                  A long-term tech & AI partner
                 </h3>
               </div>
               <p className="mt-2 text-[14px] text-zinc-300 leading-relaxed">
-                We stay ahead of the tech curve for you—improving your systems,
-                adding automations, and keeping your business aligned with the best tools
-                month after month.
+                We stay on top of the tech and AI side so you don&apos;t have to. As tools evolve,
+                we adapt your systems, suggest new automations, and keep your business aligned with
+                what actually works—not every shiny new thing.
               </p>
             </div>
           </div>
@@ -109,10 +110,10 @@ export default function PricingPhilosophyPage() {
           </h2>
 
           <p className="mt-3 max-w-3xl text-zinc-300 text-sm leading-relaxed">
-            Because every business runs differently, your investment depends on
-            how many AI employees we build and maintain for you.  
-            Each employee replaces real labor—front desk tasks, inbound lead handling, 
-            admin workflows, reminders, follow-ups, dispatching, and more.
+            Every business runs differently. We price based on the depth of partnership and how
+            many AI employees we&apos;re building and maintaining for you. Each one is designed
+            to take real, repeatable work off your plate—saving time, minimizing errors, and
+            reducing the need for extra headcount as you grow.
           </p>
 
           <div className="mt-8 space-y-6">
@@ -122,35 +123,35 @@ export default function PricingPhilosophyPage() {
                 Base AI Operations Partnership
               </h4>
               <p className="mt-1 text-zinc-300 text-sm leading-relaxed">
-                Includes infrastructure, your website, your customer funnels,
-                access to our prebuilt AI tools, and the development of your first 
-                AI employee.  
-                Most businesses start here.
+                We start by aligning your website, funnels, and core systems, then layer in your
+                first AI employee. This gives you a clear digital foundation plus a tangible,
+                day-to-day reduction in manual work.
               </p>
             </div>
 
             {/* Line 2 */}
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
               <h4 className="text-sm font-semibold text-white">
-                Additional AI Employees
+                Additional AI employees over time
               </h4>
               <p className="mt-1 text-zinc-300 text-sm leading-relaxed">
-                Need more? You can add AI employees over time.  
-                Each one is custom-built for your operations and maintained monthly 
-                like a real team member—without the salary.
+                As we learn your operations, we can roll out additional AI employees—each focused
+                on a specific area like intake, scheduling, follow-up, or internal admin. 
+                The goal is not to replace your team, but to remove the low-leverage work that
+                slows them down.
               </p>
             </div>
 
             {/* Line 3 */}
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
               <h4 className="text-sm font-semibold text-white">
-                Typical Partner Range
+                Typical partner investment range
               </h4>
               <p className="mt-1 text-zinc-300 text-sm leading-relaxed">
-                Most of our partners invest between <span className="text-white">
-                $2,500–$5,000/month
-                </span>{" "}
-                depending on how many AI employees we build together.
+                Most of our partners invest between{" "}
+                <span className="text-white">$2,500–$5,000/month</span>, depending on scope and how
+                many AI employees we&apos;re actively building and maintaining. We’ll map this out
+                transparently before you make any commitments.
               </p>
             </div>
           </div>
@@ -163,19 +164,20 @@ export default function PricingPhilosophyPage() {
           <h2
             className={`${heroFont.className} text-[clamp(26px,4vw,40px)] font-bold tracking-tight`}
           >
-            Ready to explore AI employees for your business?
+            Want to see what this could look like for your business?
           </h2>
           <p className="mt-3 max-w-xl mx-auto text-zinc-300 text-sm leading-relaxed">
             Book a short intro call.  
-            We’ll walk through your operations, identify where AI employees can replace manual work,
-            and map out what partnering together could look like.
+            We&apos;ll walk through your current bottlenecks, explore where AI employees and 
+            better systems can save you time and money, and outline what a partnership with 
+            Local Link Studio might look like.
           </p>
 
           <a
             href="/contact"
             className="mt-8 inline-flex items-center justify-center rounded-full bg-white text-black px-10 h-12 font-semibold text-sm hover:bg-zinc-200 transition"
           >
-            Book a Systems Audit
+            Book a systems audit
             <ArrowRight className="ml-2 h-4 w-4" />
           </a>
         </div>
