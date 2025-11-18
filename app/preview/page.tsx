@@ -364,15 +364,16 @@ export default function PreviewBlueprintPage() {
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-emerald-500/40 via-emerald-400/0 to-sky-500/40 blur-2xl opacity-60" />
               <div className="relative rounded-3xl border border-white/10 bg-zinc-900/80 p-5 sm:p-6 shadow-2xl backdrop-blur">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-400">
-                    <G />
-                    <span>Preview Partnership</span>
-                  </div>
-                  <div className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
-                    <Clock className="h-3 w-3" />
-                    <span>~60 seconds</span>
-                  </div>
-                </div>
+  <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-400">
+    <G>LocalLink Digital</G>
+    <span>Preview Partnership</span>
+  </div>
+  <div className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
+    <Clock className="h-3 w-3" />
+    <span>~60 seconds</span>
+  </div>
+</div>
+
                 <p className="text-sm text-zinc-200 mb-3">
                   “What would it look like if we gave you a small team of custom AI employees?”
                 </p>
