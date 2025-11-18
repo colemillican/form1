@@ -36,6 +36,13 @@ type AgentRecommendation = {
   kpi: string;
 };
 
+type Speaker = "Customer" | "AI Assistant";
+
+type ScriptLine = {
+  speaker: Speaker;
+  text: string;
+};
+
 type Blueprint = {
   summaryHeadline: string;
   summaryBody: string;
@@ -44,7 +51,7 @@ type Blueprint = {
   flowOverview: string;
   sampleScript: {
     intro: string;
-    lines: { speaker: "Customer" | "AI Assistant"; text: string }[];
+    lines: ScriptLine[];
   };
   roi: {
     hoursSavedPerMonth: number;
@@ -64,12 +71,7 @@ const painPointOptions = [
   { id: "ownerBrain", label: "Everything lives in the owner’s head" },
 ];
 
-const teamSizeOptions = [
-  "Solo operator",
-  "2–5 people",
-  "6–15 people",
-  "16+ people",
-];
+const teamSizeOptions = ["Solo operator", "2–5 people", "6–15 people", "16+ people"];
 
 const budgetOptions = [
   "I’m just exploring",
@@ -197,7 +199,7 @@ function buildBlueprint(form: FormState): Blueprint {
     });
   }
 
-  // --- ROI estimates (simple heuristic, just to demonstrate) ---
+  // --- ROI estimates (simple heuristic) ---
   let hoursSavedPerMonth = 30 + form.painPoints.length * 10;
   if (form.teamSize === "6–15 people") hoursSavedPerMonth += 20;
   if (form.teamSize === "16+ people") hoursSavedPerMonth += 40;
@@ -207,43 +209,45 @@ function buildBlueprint(form: FormState): Blueprint {
 
   const summaryHeadline = `${name} can offload a full-time workload to AI in the next 60–90 days.`;
 
-  const summaryBody = `${name} is operating in ${industry || "your space"}, where speed, responsiveness, and consistency win. Right now, too much of that work is happening manually. By installing a small stack of AI employees, you can capture more of the demand you’re already generating, while pulling the owner and core team out of low-leverage tasks.`;
+  const summaryBody = `${name} is operating in ${industry}, where speed, responsiveness, and consistency win. Right now, too much of that work is happening manually. By installing a small stack of AI employees, you can capture more of the demand you’re already generating, while pulling the owner and core team out of low-leverage tasks.`;
 
   const flowOverview =
     "Incoming calls, texts, and web leads are captured by your Lead Intake & Phone Agent. Qualified opportunities are handed to your Scheduling or Estimator agents, which book the job or send a polished quote. From there, follow-up and reviews are handled automatically, feeding clean data into your CRM so you always know what’s happening without chasing people.";
 
-  const sampleScript = {
+  const lines: ScriptLine[] = [
+    {
+      speaker: "Customer",
+      text: "Hey, I found you online. Do you have any availability this week for a quote?",
+    },
+    {
+      speaker: "AI Assistant",
+      text: `Absolutely, thanks for reaching out to ${name}. I can help with that. What kind of work are you looking to get done?`,
+    },
+    {
+      speaker: "Customer",
+      text: "We need someone to come look at a leak and maybe quote replacing some old fixtures.",
+    },
+    {
+      speaker: "AI Assistant",
+      text: "Got it. I’ll grab a few quick details and then I can get you on the schedule. What’s the address for the job?",
+    },
+    {
+      speaker: "AI Assistant",
+      text: "Perfect. We have availability on Thursday at 10am or Friday at 2pm. Which works better for you?",
+    },
+    {
+      speaker: "Customer",
+      text: "Thursday at 10 works.",
+    },
+    {
+      speaker: "AI Assistant",
+      text: "You’re all set for Thursday at 10am. I’ll send a confirmation text and a reminder before we arrive. If anything changes, you can just reply to that message. Sound good?",
+    },
+  ];
+
+  const sampleScript: Blueprint["sampleScript"] = {
     intro: `Here’s how your AI Lead Intake Agent might handle a real call for ${name}:`,
-    lines: [
-      {
-        speaker: "Customer",
-        text: "Hey, I found you online. Do you have any availability this week for a quote?",
-      },
-      {
-        speaker: "AI Assistant",
-        text: `Absolutely, thanks for reaching out to ${name}. I can help with that. What kind of work are you looking to get done?`,
-      },
-      {
-        speaker: "Customer",
-        text: "We need someone to come look at a leak and maybe quote replacing some old fixtures.",
-      },
-      {
-        speaker: "AI Assistant",
-        text: "Got it. I’ll grab a few quick details and then I can get you on the schedule. What’s the address for the job?",
-      },
-      {
-        speaker: "AI Assistant",
-        text: "Perfect. We have availability on Thursday at 10am or Friday at 2pm. Which works better for you?",
-      },
-      {
-        speaker: "Customer",
-        text: "Thursday at 10 works.",
-      },
-      {
-        speaker: "AI Assistant",
-        text: "You’re all set for Thursday at 10am. I’ll send a confirmation text and a reminder before we arrive. If anything changes, you can just reply to that message. Sound good?",
-      },
-    ],
+    lines,
   };
 
   const roi = {
@@ -309,7 +313,6 @@ export default function PreviewBlueprintPage() {
     e.preventDefault();
     setPhase("loading");
 
-    // Simulate generation delay
     setTimeout(() => {
       const bp = buildBlueprint(formState);
       setBlueprint(bp);
