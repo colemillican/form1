@@ -24,14 +24,14 @@ export default function PricingPhilosophyPage() {
           <h1
             className={`${heroFont.className} text-[clamp(30px,4.5vw,48px)] font-bold tracking-tight`}
           >
-            An investment in <G>systems</G>, not random software.
+            A <G>simple</G>, partnership-based approach to pricing.
           </h1>
 
           <p className="mt-4 mx-auto max-w-2xl text-zinc-300 text-[15px] leading-relaxed">
-            Local Link Studio is a startup focused on long-term partnerships—not quick projects.
-            We become your technical and AI partner, building systems that quietly save time, reduce
-            busywork, and make your business easier to run so you can stay focused on the work only
-            you can do.
+            We don’t charge for pages, hours, or features.  
+            We price based on the systems we build together and the ongoing value they create—saving
+            time, reducing busywork, and keeping your operations running smoother than ever.  
+            As your business grows, your automation grows with it.
           </p>
         </div>
       </section>
