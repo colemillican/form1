@@ -26,7 +26,7 @@ type AIEmployee = {
 };
 
 type ThirtyDayPhase = {
-  phase: string; // e.g. "Week 1"
+  phase: string;
   title: string;
   description: string;
   bullets: string[];
@@ -54,47 +54,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { form, type } = body as { form: FormState; type?: string };
 
-    const supabaseUrl = process.env.SUPABASE_URL || "";
-    const supabaseKey = process.env.SUPABASE_ANON_KEY || "";
-
-    let dbInserted = false;
-    let dbErrorMessage: string | null = null;
-
-    // ---------- 1) Insert into Supabase ----------
-    if (supabaseUrl && supabaseKey) {
-      try {
-        const supabase = createClient(supabaseUrl, supabaseKey);
-
-        const { error } = await supabase.from("preview_leads").insert({
-          type: type ?? "AI_SYSTEMS_BLUEPRINT",
-          business_name: form.businessName || null,
-          industry: form.industry || null,
-          email: form.email,
-          website: form.website || null,
-          team_size: form.teamSize || null,
-          monthly_leads: form.monthlyLeads || null,
-          main_bottleneck: form.mainBottleneck || null,
-          current_tools: form.currentTools || null,
-          dream_outcome: form.dreamOutcome || null,
-          extra_context: form.extraContext || null,
-        });
-
-        if (error) {
-          console.error("Supabase insert error:", error);
-          dbErrorMessage = error.message;
-        } else {
-          dbInserted = true;
-        }
-      } catch (dbErr: any) {
-        console.error("Supabase insert threw:", dbErr);
-        dbErrorMessage = dbErr?.message ?? "Unknown Supabase error";
-      }
-    } else {
-      console.warn("SUPABASE_URL or SUPABASE_ANON_KEY missing. Skipping Supabase insert.");
-      dbErrorMessage = "Supabase env vars missing.";
-    }
-
-    // ---------- 2) Deterministic time & value estimates ----------
+    // ---------- 1) Deterministic time & value estimates ----------
     const leadsRaw = cleanNumber(form.monthlyLeads);
     const leads = leadsRaw || 20; // assume at least some volume
     let team = cleanNumber(form.teamSize);
@@ -110,11 +70,20 @@ export async function POST(req: Request) {
     let followupMinutesPerLead = 4; // default follow up
     let adminMinutesPerLead = 3; // basic admin
 
-    if (bottleneck.includes("follow") || bottleneck.includes("ghost") || bottleneck.includes("response")) {
+    if (
+      bottleneck.includes("follow") ||
+      bottleneck.includes("ghost") ||
+      bottleneck.includes("response")
+    ) {
       followupMinutesPerLead += 4; // they clearly struggle here
     }
 
-    if (bottleneck.includes("admin") || bottleneck.includes("invoice") || bottleneck.includes("calendar") || bottleneck.includes("schedule")) {
+    if (
+      bottleneck.includes("admin") ||
+      bottleneck.includes("invoice") ||
+      bottleneck.includes("calendar") ||
+      bottleneck.includes("schedule")
+    ) {
       adminMinutesPerLead += 4;
     }
 
@@ -168,7 +137,7 @@ export async function POST(req: Request) {
     const businessName = form.businessName || "your business";
     const industryLabel = form.industry || "your operation";
 
-    // ---------- 3) Call OpenAI for personalized plan ----------
+    // ---------- 2) Call OpenAI for personalized plan ----------
     let aiBlueprint: Partial<Blueprint> = {};
 
     if (process.env.OPENAI_API_KEY) {
@@ -259,7 +228,7 @@ GUIDELINES:
       console.warn("OPENAI_API_KEY missing; returning fallback Blueprint.");
     }
 
-    // ---------- 4) Merge AI output with deterministic estimates ----------
+    // ---------- 3) Merge AI output with deterministic estimates ----------
     const fallbackHeadline = `How AI employees could reshape ${businessName}`;
     const fallbackSummary = `Based on what you shared about ${industryLabel.toLowerCase()}, this Blueprint shows how a small team of AI employees could plug into your current tools, clean up the backend work, and give you back meaningful time and margin every month.`;
 
@@ -334,6 +303,44 @@ GUIDELINES:
         "This Blueprint is grounded in common patterns we see across local service businesses: leads slipping through the cracks, inconsistent follow-up, and a growing admin burden. The exact details will be tuned to your tools, team, and volume during implementation.",
     };
 
+    // ---------- 4) Insert everything into Supabase ----------
+    const supabaseUrl = process.env.SUPABASE_URL || "";
+    const supabaseKey = process.env.SUPABASE_ANON_KEY || "";
+
+    if (supabaseUrl && supabaseKey) {
+      try {
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const { error } = await supabase.from("preview_leads").insert({
+          type: type ?? "AI_SYSTEMS_BLUEPRINT",
+          business_name: form.businessName || null,
+          industry: form.industry || null,
+          email: form.email,
+          website: form.website || null,
+          team_size: form.teamSize || null,
+          monthly_leads: form.monthlyLeads || null,
+          main_bottleneck: form.mainBottleneck || null,
+          current_tools: form.currentTools || null,
+          dream_outcome: form.dreamOutcome || null,
+          extra_context: form.extraContext || null,
+          hours_saved_min: minHours,
+          hours_saved_max: maxHours,
+          value_saved_min: minValue,
+          value_saved_max: maxValue,
+          ai_blueprint: blueprint,
+        });
+
+        if (error) {
+          console.error("Supabase insert error (preview_leads):", error);
+        }
+      } catch (dbErr) {
+        console.error("Supabase insert threw:", dbErr);
+      }
+    } else {
+      console.warn("SUPABASE_URL or SUPABASE_ANON_KEY missing. Skipping Supabase insert.");
+    }
+
+    // ---------- 5) Return the Blueprint to the frontend ----------
     return NextResponse.json(blueprint, { status: 200 });
   } catch (err) {
     console.error("Preview API error:", err);
