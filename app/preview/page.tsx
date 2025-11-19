@@ -91,7 +91,6 @@ export default function PreviewPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        // This payload is what you'll capture in Supabase in your API route
         body: JSON.stringify({
           type: "AI_SYSTEMS_BLUEPRINT",
           form,
@@ -104,8 +103,6 @@ export default function PreviewPage() {
 
       const data = await res.json();
 
-      // Expecting something roughly matching our Blueprint shape – you can
-      // tweak your API to match this or adapt here.
       const mapped: Blueprint = {
         headline:
           data.headline ||
@@ -350,11 +347,7 @@ export default function PreviewPage() {
                       />
                     </div>
 
-                    {error && (
-                      <p className="text-[12px] text-red-400">
-                        {error}
-                      </p>
-                    )}
+                    {error && <p className="text-[12px] text-red-400">{error}</p>}
 
                     <div className="pt-2">
                       <button
@@ -379,7 +372,7 @@ export default function PreviewPage() {
               <div className="rounded-2xl border border-white/10 bg-slate-950/80 p-6 sm:p-7 shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-400">
-                    <G />
+                    <G>LocalLink</G>
                     <span>Preview Partnership</span>
                   </div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
