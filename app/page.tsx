@@ -20,73 +20,108 @@ const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" })
 export default function HomePage() {
   return (
     <SiteChrome>
-      {/* HERO */}
-      <section className="relative border-b border-slate-200 bg-slate-900 text-slate-900">
-        {/* Cinematic background image */}
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop"
-            alt="Futuristic workspace"
+      {/* HERO – DOMINANT FULL-VIEW SECTION */}
+      <section className="relative border-b border-slate-200 bg-black text-slate-900">
+        {/* Cinematic background video / visual */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Replace the src below with a real mp4/video URL when you're ready */}
+          <video
             className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/85 via-slate-900/70 to-slate-900/90" />
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop"
+          >
+            <source src="/hero-stars.mp4" type="video/mp4" />
+          </video>
+          {/* Gradient overlay to keep text readable */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-950/90 to-black/95" />
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-6xl flex-col px-4 pt-12 pb-14 sm:px-6 sm:pt-14 sm:pb-18">
-          {/* Mobile padding is tighter so hero is closer to nav */}
-          <div className="max-w-3xl">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-200">
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-14 lg:pt-14">
+          <div className="flex min-h-[78vh] flex-col justify-center">
+            {/* Top label */}
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-200">
               LOCAL AI SYSTEMS PARTNER
             </p>
-            <h1
-              className={`${heroFont.className} text-[clamp(30px,5vw,44px)] font-bold leading-tight text-white`}
-            >
-              AI employees that give you your{" "}
-              <span className="text-emerald-300">time, margins, and headspace</span> back.
-            </h1>
-            <p className="mt-3 text-sm sm:text-[15px] text-slate-100/90">
-              We design and manage a small team of AI employees behind your website, forms, and
-              inboxes—so every lead gets handled, work moves forward on its own, and your business
-              can grow without you building a giant office staff.
-            </p>
-          </div>
 
-          {/* CTA block */}
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/preview"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-400 px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-md shadow-emerald-500/40 transition hover:bg-emerald-300 sm:w-auto"
-            >
-              Generate My AI Systems Blueprint
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/start"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-300/70 bg-slate-900/40 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-emerald-300 hover:text-emerald-200 sm:w-auto"
-            >
-              Book a Strategy Call
-            </Link>
-          </div>
+            {/* Main hero content card */}
+            <div className="max-w-3xl rounded-3xl bg-slate-950/70 px-4 py-5 shadow-[0_20px_80px_rgba(15,23,42,0.9)] ring-1 ring-white/10 sm:px-6 sm:py-7">
+              <h1
+                className={`${heroFont.className} text-[clamp(32px,5vw,48px)] font-bold leading-tight text-white`}
+              >
+                Turn your business into a{" "}
+                <span className="text-emerald-300">calm, high-output machine</span> with AI
+                employees.
+              </h1>
+              <p className="mt-3 text-sm sm:text-[15px] text-slate-100/90">
+                We build and manage a small team of AI employees behind your website, forms, and
+                inboxes—so leads get handled, follow-up happens automatically, and work moves
+                forward while you focus on the jobs that actually grow the business. Less payroll,
+                less chaos, more freedom.
+              </p>
 
-          {/* Quick promise row */}
-          <div className="mt-5 grid grid-cols-1 gap-3 text-xs text-slate-100/90 sm:grid-cols-3">
-            <div className="flex items-center gap-2">
-              <Brain className="h-4 w-4 text-emerald-300" />
-              <span>AI employees tuned to your real processes</span>
+              {/* Hero CTAs */}
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  href="/preview"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-md shadow-emerald-500/40 transition hover:bg-emerald-300 sm:w-auto"
+                >
+                  Generate My AI Systems Blueprint
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/start"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-500/60 bg-transparent px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-emerald-300 hover:text-emerald-200 sm:w-auto"
+                >
+                  Book a Strategy Call
+                </Link>
+              </div>
+
+              {/* Micro trust / promise row */}
+              <div className="mt-4 grid grid-cols-1 gap-3 text-xs text-slate-200/90 sm:grid-cols-3">
+                <div className="flex items-center gap-2">
+                  <Brain className="h-4 w-4 text-emerald-300" />
+                  <span>AI employees tuned to your real operations</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Workflow className="h-4 w-4 text-emerald-300" />
+                  <span>Leads, follow-up & admin handled automatically</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-emerald-300" />
+                  <span>Designed to save 30–80+ hours every month</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Workflow className="h-4 w-4 text-emerald-300" />
-              <span>Leads, follow-up & admin handled automatically</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-emerald-300" />
-              <span>Designed to save 30–80+ hours a month</span>
+
+            {/* Floating bottom strip */}
+            <div className="mt-6 grid w-full gap-3 text-[11px] text-slate-200/80 sm:grid-cols-3">
+              <div className="rounded-2xl bg-slate-950/70 px-3 py-2 ring-1 ring-white/10">
+                <p className="font-semibold text-slate-100">Save time</p>
+                <p className="text-slate-400">
+                  Offload the repetitive work that silently eats your calendar every week.
+                </p>
+              </div>
+              <div className="rounded-2xl bg-slate-950/70 px-3 py-2 ring-1 ring-white/10">
+                <p className="font-semibold text-slate-100">Save money</p>
+                <p className="text-slate-400">
+                  Get the leverage of extra staff without the cost, training, or turnover.
+                </p>
+              </div>
+              <div className="rounded-2xl bg-slate-950/70 px-3 py-2 ring-1 ring-white/10">
+                <p className="font-semibold text-slate-100">Save headspace</p>
+                <p className="text-slate-400">
+                  Know leads are answered and work is moving—even when you&apos;re off the clock.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PAIN POINTS – LIGHT BACKGROUND */}
+      {/* PAIN POINTS – LIGHT SECTION (reverted) */}
       <section className="bg-slate-50">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <h2
@@ -133,7 +168,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* HOW WE HELP / RESULTS */}
+      {/* RESULTS / HOW WE HELP – LIGHT SECTION (reverted) */}
       <section className="bg-white border-t border-slate-200">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <div className="mb-8 max-w-3xl">
@@ -184,7 +219,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SIMPLE 3-STEP CTA SECTION */}
+      {/* CTA / 3-STEP – LIGHT SECTION (reverted) */}
       <section className="bg-slate-50 border-t border-slate-200">
         <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
           <div className="mx-auto max-w-3xl text-center mb-8">
