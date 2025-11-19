@@ -105,7 +105,7 @@ export default function ContactPage() {
                   Email
                 </p>
                 <a
-                  href="mailto:info@locallinkdigital.com"
+                  href="mailto:support@locallinkstudio.com"
                   className="inline-flex items-center gap-2 text-sm font-medium text-emerald-300 underline underline-offset-4 hover:text-emerald-200"
                 >
                   info@locallinkdigital.com
