@@ -1,181 +1,149 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import { Exo_2 } from "next/font/google";
 import SiteChrome, { G } from "../components/SiteChrome";
+import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
+
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+const FAQS: FAQItem[] = [
+  {
+    question: "What do you mean by “AI employees”?",
+    answer:
+      "We use “AI employees” as a simple way to describe focused AI agents that handle specific responsibilities inside your business: answering leads, sending follow-ups, routing tasks, updating tools, and more. They’re designed around your real processes and tools, not generic chatbots dropped on your website.",
+  },
+  {
+    question: "What kinds of businesses is LocalLink a good fit for?",
+    answer:
+      "We’re built for lean, service-based businesses that handle a steady stream of inquiries and projects—think home services, clinics, gyms, studios, agencies, and local professional services. If you have repeatable workflows and conversations, AI employees can remove a lot of friction.",
+  },
+  {
+    question: "Do you replace my team or support staff?",
+    answer:
+      "No. Our goal is to remove the repetitive, low-leverage work that burns your team out—so they can focus on judgment calls, relationships, and high-value execution. In practice, AI employees reduce the need for extra admin hires and make your existing team more effective.",
+  },
+  {
+    question: "What does the AI Systems Blueprint include?",
+    answer:
+      "Your Blueprint outlines 2–3 AI employee roles we’d install, where they plug into your tools, what tasks they own, and the time/money they’re likely to save. It also covers guardrails, handoff rules to humans, and a high-level implementation plan so you know exactly what you’re saying yes to.",
+  },
+  {
+    question: "How long does it take to get from Blueprint to live system?",
+    answer:
+      "Most projects move from signed agreement to live AI employees in 3–6 weeks, depending on complexity and how many tools we’re integrating with. We’d rather move a bit slower and get it right than rush something you don’t fully trust.",
+  },
+  {
+    question: "Do you need access to my data and tools?",
+    answer:
+      "Yes, but only the minimum needed. We typically ask for scoped, view-only access at first so we can map your workflows. As we build, we’ll set up secure API keys and permissions so AI employees can do their jobs without overreaching. You stay in control of what they can and can’t touch.",
+  },
+  {
+    question: "How do you handle privacy and security?",
+    answer:
+      "We treat your data like it’s our own. We rely on battle-tested infrastructure, follow least-privilege access principles, and put clear guardrails around what AI can store, access, and say. If you have specific compliance needs, we’ll walk through them before we start.",
+  },
+  {
+    question: "What if something goes wrong or the AI says the wrong thing?",
+    answer:
+      "We design every role with clear boundaries and escalation rules. In sensitive situations, AI employees route directly to a human instead of guessing. Early on, we run in a controlled or “shadow” mode so we can catch issues before they’re fully live—and we monitor and tune continuously.",
+  },
+  {
+    question: "Can you help with my website too, or only AI systems?",
+    answer:
+      "Yes, we can handle both. If your website is holding the rest of the system back, we’ll either clean it up or rebuild what’s necessary so your AI employees have a solid foundation to work from.",
+  },
+  {
+    question: "What does working together actually feel like day to day?",
+    answer:
+      "Most owners tell us it feels like somebody finally grabbed the messy backend of the business and started quietly fixing it. You’ll have clear checkpoints, simple updates from us, and the sense that more and more of the boring work is being handled without you having to chase it.",
+  },
+];
+
+function FAQCard({ item }: { item: FAQItem }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 sm:p-5 shadow-[0_18px_45px_rgba(0,0,0,0.65)] transition-transform duration-200 hover:-translate-y-1 hover:border-emerald-400/70">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-3 text-left"
+      >
+        <span className="text-sm sm:text-[15px] font-semibold text-zinc-50">
+          {item.question}
+        </span>
+        {open ? (
+          <ChevronUp className="h-4 w-4 flex-shrink-0 text-emerald-300" />
+        ) : (
+          <ChevronDown className="h-4 w-4 flex-shrink-0 text-emerald-300" />
+        )}
+      </button>
+      <div
+        className={`mt-2 text-xs sm:text-[13px] text-zinc-300 transition-all duration-200 ${
+          open ? "max-h-40 sm:max-h-56 opacity-100" : "max-h-0 opacity-0"
+        } overflow-hidden`}
+      >
+        <p className="pt-2 leading-relaxed">{item.answer}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function FAQPage() {
   return (
     <SiteChrome>
       {/* HERO */}
-      <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
+      <section className="border-b border-white/10 bg-gradient-to-b from-black to-slate-950">
         <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 text-center">
           <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">FAQ</p>
           <h1
-            className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight`}
+            className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight text-zinc-50`}
           >
-            Straightforward answers to <G>common questions</G>.
+            Straight answers about partnering with <G>LocalLink</G>.
           </h1>
-          <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            We&apos;re a small startup out of Auburn, Alabama, partnering long-term with local
-            businesses. Here&apos;s how our preview, pricing, and AI tools actually work in
-            practice.
+          <p className="mt-3 mx-auto max-w-3xl text-zinc-300">
+            If you’re wondering what “AI employees” actually look like in your business, how the
+            Blueprint works, or what it feels like to hand us the backend, you’re in the right
+            place.
           </p>
         </div>
       </section>
 
-      {/* Q&A + visual */}
+      {/* FAQ GRID */}
       <section className="bg-black">
-        <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-10 md:grid-cols-[1.2fr,1fr] items-start">
-          {/* Q&A */}
-          <div className="space-y-7 text-zinc-300 text-sm sm:text-[15px]">
-            {/* Preview flow */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                How does the free homepage preview work?
-              </div>
-              <p className="mt-1">
-                You fill out a short form with details about your business and goals. We take that
-                and build a conceptual homepage direction—story, structure, and visual feel—that
-                we show you inside our preview portal. If it feels like a fit, you can start a
-                project from there. If not, no hard feelings.
-              </p>
-            </div>
-
-            {/* Timeline */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                How long does a typical site take to launch?
-              </div>
-              <p className="mt-1">
-                Sites go live within 7 days after we start the project. That includes
-                design, build, and a round or two of feedback. If you have a tight deadline, we&apos;ll
-                tell you exactly what&apos;s realistic based on scope.
-              </p>
-            </div>
-
-            {/* What they need vs you */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                What do you need from me to get started?
-              </div>
-              <p className="mt-1">
-                A short preview form, a quick kickoff conversation, your logo, any photos you want
-                us to use, and a clear description of your services. You don&apos;t need to write
-                perfect copy or plan every page—we guide that with you.
-              </p>
-            </div>
-
-            {/* Pricing model */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                Why a monthly subscription instead of a one-time fee?
-              </div>
-              <p className="mt-1">
-                Most websites go stale because they&apos;re treated like a one-off project. The
-                subscription model lets us design, build, host, and actively maintain your site over
-                time—updating copy, swapping photos, tuning funnels, and keeping things fast and
-                secure—without surprise invoices for every small change.
-              </p>
-            </div>
-
-            {/* Tiers & AI */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                What&apos;s the difference between the tiers and the AI suite?
-              </div>
-              <p className="mt-1">
-                All plans include website design, hosting, upkeep, basic SEO, and optimized sales
-                funnels. Our middle and top tiers unlock our LocalLink AI tools—things like an AI
-                front desk assistant, lead qualification flows, and simple performance summaries.
-                The top tier also comes with priority support and first access to new tools as we
-                release them.
-              </p>
-            </div>
-
-            {/* Ownership / leaving */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                Do I own my content? Can I leave later if I need to?
-              </div>
-              <p className="mt-1">
-                Yes. You own your content, branding, and assets. If you ever need to move in a
-                different direction, we don&apos;t hold your site hostage. We&apos;ll help you
-                transition cleanly instead of locking you in.
-              </p>
-            </div>
-
-            {/* Who it's for */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                Who is LocalLink a good fit for?
-              </div>
-              <p className="mt-1">
-                We&apos;re built for local businesses that care about their work but don&apos;t
-                have the time or desire to babysit websites and tech. Think gyms, trades and home
-                services, boutique shops, and small professional services. If you want a sharp,
-                modern site and a partner to manage it, we&apos;re probably a good fit.
-              </p>
-            </div>
-
-            {/* Who it's not for */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                Who is LocalLink <span className="italic">not</span> a good fit for?
-              </div>
-              <p className="mt-1">
-                If you&apos;re looking for a huge corporate rebrand, a complex web app, or a
-                one-time build with no ongoing relationship, we&apos;re probably not your people.
-                We focus on being a lean, long-term digital partner for smaller teams.
-              </p>
-            </div>
-
-            {/* AI concerns */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                Do I have to use the AI tools if I just want a website?
-              </div>
-              <p className="mt-1">
-                No. You can stay on a plan that focuses purely on design, hosting, upkeep, SEO, and
-                funnels. The AI layer is there when you&apos;re ready for it—especially if you want
-                to reduce admin work and tighten follow-up without hiring more staff.
-              </p>
-            </div>
-
-            {/* Next step */}
-            <div>
-              <div className="font-semibold text-zinc-100">
-                What&apos;s the best next step if I&apos;m interested?
-              </div>
-              <p className="mt-1">
-                Start with the free preview. It gives you something concrete to react to and lets
-                both of us see if the partnership makes sense. From there, we can lock in a plan and
-                timeline if it feels right.
-              </p>
-            </div>
+        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
+          <div className="grid gap-4 md:grid-cols-2">
+            {FAQS.map((item) => (
+              <FAQCard key={item.question} item={item} />
+            ))}
           </div>
 
-          {/* Visual */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=1600&auto=format&fit=crop"
-              alt="Futuristic interface and city skyline"
-              className="w-full aspect-[4/3] object-cover"
-            />
-            <div className="p-5 text-xs sm:text-sm text-zinc-200">
-              <div className="font-semibold mb-1">A small team, thinking long-term</div>
-              <p>
-                LocalLink Studio is a young company on purpose. We&apos;re not here to churn out
-                quick templates and disappear—we&apos;re looking for a handful of local partners to
-                grow with as the web and AI keep evolving.
-              </p>
-              <button
-                onClick={() => (window.location.href = "/preview")}
-                className="mt-3 inline-flex h-9 items-center justify-center rounded-full bg-white px-4 text-[11px] font-semibold text-black hover:bg-zinc-200"
+          {/* Still have questions */}
+          <div className="mt-12 flex flex-col items-center gap-3 text-center">
+            <p className="text-sm text-zinc-300">
+              Still unsure if this is the right move for your business?
+            </p>
+            <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Link
+                href="/start"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-7 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.7)] transition-transform duration-200 hover:scale-[1.03] hover:bg-emerald-400 sm:w-auto"
               >
-                Start with a free preview
-              </button>
+                Book a strategy session
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/preview"
+                className="inline-flex w-full items-center justify-center rounded-full border border-white/60 bg-black/40 px-7 py-3 text-sm font-semibold text-zinc-50 backdrop-blur-sm transition hover:border-emerald-300 hover:text-emerald-100 sm:w-auto"
+              >
+                Start with a free AI Systems Blueprint
+              </Link>
             </div>
           </div>
         </div>
