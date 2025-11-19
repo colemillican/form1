@@ -22,13 +22,12 @@ export async function POST(req: Request) {
     // -----------------------------
     // 1) Try to store in Supabase
     // -----------------------------
-    const supabaseUrl =
-      process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || "";
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+    const supabaseUrl = process.env.SUPABASE_URL || "";
+    const supabaseKey = process.env.SUPABASE_ANON_KEY || "";
 
-    if (supabaseUrl && supabaseServiceKey) {
+    if (supabaseUrl && supabaseKey) {
       try {
-        const supabase = createClient(supabaseUrl, supabaseServiceKey);
+        const supabase = createClient(supabaseUrl, supabaseKey);
 
         await supabase.from("preview_leads").insert({
           type: type ?? "AI_SYSTEMS_BLUEPRINT",
@@ -45,11 +44,11 @@ export async function POST(req: Request) {
         });
       } catch (dbErr) {
         console.error("Supabase insert error:", dbErr);
-        // We still continue and return a Blueprint
+        // Still continue and return a Blueprint so the preview doesn't break
       }
     } else {
       console.warn(
-        "Supabase env vars missing (NEXT_PUBLIC_SUPABASE_URL/SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY). Skipping DB insert."
+        "SUPABASE_URL or SUPABASE_ANON_KEY missing. Skipping Supabase insert."
       );
     }
 
@@ -61,6 +60,7 @@ export async function POST(req: Request) {
 
     const leads = cleanNumber(form.monthlyLeads);
     let team = cleanNumber(form.teamSize);
+
     if (!team && form.teamSize.toLowerCase().includes("just me")) {
       team = 1;
     }
@@ -68,6 +68,7 @@ export async function POST(req: Request) {
     let baseHours = 10;
     baseHours += Math.min(leads * 0.25, 40); // up to +40 from volume
     baseHours += Math.min(team * 3, 30); // up to +30 from coordination
+
     const estHours = Math.round(Math.min(Math.max(baseHours, 15), 80)); // clamp 15–80
 
     const valuePerHour = 60;
