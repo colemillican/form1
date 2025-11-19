@@ -129,12 +129,13 @@ export default function PreviewPage() {
           <h1
             className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight text-zinc-50`}
           >
-            See the <G>AI employees</G> we&apos;d give you—and what they&apos;d actually do.
+            A proposed <G>AI employee</G> plan for your operation—before you commit.
           </h1>
           <p className="mt-3 mx-auto max-w-3xl text-zinc-300">
-            Share how your business runs today and we&apos;ll generate a tailored AI Systems
-            Blueprint: a set of AI employees, the workflows they&apos;d own, and realistic time and
-            money saved every month—before you sign anything.
+            Tell us how your business actually runs today. We&apos;ll use AI to draft a directional
+            systems blueprint: a small team of AI employees, the workflows they&apos;d own, and a
+            realistic range of time and value they could free up each month. It&apos;s a proposed
+            direction, not a final scope.
           </p>
         </div>
       </section>
@@ -155,7 +156,7 @@ export default function PreviewPage() {
                   </div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
                     <Sparkles className="h-3 w-3" />
-                    AI-generated preview
+                    AI-drafted direction
                   </span>
                 </div>
 
@@ -163,8 +164,8 @@ export default function PreviewPage() {
                   <div className="flex flex-col items-center justify-center py-16 text-center">
                     <div className="mb-4 h-10 w-10 animate-spin rounded-full border-2 border-emerald-400 border-t-transparent" />
                     <p className="text-sm text-zinc-300">
-                      Designing your AI Systems Blueprint—mapping roles, workflows, and time
-                      savings…
+                      Drafting a proposed AI systems plan—mapping roles, workflows, and time
+                      savings based on what you shared…
                     </p>
                   </div>
                 ) : (
@@ -293,7 +294,7 @@ export default function PreviewPage() {
                     {/* Dream outcome */}
                     <div>
                       <label className="mb-1 block text-[12px] font-medium uppercase tracking-[0.16em] text-zinc-400">
-                        If this worked perfectly, what would change?
+                        If this worked well, what would change?
                       </label>
                       <textarea
                         name="dreamOutcome"
@@ -301,7 +302,7 @@ export default function PreviewPage() {
                         onChange={handleChange}
                         rows={3}
                         className="w-full rounded-xl border border-white/15 bg-black/60 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500 focus:border-emerald-400"
-                        placeholder="For example: faster responses, fewer late nights, less hiring, clearer pipeline, more time to think and lead, etc."
+                        placeholder="For example: faster responses, fewer late nights, less hiring pressure, clearer pipeline, more time to think and lead."
                       />
                     </div>
 
@@ -316,7 +317,7 @@ export default function PreviewPage() {
                         onChange={handleChange}
                         rows={2}
                         className="w-full rounded-xl border border-white/15 bg-black/60 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500 focus:border-emerald-400"
-                        placeholder="Optional—but helpful. Unique constraints, sensitive workflows, or non-negotiables."
+                        placeholder="Optional—but helpful. Unique constraints, sensitive workflows, non-negotiables."
                       />
                     </div>
 
@@ -331,8 +332,8 @@ export default function PreviewPage() {
                         <ArrowRight className="h-4 w-4" />
                       </button>
                       <p className="mt-2 text-[11px] text-zinc-500">
-                        We’ll email your Blueprint and follow up with any clarifying questions if
-                        needed. No spam, no pressure.
+                        We&apos;ll email your Blueprint and refine it on a strategy call if it looks like
+                        a fit. No spam, no pressure.
                       </p>
                     </div>
                   </form>
@@ -346,30 +347,30 @@ export default function PreviewPage() {
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-400">
                     <G>LocalLink</G>
-                    <span>Preview Partnership</span>
+                    <span>Proposed Direction</span>
                   </div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
                     <Brain className="h-3 w-3" />
-                    AI Systems Blueprint
+                    AI Systems Draft
                   </span>
                 </div>
 
                 {phase === "form" && (
                   <div className="space-y-4 text-sm text-zinc-300">
                     <p>
-                      Once you submit the form, this panel will be replaced with a tailored Blueprint
-                      for your business—showing:
+                      After you submit the form, this panel will show a proposed AI Systems Blueprint
+                      for your operation—not a canned template, and not a guarantee. You&apos;ll see:
                     </p>
                     <ul className="space-y-2 text-[13px] text-zinc-300">
-                      <li>• 2–3 AI employees we’d install and the exact jobs they’d do.</li>
-                      <li>• How they connect to your existing tools and workflows.</li>
-                      <li>• A realistic range of hours saved every month across your team.</li>
-                      <li>• An equivalent monthly dollar value in reclaimed time and avoided hires.</li>
-                      <li>• A 30-day rollout plan for implementation.</li>
+                      <li>• 2–3 AI employee roles we&apos;d start with and what they&apos;d own.</li>
+                      <li>• How they plug into the tools and workflows you already use.</li>
+                      <li>• A directional range of hours saved every month across your team.</li>
+                      <li>• A conservative dollar range for the value of that time.</li>
+                      <li>• A first 30-day rollout broken into clear, concrete phases.</li>
                     </ul>
                     <p className="text-[12px] text-zinc-500">
-                      Think of it as seeing the “after” picture of your operations before you commit
-                      to anything.
+                      You can treat it as a starting point. On a strategy call, we pressure-test it
+                      against your real world before anything is built.
                     </p>
                   </div>
                 )}
@@ -377,11 +378,11 @@ export default function PreviewPage() {
                 {phase === "loading" && (
                   <div className="space-y-3 text-sm text-zinc-300">
                     <p className="font-semibold text-zinc-50">
-                      Generating your AI Systems Blueprint…
+                      Drafting your AI Systems Blueprint…
                     </p>
                     <p className="text-[13px] text-zinc-300">
-                      We&apos;re mapping potential AI roles, workflows, and estimated time savings
-                      based on what you shared.
+                      We&apos;re using your answers to sketch a conservative starting point for AI
+                      employees in your operation—roles, workflows, and directional impact.
                     </p>
                   </div>
                 )}
@@ -402,7 +403,7 @@ export default function PreviewPage() {
                       <div className="rounded-xl border border-emerald-500/30 bg-black/60 p-3">
                         <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
                           <Clock className="h-3 w-3" />
-                          Est. hours saved / month
+                          Directional hours saved / month
                         </div>
                         <p className="mt-1 text-[15px] font-semibold text-zinc-50">
                           {blueprint.hoursSavedPerMonth}
@@ -411,7 +412,7 @@ export default function PreviewPage() {
                       <div className="rounded-xl border border-emerald-500/30 bg-black/60 p-3">
                         <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
                           <LineChart className="h-3 w-3" />
-                          Est. value of that time
+                          Directional value of that time
                         </div>
                         <p className="mt-1 text-[15px] font-semibold text-zinc-50">
                           {blueprint.valuePerMonth}
@@ -450,7 +451,7 @@ export default function PreviewPage() {
                     <div className="space-y-3">
                       <div>
                         <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                          How it runs day to day
+                          How it would run day to day
                         </h3>
                         <p className="mt-1 text-[13px] text-zinc-300">
                           {blueprint.workflowOverview}
@@ -470,7 +471,7 @@ export default function PreviewPage() {
                     {blueprint.thirtyDayPlan && blueprint.thirtyDayPlan.length > 0 && (
                       <div>
                         <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                          First 30 days with LocalLink
+                          First 30 days (proposed)
                         </h3>
                         <div className="mt-2 space-y-2">
                           {blueprint.thirtyDayPlan.map((phase, idx) => (
@@ -515,8 +516,8 @@ export default function PreviewPage() {
                           <ArrowRight className="h-3 w-3" />
                         </Link>
                         <p className="text-[11px] text-zinc-500">
-                          Or reply directly to the email with your Blueprint if you prefer to keep it
-                          async.
+                          On that call, we stress-test this Blueprint against your real workflows and
+                          adjust before anything is built.
                         </p>
                       </div>
                     </div>
@@ -530,9 +531,10 @@ export default function PreviewPage() {
                   What this is (and isn&apos;t)
                 </p>
                 <p>
-                  This isn&apos;t a generic PDF or a hard sales pitch. It&apos;s a first look at how
-                  AI employees could realistically show up in your business, with time and value
-                  estimates attached. If it doesn&apos;t look like a win, we&apos;ll say so.
+                  This is a directional draft of how AI employees could show up in your business—
+                  based on what you share, and grounded in realistic time and cost ranges. It&apos;s
+                  not a final scope or a promise. The point is to give you a clear starting point
+                  before you spend a dollar.
                 </p>
               </div>
             </div>
