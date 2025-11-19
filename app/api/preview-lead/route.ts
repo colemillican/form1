@@ -37,164 +37,42 @@ type Blueprint = {
   summary: string;
   aiEmployees: AIEmployee[];
   workflowOverview: string;
-  hoursSavedPerMonth: string;
-  valuePerMonth: string;
-  confidenceNote: string;
-  nextSteps: string;
+  directionalBenefits: string[];
   thirtyDayPlan: ThirtyDayPhase[];
   industryNotes: string;
+  nextSteps: string;
 };
-
-function cleanNumber(s: string): number {
-  return parseInt((s || "").replace(/[^0-9]/g, ""), 10) || 0;
-}
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { form, type } = body as { form: FormState; type?: string };
 
-    // ---------- 1) Deterministic time & value estimates (Tone D, more realistic) ----------
-    const leadsRaw = cleanNumber(form.monthlyLeads);
-    const leads = leadsRaw || 10; // assume some volume if they don't know
-
-    let team = cleanNumber(form.teamSize);
-    if (!team && form.teamSize.toLowerCase().includes("just me")) {
-      team = 1;
-    }
-    if (!team) team = 1;
-
-    const bottleneck = (form.mainBottleneck || "").toLowerCase();
-    const industry = (form.industry || "").toLowerCase();
-
-    // Base minutes per lead (intake + follow-up + admin), intentionally not timid
-    let intakeMinutesPerLead = 8;   // getting info, first reply, logging
-    let followMinutesPerLead = 7;   // real follow-up across channels
-    let adminMinutesPerLead = 5;    // tools, notes, calendar, simple ops
-
-    // Adjust for bottlenecks they explicitly call out
-    if (
-      bottleneck.includes("follow") ||
-      bottleneck.includes("ghost") ||
-      bottleneck.includes("response") ||
-      bottleneck.includes("reply")
-    ) {
-      followMinutesPerLead += 5;
-    }
-
-    if (
-      bottleneck.includes("admin") ||
-      bottleneck.includes("invoice") ||
-      bottleneck.includes("calendar") ||
-      bottleneck.includes("schedule") ||
-      bottleneck.includes("paperwork")
-    ) {
-      adminMinutesPerLead += 4;
-    }
-
-    // Minutes from per-lead work
-    const intakeMinutes = leads * intakeMinutesPerLead;
-    const followupMinutes = leads * followMinutesPerLead;
-    const adminMinutes = leads * adminMinutesPerLead;
-
-    // Coordination / ops overhead per team member per month
-    // (meetings, chasing info, reminders, context switching)
-    let opsMinutesPerPerson = 60;
-    if (bottleneck.includes("chaos") || bottleneck.includes("everywhere")) {
-      opsMinutesPerPerson += 30;
-    }
-    const opsMinutes = team * opsMinutesPerPerson;
-
-    const totalMinutes = intakeMinutes + followupMinutes + adminMinutes + opsMinutes;
-    const rawHours = totalMinutes / 60;
-
-    // Build a directional range with sensible floors and ceilings
-    let minHours = Math.round(rawHours * 0.7);
-    let maxHours = Math.round(rawHours * 1.3);
-
-    // Floors: realistic operational lift for any real business
-    if (leads >= 5 && minHours < 15) minHours = 15;
-    if (leads >= 5 && maxHours < minHours + 10) maxHours = minHours + 10;
-
-    // If they're truly tiny (less than 5 leads/mo), allow lower floor
-    if (leads < 5) {
-      minHours = Math.max(5, Math.round(rawHours * 0.6));
-      maxHours = Math.max(minHours + 5, Math.round(rawHours * 1.2));
-    }
-
-    // Hourly value based on admin/ops labor by industry
-    let hourlyRate = 30; // default
-
-    if (
-      industry.includes("dental") ||
-      industry.includes("clinic") ||
-      industry.includes("med spa") ||
-      industry.includes("medical")
-    ) {
-      hourlyRate = 45;
-    } else if (
-      industry.includes("law") ||
-      industry.includes("legal")
-    ) {
-      hourlyRate = 50;
-    } else if (
-      industry.includes("roof") ||
-      industry.includes("hvac") ||
-      industry.includes("plumb") ||
-      industry.includes("electric") ||
-      industry.includes("contractor") ||
-      industry.includes("construction")
-    ) {
-      hourlyRate = 38;
-    } else if (
-      industry.includes("agency") ||
-      industry.includes("marketing") ||
-      industry.includes("consult")
-    ) {
-      hourlyRate = 35;
-    }
-
-    let minValue = minHours * hourlyRate;
-    let maxValue = maxHours * hourlyRate;
-
-    // Don't underwrite value for any real business with >= 5 leads/mo
-    if (leads >= 5 && minValue < 900) {
-      minValue = 900;
-      maxValue = Math.max(maxValue, Math.round(minValue * 1.5));
-    }
-
-    const hoursSavedPerMonth = `${minHours}–${maxHours} hours/month (directional)`;
-    const valuePerMonth = `$${minValue.toLocaleString()}–$${maxValue.toLocaleString()}/month (in reclaimed time)`;
-
     const businessName = form.businessName || "your business";
     const industryLabel = form.industry || "your operation";
 
-    // ---------- 2) Call OpenAI for a grounded, directional plan ----------
-    let aiBlueprint: Partial<Blueprint> = {};
-
-    if (process.env.OPENAI_API_KEY) {
-      const systemPrompt = `
-You are a senior operations consultant and AI automation architect.
-
-You are helping LocalLink Digital generate an **AI Systems Blueprint** as a *proposed direction* for a small or mid-sized business. This is a first pass, not a final scope, and not a guarantee of results.
+    // -------- 1) Build system prompt (Tone D, no numbers) --------
+    const systemPrompt = `
+You are a senior operations consultant and AI systems architect.
+Your goal is to give a prospective client a sharp, confident,
+straightforward operational blueprint—not a final plan.
 
 TONE:
-- Confident, clear, and competent.
-- Direct and masculine.
-- Low hype, high signal.
-- Grounded in operations, not AI buzzwords.
+- Competent, mature, masculine, precise
+- No hype, no exaggeration, no guarantees
+- Under-promise, over-deliver
+- Keep language clean, direct, and grounded
 
-POSITIONING:
-- This Blueprint is a proposed direction, not a final plan.
-- It should be obviously useful, but conservative and honest.
-- It should make the owner think: "They actually understand how my business runs."
+FRAMING:
+- Everything you produce is “directional,” “proposed,” or “first-pass”
+- Do NOT present any output as final or guaranteed
+- Avoid specific hours or dollar values entirely
+- Do not attempt to calculate savings or ROI
+- Do not reference pricing
+- Avoid complex multi-agent AI systems unless the user explicitly indicates
+  very high volume or multiple departments
 
-YOU ARE GIVEN:
-- A description of the business, tools, bottlenecks, and goals.
-- A time-savings range and a dollar value range calculated by the backend. You must respect those ranges; you do NOT change those numbers.
-
-OUTPUT FORMAT:
-Return a single JSON object with these keys:
+YOU WILL OUTPUT A SINGLE JSON OBJECT WITH THESE KEYS:
 
 {
   "headline": string,
@@ -207,49 +85,72 @@ Return a single JSON object with these keys:
     }
   ],
   "workflowOverview": string,
-  "confidenceNote": string,
-  "nextSteps": string,
+  "directionalBenefits": string[],
   "thirtyDayPlan": [
     {
-      "phase": string,      // e.g. "Week 1"
+      "phase": string,
       "title": string,
       "description": string,
       "bullets": string[]
     }
   ],
-  "industryNotes": string
+  "industryNotes": string,
+  "nextSteps": string
 }
 
-RULES:
-- Treat everything as a *proposal* or *directional draft*, not a guarantee.
-- Use words like "could", "proposed", "likely", "directionally", not "will" and not "guaranteed".
-- Recommend **no more than 2–3 AI employees** unless the description clearly indicates a high-volume, multi-location or multi-department operation.
-- "AI employees" should be simple, understandable roles with clear jobs (e.g., Lead Intake Assistant, Follow-Up Coordinator, Ops Logging Assistant).
-- Keep all language practical and concrete. No jargon like "synergy", "revolutionize", etc.
-- Do NOT invent revenue numbers. Stick to operational impact (time & focus).
-- Make sure the owner sees where humans still make decisions (judgment calls, pricing, edge cases).
-- Reflect the business specifics (industry, tools, bottlenecks) in the roles and plan.
+GUIDELINES:
+
+1. HEADLINE
+   - 1 concise sentence
+   - Should feel like a confident, strategic direction
+
+2. SUMMARY
+   - 3–5 sentences max
+   - Explain the business problem, the leverage points, and the proposed direction
+
+3. AI EMPLOYEES (2–3 max)
+   - Each should have a clear operational purpose
+   - Avoid buzzwords
+   - Do NOT mention “agents” or “models”
+   - Describe them like real team roles
+
+4. WORKFLOW OVERVIEW
+   - 4–6 sentences
+   - Explain how AI employees fit into the user's existing tools and workflows
+
+5. DIRECTIONAL BENEFITS
+   - Bullet list of qualitative improvements (clarity, responsiveness, reduced chaos)
+   - NO time or dollar figures
+
+6. THIRTY DAY PLAN
+   - 3 or 4 phases
+   - Keep each phase realistic and sharp
+   - Focus on sequencing and tightening operations
+
+7. INDUSTRY NOTES
+   - 2–4 insights specific to the user's industry or workflow patterns
+
+8. NEXT STEPS
+   - 1–2 sentences
+   - Frame the strategy call as the place where details tighten and decisions are made
 `;
 
-      const userPayload = {
-        businessName: form.businessName,
-        industry: form.industry,
-        email: form.email,
-        website: form.website,
-        teamSize: form.teamSize,
-        monthlyLeads: form.monthlyLeads,
-        mainBottleneck: form.mainBottleneck,
-        currentTools: form.currentTools,
-        dreamOutcome: form.dreamOutcome,
-        extraContext: form.extraContext,
-        numericEstimates: {
-          leads,
-          team,
-          hoursRange: [minHours, maxHours],
-          valueRange: [minValue, maxValue],
-        },
-      };
+    const userPayload = {
+      businessName: form.businessName,
+      industry: form.industry,
+      email: form.email,
+      website: form.website,
+      teamSize: form.teamSize,
+      monthlyLeads: form.monthlyLeads,
+      mainBottleneck: form.mainBottleneck,
+      currentTools: form.currentTools,
+      dreamOutcome: form.dreamOutcome,
+      extraContext: form.extraContext,
+    };
 
+    let aiBlueprint: Partial<Blueprint> = {};
+
+    if (process.env.OPENAI_API_KEY) {
       try {
         const completion = await openai.chat.completions.create({
           model: "gpt-4.1-mini",
@@ -262,98 +163,106 @@ RULES:
 
         const content = completion.choices[0]?.message?.content || "{}";
         aiBlueprint = JSON.parse(content) as Partial<Blueprint>;
-      } catch (aiErr) {
-        console.error("OpenAI Blueprint error:", aiErr);
+      } catch (err) {
+        console.error("OpenAI error generating Blueprint:", err);
       }
     } else {
-      console.warn("OPENAI_API_KEY missing; returning fallback Blueprint only.");
+      console.warn("OPENAI_API_KEY missing; using fallback Blueprint only.");
     }
 
-    // ---------- 3) Merge AI output with deterministic estimates ----------
-    const fallbackHeadline = `A proposed AI systems direction for ${businessName}`;
-    const fallbackSummary = `Based on what you shared about ${industryLabel.toLowerCase()}, this Blueprint outlines a conservative, directional plan for using a small team of AI employees to clean up backend work and give you back meaningful time and focus every month. This is a proposal, not a final scope.`;
+    // -------- 2) Fallbacks & final Blueprint object --------
+    const fallback: Blueprint = {
+      headline: `A proposed AI systems direction for ${businessName}`,
+      summary: `Based on what you shared about ${industryLabel.toLowerCase()}, this Blueprint outlines a conservative, first-pass direction for using a small team of AI employees to clean up backend work and give you more headspace to run the business. It’s not a final scope—it's a directional starting point to refine together.`,
+      aiEmployees: [
+        {
+          name: "Lead Intake Assistant (proposed)",
+          role: "Handles inbound leads across your main channels and makes sure every inquiry is acknowledged and logged in one place.",
+          responsibilities: [
+            "Send an immediate, on-brand reply to every new lead.",
+            "Capture a few key details and record them in your existing tools.",
+            "Flag high-value or complex leads for a human callback with a short summary.",
+          ],
+        },
+        {
+          name: "Follow-Up Coordinator (proposed)",
+          role: "Keeps follow-up consistent so warm conversations don’t die just because the day got busy.",
+          responsibilities: [
+            "Run simple follow-up sequences for unbooked or unresponsive leads.",
+            "Keep track of where each conversation left off.",
+            "Route replies back to the right person on your team when judgment is needed.",
+          ],
+        },
+      ],
+      workflowOverview:
+        "Leads and requests continue to come in through the channels you already use—forms, email, text, or DMs. The proposed AI employees handle first response, simple questions, basic qualification, and logging into your tools. Your team steps in for pricing, nuance, and final decisions. The point is to offload repetitive motion, not replace human judgment.",
+      directionalBenefits: [
+        "Fewer leads slipping through the cracks because of slow or missed responses.",
+        "Cleaner notes and history so anyone on the team can see what’s going on.",
+        "Less mental clutter for owners and key staff around who needs what next.",
+      ],
+      thirtyDayPlan: [
+        {
+          phase: "Week 1",
+          title: "Map reality & connect systems",
+          description:
+            "We map how leads and requests move through your business today and connect the tools that matter most.",
+          bullets: [
+            "Document your core lead sources and response patterns.",
+            "Clarify which tools should be the source of truth for contacts and work.",
+            "Agree on 1–2 specific plays AI employees will own first.",
+          ],
+        },
+        {
+          phase: "Week 2",
+          title: "Launch intake & simple follow-up",
+          description:
+            "We roll out an initial AI employee for intake and basic follow-up so nothing sits untouched.",
+          bullets: [
+            "Install a Lead Intake Assistant tied into your existing channels.",
+            "Draft and tune simple, on-brand replies for common questions.",
+            "Set up a basic follow-up path for unbooked or dormant leads.",
+          ],
+        },
+        {
+          phase: "Week 3–4",
+          title: "Tighten admin & handoffs",
+          description:
+            "We bring more admin work into the system and refine everything based on how your team actually uses it.",
+          bullets: [
+            "Add light internal notes, summaries, and task routing where it helps most.",
+            "Adjust triggers and templates based on live conversations.",
+            "Lock in a simple operating rhythm so the system runs without babysitting.",
+          ],
+        },
+      ],
+      industryNotes:
+        "This direction is based on common patterns in growing local service and professional businesses: leads spread across channels, ad-hoc follow-up, and a rising admin load on the same small group of people. The exact implementation would be shaped around your tools, team, and tolerance for change.",
+      nextSteps:
+        "If this direction feels close to what you’re looking for, the next step is a short strategy call. We’ll walk through your workflows, tighten the plan, and only then talk about build scope and timeline.",
+    };
 
     const blueprint: Blueprint = {
-      headline: aiBlueprint.headline || fallbackHeadline,
-      summary: aiBlueprint.summary || fallbackSummary,
+      headline: aiBlueprint.headline || fallback.headline,
+      summary: aiBlueprint.summary || fallback.summary,
       aiEmployees:
         aiBlueprint.aiEmployees && aiBlueprint.aiEmployees.length > 0
           ? aiBlueprint.aiEmployees
-          : [
-              {
-                name: "Lead Intake Assistant (proposed)",
-                role: "Handles inbound leads across your main channels and makes sure every inquiry is acknowledged and logged in one place.",
-                responsibilities: [
-                  "Sends an immediate, on-brand reply to every new lead 24/7.",
-                  "Collects a few key pieces of information and records them in your system.",
-                  "Flags high-priority leads for a human callback with a short summary.",
-                ],
-              },
-              {
-                name: "Follow-Up Coordinator (proposed)",
-                role: "Keeps follow-up consistent so warm leads don’t go cold just because the day got busy.",
-                responsibilities: [
-                  "Runs 3–7–14 day follow-up sequences for unbooked or unresponsive leads.",
-                  "Keeps notes on last contact so your team isn’t digging through threads.",
-                  "Routes replies back to the right person when human judgment is needed.",
-                ],
-              },
-            ],
-      workflowOverview:
-        aiBlueprint.workflowOverview ||
-        "Leads and requests come in through your existing channels. The proposed AI employees handle first response, basic questions, qualification, and logging. Your team steps in for pricing, nuanced conversations, and final decisions. The goal is to remove the repetitive work—not the human judgment.",
-      hoursSavedPerMonth: hoursSavedPerMonth,
-      valuePerMonth: valuePerMonth,
-      confidenceNote:
-        aiBlueprint.confidenceNote ||
-        "These ranges are directional and based on the lead volume, team size, and bottlenecks you described. On a strategy call, we walk through your real workflows and refine these numbers with more precision.",
-      nextSteps:
-        aiBlueprint.nextSteps ||
-        "If this proposed direction looks close to where you want your operations to go, the next step is a short strategy session. We pressure-test the roles, plug in your actual numbers, and map a concrete build plan with scope, timeline, and investment.",
+          : fallback.aiEmployees,
+      workflowOverview: aiBlueprint.workflowOverview || fallback.workflowOverview,
+      directionalBenefits:
+        aiBlueprint.directionalBenefits && aiBlueprint.directionalBenefits.length > 0
+          ? aiBlueprint.directionalBenefits
+          : fallback.directionalBenefits,
       thirtyDayPlan:
         aiBlueprint.thirtyDayPlan && aiBlueprint.thirtyDayPlan.length > 0
           ? aiBlueprint.thirtyDayPlan
-          : [
-              {
-                phase: "Week 1",
-                title: "Map reality & connect tools",
-                description:
-                  "We map how leads flow through your business today and connect your core tools so we’re seeing the same reality.",
-                bullets: [
-                  "Document lead sources and current response patterns.",
-                  "Connect email, forms, and key apps into a single view.",
-                  "Agree on 1–2 plays your AI employees will own first.",
-                ],
-              },
-              {
-                phase: "Week 2",
-                title: "Launch lead intake & basic follow-up",
-                description:
-                  "We deploy the first AI employee to handle intake and simple follow-up so nothing sits untouched.",
-                bullets: [
-                  "Install AI Lead Intake Assistant for instant replies.",
-                  "Set up simple qualification and logging into your tools.",
-                  "Launch basic follow-up sequences for unbooked leads.",
-                ],
-              },
-              {
-                phase: "Week 3–4",
-                title: "Tighten follow-up & automate admin",
-                description:
-                  "We bring admin and internal routing into the system and tune everything based on real usage.",
-                bullets: [
-                  "Add AI Ops Assistant for notes, recaps, and task routing.",
-                  "Refine triggers, templates, and alert rules with your feedback.",
-                  "Review early data and lock in the highest-leverage automations.",
-                ],
-              },
-            ],
-      industryNotes:
-        aiBlueprint.industryNotes ||
-        "This direction is based on patterns we see in similar local service operations: leads slipping through the cracks, inconsistent follow-up, and a growing admin load. The exact implementation would be tuned to your tools, your team, and how you like to work.",
+          : fallback.thirtyDayPlan,
+      industryNotes: aiBlueprint.industryNotes || fallback.industryNotes,
+      nextSteps: aiBlueprint.nextSteps || fallback.nextSteps,
     };
 
-    // ---------- 4) Insert everything into Supabase ----------
+    // -------- 3) Insert into Supabase --------
     const supabaseUrl = process.env.SUPABASE_URL || "";
     const supabaseKey = process.env.SUPABASE_ANON_KEY || "";
 
@@ -373,11 +282,12 @@ RULES:
           current_tools: form.currentTools || null,
           dream_outcome: form.dreamOutcome || null,
           extra_context: form.extraContext || null,
-          hours_saved_min: minHours,
-          hours_saved_max: maxHours,
-          value_saved_min: minValue,
-          value_saved_max: maxValue,
           ai_blueprint: blueprint,
+          // numeric columns (if they exist) left null on purpose
+          hours_saved_min: null,
+          hours_saved_max: null,
+          value_saved_min: null,
+          value_saved_max: null,
         });
 
         if (error) {
@@ -390,7 +300,7 @@ RULES:
       console.warn("SUPABASE_URL or SUPABASE_ANON_KEY missing. Skipping Supabase insert.");
     }
 
-    // ---------- 5) Return the Blueprint to the frontend ----------
+    // -------- 4) Return Blueprint to frontend --------
     return NextResponse.json(blueprint, { status: 200 });
   } catch (err) {
     console.error("Preview API error:", err);
