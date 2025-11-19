@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 type FormState = {
   businessName: string;
@@ -14,22 +19,53 @@ type FormState = {
   extraContext: string;
 };
 
+type AIEmployee = {
+  name: string;
+  role: string;
+  responsibilities: string[];
+};
+
+type ThirtyDayPhase = {
+  phase: string; // e.g. "Week 1"
+  title: string;
+  description: string;
+  bullets: string[];
+};
+
+type Blueprint = {
+  headline: string;
+  summary: string;
+  aiEmployees: AIEmployee[];
+  workflowOverview: string;
+  hoursSavedPerMonth: string;
+  valuePerMonth: string;
+  confidenceNote: string;
+  nextSteps: string;
+  thirtyDayPlan: ThirtyDayPhase[];
+  industryNotes: string;
+};
+
+function cleanNumber(s: string): number {
+  return parseInt((s || "").replace(/[^0-9]/g, ""), 10) || 0;
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { form, type } = body as { form: FormState; type?: string };
 
-    // -----------------------------
-    // 1) Try to store in Supabase
-    // -----------------------------
     const supabaseUrl = process.env.SUPABASE_URL || "";
     const supabaseKey = process.env.SUPABASE_ANON_KEY || "";
 
+    let dbInserted = false;
+    let dbErrorMessage: string | null = null;
+
+    // ---------- 1) Insert into Supabase ----------
     if (supabaseUrl && supabaseKey) {
       try {
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        await supabase.from("preview_leads").insert({
+        const { error } = await supabase.from("preview_leads").insert({
           type: type ?? "AI_SYSTEMS_BLUEPRINT",
           business_name: form.businessName || null,
           industry: form.industry || null,
@@ -42,100 +78,260 @@ export async function POST(req: Request) {
           dream_outcome: form.dreamOutcome || null,
           extra_context: form.extraContext || null,
         });
-      } catch (dbErr) {
-        console.error("Supabase insert error:", dbErr);
-        // Still continue and return a Blueprint so the preview doesn't break
+
+        if (error) {
+          console.error("Supabase insert error:", error);
+          dbErrorMessage = error.message;
+        } else {
+          dbInserted = true;
+        }
+      } catch (dbErr: any) {
+        console.error("Supabase insert threw:", dbErr);
+        dbErrorMessage = dbErr?.message ?? "Unknown Supabase error";
       }
     } else {
-      console.warn(
-        "SUPABASE_URL or SUPABASE_ANON_KEY missing. Skipping Supabase insert."
-      );
+      console.warn("SUPABASE_URL or SUPABASE_ANON_KEY missing. Skipping Supabase insert.");
+      dbErrorMessage = "Supabase env vars missing.";
     }
 
-    // -----------------------------
-    // 2) Lightweight estimates
-    // -----------------------------
-    const cleanNumber = (s: string) =>
-      parseInt((s || "").replace(/[^0-9]/g, ""), 10) || 0;
-
-    const leads = cleanNumber(form.monthlyLeads);
+    // ---------- 2) Deterministic time & value estimates ----------
+    const leadsRaw = cleanNumber(form.monthlyLeads);
+    const leads = leadsRaw || 20; // assume at least some volume
     let team = cleanNumber(form.teamSize);
-
     if (!team && form.teamSize.toLowerCase().includes("just me")) {
       team = 1;
     }
 
-    let baseHours = 10;
-    baseHours += Math.min(leads * 0.25, 40); // up to +40 from volume
-    baseHours += Math.min(team * 3, 30); // up to +30 from coordination
+    const bottleneck = (form.mainBottleneck || "").toLowerCase();
+    const industry = (form.industry || "").toLowerCase();
 
-    const estHours = Math.round(Math.min(Math.max(baseHours, 15), 80)); // clamp 15–80
+    // base minutes per lead
+    let intakeMinutesPerLead = 6; // initial reply + basic logging
+    let followupMinutesPerLead = 4; // default follow up
+    let adminMinutesPerLead = 3; // basic admin
 
-    const valuePerHour = 60;
-    const estValue = estHours * valuePerHour;
+    if (bottleneck.includes("follow") || bottleneck.includes("ghost") || bottleneck.includes("response")) {
+      followupMinutesPerLead += 4; // they clearly struggle here
+    }
 
-    const hoursSavedPerMonth = `${estHours}–${estHours + 10} hours/month`;
-    const valuePerMonth = `$${(estValue - 500).toLocaleString()}–$${(
-      estValue + 1500
-    ).toLocaleString()}/month`;
+    if (bottleneck.includes("admin") || bottleneck.includes("invoice") || bottleneck.includes("calendar") || bottleneck.includes("schedule")) {
+      adminMinutesPerLead += 4;
+    }
 
-    // -----------------------------
-    // 3) Build Blueprint object
-    // -----------------------------
+    const intakeMinutes = leads * intakeMinutesPerLead;
+    const followupMinutes = leads * followupMinutesPerLead;
+    const adminMinutes = leads * adminMinutesPerLead;
+
+    // coordination / internal ops minutes based on team size
+    const opsMinutes = Math.max(team, 1) * 45; // minimal per-person weekly ops overhead
+
+    const totalMinutes = intakeMinutes + followupMinutes + adminMinutes + opsMinutes;
+    const rawHours = totalMinutes / 60;
+
+    // clamp and make a range
+    const minHours = Math.max(10, Math.round(rawHours * 0.6));
+    const maxHours = Math.max(minHours + 5, Math.round(rawHours * 1.1));
+
+    // hourly value based on rough industry benchmarks
+    let hourlyRate = 28; // default admin-level
+
+    if (
+      industry.includes("dental") ||
+      industry.includes("clinic") ||
+      industry.includes("med spa") ||
+      industry.includes("law") ||
+      industry.includes("legal")
+    ) {
+      hourlyRate = 40;
+    } else if (
+      industry.includes("roof") ||
+      industry.includes("hvac") ||
+      industry.includes("plumb") ||
+      industry.includes("electric") ||
+      industry.includes("contractor")
+    ) {
+      hourlyRate = 35;
+    } else if (
+      industry.includes("agency") ||
+      industry.includes("marketing") ||
+      industry.includes("consult")
+    ) {
+      hourlyRate = 32;
+    }
+
+    const minValue = minHours * hourlyRate;
+    const maxValue = maxHours * hourlyRate;
+
+    const hoursSavedPerMonth = `${minHours}–${maxHours} hours/month`;
+    const valuePerMonth = `$${minValue.toLocaleString()}–$${maxValue.toLocaleString()}/month`;
+
     const businessName = form.businessName || "your business";
-    const industry = form.industry || "your operation";
+    const industryLabel = form.industry || "your operation";
 
-    const headline = `How AI employees could reshape ${businessName}`;
-    const summary = `Based on what you shared about ${industry.toLowerCase()}, this Blueprint shows how a small team of AI employees could plug into your current tools, clean up the backend work, and give you back meaningful time and margin every month.`;
+    // ---------- 3) Call OpenAI for personalized plan ----------
+    let aiBlueprint: Partial<Blueprint> = {};
 
-    const aiEmployees = [
-      {
-        name: "Lead Response Assistant",
-        role: "Handles inbound leads across your main channels and makes sure every inquiry is acknowledged and logged.",
-        responsibilities: [
-          "Sends an immediate, on-brand reply to every new lead 24/7.",
-          "Asks 2–3 qualifying questions and records the answers in your system.",
-          "Routes hot or complex leads to the right human with a clear summary.",
-        ],
-      },
-      {
-        name: "Follow-Up & Reminder Coordinator",
-        role: "Keeps deals, projects, and clients from going cold by driving consistent follow-up and reminders.",
-        responsibilities: [
-          "Schedules and sends follow-up messages based on your timelines.",
-          "Flags stalled opportunities and nudges the right person internally.",
-          "Keeps a log of touchpoints so you can see where each lead or client stands.",
-        ],
-      },
-      {
-        name: "Ops & Admin Assistant",
-        role: "Clears repetitive admin tasks so your team can focus on higher-value work.",
-        responsibilities: [
-          "Updates records in your tools when new info comes in.",
-          "Prepares simple recaps from calls, forms, or email threads.",
-          "Surfaces daily/weekly task lists for humans based on system activity.",
-        ],
-      },
-    ];
+    if (process.env.OPENAI_API_KEY) {
+      const systemPrompt = `
+You are a senior operations consultant and AI automation architect who designs "AI employees" for small and mid-sized service businesses.
 
-    const workflowOverview =
-      "Leads and requests come in through your existing channels (forms, email, text, etc.). AI employees acknowledge and log each one, qualify where appropriate, create or update records in your tools, and route tasks to your team. Your humans step in for judgment calls, nuanced conversations, and final decisions—without chasing every small detail.";
+You are helping a company called LocalLink Digital produce an **AI Systems Blueprint** for potential clients.
 
-    const confidenceNote =
-      "These estimates are directional and based on typical patterns we see with similar teams and lead volumes. On a strategy call, we refine them with real numbers from your world.";
+GOALS:
+- Make the client feel deeply understood.
+- Turn their answers into a specific, practical plan (not generic fluff).
+- Show exactly HOW AI will plug into their existing tools and workflows.
+- Use the time & value estimates we calculated as grounding (do not change them).
 
-    const nextSteps =
-      "If this Blueprint feels aligned with where you want the business to go, the next step is a short strategy session. We’ll walk through the roles, plug in your real numbers, and map a concrete build plan with timeline and investment.";
+OUTPUT FORMAT:
+Return a single JSON object with the following keys:
 
-    const blueprint = {
-      headline,
-      summary,
-      aiEmployees,
-      workflowOverview,
+{
+  "headline": string,
+  "summary": string,
+  "aiEmployees": [
+    {
+      "name": string,
+      "role": string,
+      "responsibilities": string[]
+    },
+    ...
+  ],
+  "workflowOverview": string,
+  "confidenceNote": string,
+  "nextSteps": string,
+  "thirtyDayPlan": [
+    {
+      "phase": string,      // e.g. "Week 1"
+      "title": string,
+      "description": string,
+      "bullets": string[]
+    },
+    ...
+  ],
+  "industryNotes": string
+}
+
+GUIDELINES:
+- Anchor everything in the specific business info and bottlenecks.
+- "AI employees" should feel like roles on their team with clear jobs.
+- Keep language plain, sharp, and businesslike (not hypey, not technical).
+- In "thirtyDayPlan", outline 3–4 phases (Week 1, Week 2, Week 3–4) showing what we would build when.
+- "industryNotes" should call out 2–4 insights specific to their industry, lead flow, or tool stack.
+- Do NOT include the hours or dollar estimates in the JSON; those are provided separately by the backend.
+`;
+
+      const userPayload = {
+        businessName: form.businessName,
+        industry: form.industry,
+        email: form.email,
+        website: form.website,
+        teamSize: form.teamSize,
+        monthlyLeads: form.monthlyLeads,
+        mainBottleneck: form.mainBottleneck,
+        currentTools: form.currentTools,
+        dreamOutcome: form.dreamOutcome,
+        extraContext: form.extraContext,
+        numericEstimates: {
+          leads,
+          team,
+          hoursRange: [minHours, maxHours],
+          valueRange: [minValue, maxValue],
+        },
+      };
+
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-4.1-mini",
+          response_format: { type: "json_object" },
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: JSON.stringify(userPayload) },
+          ],
+        });
+
+        const content = completion.choices[0]?.message?.content || "{}";
+        aiBlueprint = JSON.parse(content) as Partial<Blueprint>;
+      } catch (aiErr) {
+        console.error("OpenAI Blueprint error:", aiErr);
+      }
+    } else {
+      console.warn("OPENAI_API_KEY missing; returning fallback Blueprint.");
+    }
+
+    // ---------- 4) Merge AI output with deterministic estimates ----------
+    const fallbackHeadline = `How AI employees could reshape ${businessName}`;
+    const fallbackSummary = `Based on what you shared about ${industryLabel.toLowerCase()}, this Blueprint shows how a small team of AI employees could plug into your current tools, clean up the backend work, and give you back meaningful time and margin every month.`;
+
+    const blueprint: Blueprint = {
+      headline: aiBlueprint.headline || fallbackHeadline,
+      summary: aiBlueprint.summary || fallbackSummary,
+      aiEmployees:
+        aiBlueprint.aiEmployees && aiBlueprint.aiEmployees.length > 0
+          ? aiBlueprint.aiEmployees
+          : [
+              {
+                name: "Lead Response Assistant",
+                role: "Handles inbound leads across your main channels and makes sure every inquiry is acknowledged and logged.",
+                responsibilities: [
+                  "Sends an immediate, on-brand reply to every new lead 24/7.",
+                  "Asks 2–3 qualifying questions and records the answers in your system.",
+                  "Routes hot or complex leads to the right human with a clear summary.",
+                ],
+              },
+            ],
+      workflowOverview:
+        aiBlueprint.workflowOverview ||
+        "Leads and requests come in through your existing channels (forms, email, text, etc.). AI employees acknowledge and log each one, qualify where appropriate, create or update records in your tools, and route tasks to your team. Your humans step in for judgment calls, nuanced conversations, and final decisions—without chasing every small detail.",
       hoursSavedPerMonth,
       valuePerMonth,
-      confidenceNote,
-      nextSteps,
+      confidenceNote:
+        aiBlueprint.confidenceNote ||
+        "These estimates are directional and based on typical patterns we see with similar teams and lead volumes. On a strategy call, we refine them with your real numbers.",
+      nextSteps:
+        aiBlueprint.nextSteps ||
+        "If this Blueprint feels aligned with where you want the business to go, the next step is a short strategy session. We’ll walk through the roles, plug in your real numbers, and map a concrete build plan with timeline and investment.",
+      thirtyDayPlan:
+        aiBlueprint.thirtyDayPlan && aiBlueprint.thirtyDayPlan.length > 0
+          ? aiBlueprint.thirtyDayPlan
+          : [
+              {
+                phase: "Week 1",
+                title: "Map reality & connect tools",
+                description:
+                  "We map how leads flow through your business today and connect your core tools so we can start tracking everything in one place.",
+                bullets: [
+                  "Map lead sources and your current response patterns.",
+                  "Connect email, forms, and key apps into a single view.",
+                  "Define the core plays your AI employees will run.",
+                ],
+              },
+              {
+                phase: "Week 2",
+                title: "Launch lead handling & follow-up",
+                description:
+                  "We launch your first AI employees to handle intake, qualification, and consistent follow-up.",
+                bullets: [
+                  "Install AI Lead Response Assistant for instant replies.",
+                  "Deploy simple qualification flows tied to your tools.",
+                  "Set up 3–7–14 day follow-up sequences that match your tone.",
+                ],
+              },
+              {
+                phase: "Week 3–4",
+                title: "Automate admin & tighten the loop",
+                description:
+                  "We automate repetitive admin and refine the system based on real usage and your feedback.",
+                bullets: [
+                  "Roll out AI Ops Assistant for logging and recaps.",
+                  "Tune triggers, templates, and internal alerts.",
+                  "Review early metrics and lock in the highest-leverage automations.",
+                ],
+              },
+            ],
+      industryNotes:
+        aiBlueprint.industryNotes ||
+        "This Blueprint is grounded in common patterns we see across local service businesses: leads slipping through the cracks, inconsistent follow-up, and a growing admin burden. The exact details will be tuned to your tools, team, and volume during implementation.",
     };
 
     return NextResponse.json(blueprint, { status: 200 });
