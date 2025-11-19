@@ -81,7 +81,7 @@ export default function ContactPage() {
               <div className="space-y-2">
                 <p className="flex items-center gap-2">
                   <Mail className="h-4 w-4 text-emerald-400" />
-                  <span>info@locallinkdigital.com</span>
+                  <span>support@locallinkstudio.com</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <Phone className="h-4 w-4 text-emerald-400" />
