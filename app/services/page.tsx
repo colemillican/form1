@@ -111,7 +111,7 @@ export default function ServicesPage() {
           {/* Integrations & automation */}
           <article className="rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80">
             <img
-              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop"
               alt="Team collaborating with digital tools"
               className="w-full aspect-[16/9] object-cover"
             />
@@ -146,7 +146,7 @@ export default function ServicesPage() {
           {/* Ongoing optimization & support */}
           <article className="rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80">
             <img
-              src="https://images.unsplash.com/photo-1553877522-3b62b4f7d3a4?q=80&w=1600&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop"
               alt="Analytics and optimization dashboards"
               className="w-full aspect-[16/9] object-cover"
             />
