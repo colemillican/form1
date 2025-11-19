@@ -4,15 +4,7 @@ import React, { useState, FormEvent } from "react";
 import Link from "next/link";
 import { Exo_2 } from "next/font/google";
 import SiteChrome, { G } from "../components/SiteChrome";
-import {
-  ArrowRight,
-  Clock,
-  LineChart,
-  Sparkles,
-  Workflow,
-  ShieldCheck,
-  Brain,
-} from "lucide-react";
+import { ArrowRight, Sparkles, Workflow, ShieldCheck, Brain } from "lucide-react";
 
 const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
@@ -49,12 +41,10 @@ type Blueprint = {
   summary: string;
   aiEmployees: AIEmployee[];
   workflowOverview: string;
-  hoursSavedPerMonth: string;
-  valuePerMonth: string;
-  confidenceNote: string;
-  nextSteps: string;
+  directionalBenefits: string[];
   thirtyDayPlan: ThirtyDayPhase[];
   industryNotes: string;
+  nextSteps: string;
 };
 
 const initialForm: FormState = {
@@ -129,22 +119,22 @@ export default function PreviewPage() {
           <h1
             className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight text-zinc-50`}
           >
-            A proposed <G>AI employee</G> plan for your operation—before you commit.
+            A directional <G>AI employee</G> plan for your business—before you commit.
           </h1>
           <p className="mt-3 mx-auto max-w-3xl text-zinc-300">
-            Tell us how your business actually runs today. We&apos;ll use AI to draft a directional
-            systems blueprint: a small team of AI employees, the workflows they&apos;d own, and a
-            realistic range of time and value they could free up each month. It&apos;s a proposed
-            direction, not a final scope.
+            Share how your operation actually runs today. We&apos;ll use AI to draft a proposed
+            systems blueprint: a small team of AI employees, the workflows they&apos;d own, and how
+            they&apos;d plug into the tools you already use. It&apos;s a first-pass direction, not a
+            final scope or a promise.
           </p>
         </div>
       </section>
 
-      {/* MAIN BODY */}
+      {/* MAIN */}
       <section className="bg-black">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-            {/* LEFT: Form / Loading */}
+            {/* LEFT: FORM / LOADING */}
             <div className="space-y-6">
               <div className="rounded-2xl border border-white/10 bg-slate-950/80 p-6 sm:p-7 shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
                 <div className="mb-4 flex items-center justify-between">
@@ -164,8 +154,7 @@ export default function PreviewPage() {
                   <div className="flex flex-col items-center justify-center py-16 text-center">
                     <div className="mb-4 h-10 w-10 animate-spin rounded-full border-2 border-emerald-400 border-t-transparent" />
                     <p className="text-sm text-zinc-300">
-                      Drafting a proposed AI systems plan—mapping roles, workflows, and time
-                      savings based on what you shared…
+                      Drafting a first-pass AI systems blueprint based on what you shared…
                     </p>
                   </div>
                 ) : (
@@ -332,8 +321,8 @@ export default function PreviewPage() {
                         <ArrowRight className="h-4 w-4" />
                       </button>
                       <p className="mt-2 text-[11px] text-zinc-500">
-                        We&apos;ll email your Blueprint and refine it on a strategy call if it looks like
-                        a fit. No spam, no pressure.
+                        We&apos;ll email your Blueprint and, if it looks like a fit, refine it with
+                        you on a short strategy call. No spam, no pressure.
                       </p>
                     </div>
                   </form>
@@ -341,13 +330,13 @@ export default function PreviewPage() {
               </div>
             </div>
 
-            {/* RIGHT: Blueprint preview */}
+            {/* RIGHT: BLUEPRINT PREVIEW */}
             <div className="space-y-4">
               <div className="rounded-2xl border border-white/10 bg-slate-950/80 p-6 sm:p-7 shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-400">
                     <G>LocalLink</G>
-                    <span>Proposed Direction</span>
+                    <span>Directional Blueprint</span>
                   </div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
                     <Brain className="h-3 w-3" />
@@ -359,18 +348,17 @@ export default function PreviewPage() {
                   <div className="space-y-4 text-sm text-zinc-300">
                     <p>
                       After you submit the form, this panel will show a proposed AI Systems Blueprint
-                      for your operation—not a canned template, and not a guarantee. You&apos;ll see:
+                      for your operation—not a canned template and not a guarantee. You&apos;ll see:
                     </p>
                     <ul className="space-y-2 text-[13px] text-zinc-300">
                       <li>• 2–3 AI employee roles we&apos;d start with and what they&apos;d own.</li>
                       <li>• How they plug into the tools and workflows you already use.</li>
-                      <li>• A directional range of hours saved every month across your team.</li>
-                      <li>• A conservative dollar range for the value of that time.</li>
+                      <li>• The key operational benefits we&apos;re aiming for (clarity, speed, less chaos).</li>
                       <li>• A first 30-day rollout broken into clear, concrete phases.</li>
                     </ul>
                     <p className="text-[12px] text-zinc-500">
-                      You can treat it as a starting point. On a strategy call, we pressure-test it
-                      against your real world before anything is built.
+                      Think of it as a first-pass direction you can react to. On a strategy call, we
+                      pressure-test it against your real world before anything is built.
                     </p>
                   </div>
                 )}
@@ -382,13 +370,14 @@ export default function PreviewPage() {
                     </p>
                     <p className="text-[13px] text-zinc-300">
                       We&apos;re using your answers to sketch a conservative starting point for AI
-                      employees in your operation—roles, workflows, and directional impact.
+                      employees in your operation—roles, workflows, and directional benefits.
                     </p>
                   </div>
                 )}
 
                 {phase === "blueprint" && blueprint && (
                   <div className="space-y-5 text-sm text-zinc-200">
+                    {/* Headline + summary */}
                     <div>
                       <h2
                         className={`${heroFont.className} text-[17px] font-semibold text-zinc-50`}
@@ -398,29 +387,7 @@ export default function PreviewPage() {
                       <p className="mt-1 text-[13px] text-zinc-300">{blueprint.summary}</p>
                     </div>
 
-                    {/* Metrics */}
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      <div className="rounded-xl border border-emerald-500/30 bg-black/60 p-3">
-                        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
-                          <Clock className="h-3 w-3" />
-                          Directional hours saved / month
-                        </div>
-                        <p className="mt-1 text-[15px] font-semibold text-zinc-50">
-                          {blueprint.hoursSavedPerMonth}
-                        </p>
-                      </div>
-                      <div className="rounded-xl border border-emerald-500/30 bg-black/60 p-3">
-                        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
-                          <LineChart className="h-3 w-3" />
-                          Directional value of that time
-                        </div>
-                        <p className="mt-1 text-[15px] font-semibold text-zinc-50">
-                          {blueprint.valuePerMonth}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* AI employees */}
+                    {/* Proposed AI employees */}
                     <div>
                       <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
                         Proposed AI employees
@@ -447,7 +414,7 @@ export default function PreviewPage() {
                       </div>
                     </div>
 
-                    {/* Workflow + industry notes */}
+                    {/* Workflow + benefits */}
                     <div className="space-y-3">
                       <div>
                         <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
@@ -457,14 +424,19 @@ export default function PreviewPage() {
                           {blueprint.workflowOverview}
                         </p>
                       </div>
-                      <div>
-                        <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                          Notes specific to your world
-                        </h3>
-                        <p className="mt-1 text-[13px] text-zinc-300">
-                          {blueprint.industryNotes}
-                        </p>
-                      </div>
+
+                      {blueprint.directionalBenefits && blueprint.directionalBenefits.length > 0 && (
+                        <div>
+                          <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                            Directional benefits
+                          </h3>
+                          <ul className="mt-1 space-y-1 text-[12px] text-zinc-300">
+                            {blueprint.directionalBenefits.map((b, idx) => (
+                              <li key={idx}>• {b}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
 
                     {/* 30-day plan */}
@@ -474,23 +446,23 @@ export default function PreviewPage() {
                           First 30 days (proposed)
                         </h3>
                         <div className="mt-2 space-y-2">
-                          {blueprint.thirtyDayPlan.map((phase, idx) => (
+                          {blueprint.thirtyDayPlan.map((phaseItem, idx) => (
                             <div
                               key={idx}
                               className="rounded-xl border border-white/10 bg-black/50 p-3"
                             >
                               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
-                                {phase.phase}
+                                {phaseItem.phase}
                               </p>
                               <p className="text-[13px] font-semibold text-zinc-50">
-                                {phase.title}
+                                {phaseItem.title}
                               </p>
                               <p className="mt-1 text-[12px] text-zinc-300">
-                                {phase.description}
+                                {phaseItem.description}
                               </p>
-                              {phase.bullets?.length > 0 && (
+                              {phaseItem.bullets?.length > 0 && (
                                 <ul className="mt-2 space-y-1 text-[12px] text-zinc-300">
-                                  {phase.bullets.map((b, bIdx) => (
+                                  {phaseItem.bullets.map((b, bIdx) => (
                                     <li key={bIdx}>• {b}</li>
                                   ))}
                                 </ul>
@@ -501,38 +473,46 @@ export default function PreviewPage() {
                       </div>
                     )}
 
-                    <p className="text-[11px] text-zinc-500">{blueprint.confidenceNote}</p>
-
-                    {/* Next steps */}
-                    <div className="mt-3 flex flex-col gap-3 border-t border-white/10 pt-4 text-[13px] text-zinc-200">
-                      <p className="font-semibold text-zinc-50">Next steps</p>
-                      <p className="text-zinc-300">{blueprint.nextSteps}</p>
-                      <div className="flex flex-col gap-3 sm:flex-row">
-                        <Link
-                          href="/start"
-                          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-[13px] font-semibold text-black shadow-[0_16px_40px_rgba(16,185,129,0.7)] transition-transform duration-200 hover:scale-[1.03] hover:bg-emerald-400 sm:w-auto"
-                        >
-                          Book a strategy session
-                          <ArrowRight className="h-3 w-3" />
-                        </Link>
-                        <p className="text-[11px] text-zinc-500">
-                          On that call, we stress-test this Blueprint against your real workflows and
-                          adjust before anything is built.
+                    {/* Industry notes + next steps */}
+                    <div className="space-y-3 border-t border-white/10 pt-4">
+                      <div>
+                        <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                          Notes specific to your world
+                        </h3>
+                        <p className="mt-1 text-[13px] text-zinc-300">
+                          {blueprint.industryNotes}
                         </p>
+                      </div>
+                      <div className="space-y-3 text-[13px] text-zinc-200">
+                        <p className="font-semibold text-zinc-50">Next steps</p>
+                        <p className="text-zinc-300">{blueprint.nextSteps}</p>
+                        <div className="flex flex-col gap-3 sm:flex-row">
+                          <Link
+                            href="/start"
+                            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-[13px] font-semibold text-black shadow-[0_16px_40px_rgba(16,185,129,0.7)] transition-transform duration-200 hover:scale-[1.03] hover:bg-emerald-400 sm:w-auto"
+                          >
+                            Book a strategy session
+                            <ArrowRight className="h-3 w-3" />
+                          </Link>
+                          <p className="text-[11px] text-zinc-500">
+                            On that call, we stress-test this Blueprint against your real workflows
+                            and adjust it before anything is built.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Small reassurance block */}
+              {/* Reassurance block */}
               <div className="rounded-2xl border border-white/10 bg-slate-950/80 p-4 text-[12px] text-zinc-300">
                 <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
                   What this is (and isn&apos;t)
                 </p>
                 <p>
                   This is a directional draft of how AI employees could show up in your business—
-                  based on what you share, and grounded in realistic time and cost ranges. It&apos;s
+                  based on what you share and grounded in your existing tools and workflows. It&apos;s
                   not a final scope or a promise. The point is to give you a clear starting point
                   before you spend a dollar.
                 </p>
