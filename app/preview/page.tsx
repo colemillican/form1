@@ -37,6 +37,13 @@ type AIEmployee = {
   responsibilities: string[];
 };
 
+type ThirtyDayPhase = {
+  phase: string;
+  title: string;
+  description: string;
+  bullets: string[];
+};
+
 type Blueprint = {
   headline: string;
   summary: string;
@@ -46,6 +53,8 @@ type Blueprint = {
   valuePerMonth: string;
   confidenceNote: string;
   nextSteps: string;
+  thirtyDayPlan: ThirtyDayPhase[];
+  industryNotes: string;
 };
 
 const initialForm: FormState = {
@@ -101,44 +110,8 @@ export default function PreviewPage() {
         throw new Error("Preview generation failed");
       }
 
-      const data = await res.json();
-
-      const mapped: Blueprint = {
-        headline:
-          data.headline ||
-          `How AI employees could reshape ${form.businessName || "your business"}`,
-        summary:
-          data.summary ||
-          "Based on what you shared, here’s a first-pass Blueprint for how AI employees could plug into your existing tools, clean up the backend, and give you more time, margin, and control.",
-        aiEmployees: data.aiEmployees || [
-          {
-            name: "Lead Response Assistant",
-            role: "Handles inbound leads and first-touch responses.",
-            responsibilities: [
-              "Auto-acknowledges every new lead within seconds.",
-              "Asks 2–3 qualifying questions and logs answers in your tools.",
-              "Routes hot leads to the right person with context attached.",
-            ],
-          },
-        ],
-        workflowOverview:
-          data.workflowOverview ||
-          "Leads enter through your existing channels, are captured in a single source of truth, then AI employees handle first response, qualification, and task routing—while your team steps in only where judgment and relationships matter.",
-        hoursSavedPerMonth:
-          data.hoursSavedPerMonth ||
-          "20–40 hours/month of manual follow-up, logging, and chasing loose ends.",
-        valuePerMonth:
-          data.valuePerMonth ||
-          "$1,500–$4,000/month in equivalent admin cost and recovered opportunity.",
-        confidenceNote:
-          data.confidenceNote ||
-          "These estimates are directional. We refine them after a deeper look at your volume, tools, and current response times.",
-        nextSteps:
-          data.nextSteps ||
-          "If this Blueprint feels close to what you’re after, the next step is a short strategy session where we tighten assumptions, answer questions, and map a concrete build plan.",
-      };
-
-      setBlueprint(mapped);
+      const data = (await res.json()) as Blueprint;
+      setBlueprint(data);
       setPhase("blueprint");
     } catch (err) {
       console.error(err);
@@ -156,12 +129,12 @@ export default function PreviewPage() {
           <h1
             className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight text-zinc-50`}
           >
-            See your <G>AI employees</G> before you ever sign anything.
+            See the <G>AI employees</G> we&apos;d give you—and what they&apos;d actually do.
           </h1>
           <p className="mt-3 mx-auto max-w-3xl text-zinc-300">
-            Fill out a short form and we&apos;ll generate a tailored AI Systems Blueprint: the AI
-            employees we&apos;d install, where they plug into your tools, and how many hours and
-            dollars they&apos;re likely to save your business every month.
+            Share how your business runs today and we&apos;ll generate a tailored AI Systems
+            Blueprint: a set of AI employees, the workflows they&apos;d own, and realistic time and
+            money saved every month—before you sign anything.
           </p>
         </div>
       </section>
@@ -170,7 +143,7 @@ export default function PreviewPage() {
       <section className="bg-black">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-            {/* LEFT: Form or loading */}
+            {/* LEFT: Form / Loading */}
             <div className="space-y-6">
               <div className="rounded-2xl border border-white/10 bg-slate-950/80 p-6 sm:p-7 shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
                 <div className="mb-4 flex items-center justify-between">
@@ -182,7 +155,7 @@ export default function PreviewPage() {
                   </div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
                     <Sparkles className="h-3 w-3" />
-                    Free preview
+                    AI-generated preview
                   </span>
                 </div>
 
@@ -390,8 +363,9 @@ export default function PreviewPage() {
                     <ul className="space-y-2 text-[13px] text-zinc-300">
                       <li>• 2–3 AI employees we’d install and the exact jobs they’d do.</li>
                       <li>• How they connect to your existing tools and workflows.</li>
-                      <li>• Estimated hours saved every month across your team.</li>
+                      <li>• A realistic range of hours saved every month across your team.</li>
                       <li>• An equivalent monthly dollar value in reclaimed time and avoided hires.</li>
+                      <li>• A 30-day rollout plan for implementation.</li>
                     </ul>
                     <p className="text-[12px] text-zinc-500">
                       Think of it as seeing the “after” picture of your operations before you commit
@@ -472,19 +446,61 @@ export default function PreviewPage() {
                       </div>
                     </div>
 
-                    {/* Workflow + note */}
-                    <div>
-                      <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                        How it runs day to day
-                      </h3>
-                      <p className="mt-1 text-[13px] text-zinc-300">
-                        {blueprint.workflowOverview}
-                      </p>
+                    {/* Workflow + industry notes */}
+                    <div className="space-y-3">
+                      <div>
+                        <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                          How it runs day to day
+                        </h3>
+                        <p className="mt-1 text-[13px] text-zinc-300">
+                          {blueprint.workflowOverview}
+                        </p>
+                      </div>
+                      <div>
+                        <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                          Notes specific to your world
+                        </h3>
+                        <p className="mt-1 text-[13px] text-zinc-300">
+                          {blueprint.industryNotes}
+                        </p>
+                      </div>
                     </div>
 
-                    <p className="text-[11px] text-zinc-500">
-                      {blueprint.confidenceNote}
-                    </p>
+                    {/* 30-day plan */}
+                    {blueprint.thirtyDayPlan && blueprint.thirtyDayPlan.length > 0 && (
+                      <div>
+                        <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                          First 30 days with LocalLink
+                        </h3>
+                        <div className="mt-2 space-y-2">
+                          {blueprint.thirtyDayPlan.map((phase, idx) => (
+                            <div
+                              key={idx}
+                              className="rounded-xl border border-white/10 bg-black/50 p-3"
+                            >
+                              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
+                                {phase.phase}
+                              </p>
+                              <p className="text-[13px] font-semibold text-zinc-50">
+                                {phase.title}
+                              </p>
+                              <p className="mt-1 text-[12px] text-zinc-300">
+                                {phase.description}
+                              </p>
+                              {phase.bullets?.length > 0 && (
+                                <ul className="mt-2 space-y-1 text-[12px] text-zinc-300">
+                                  {phase.bullets.map((b, bIdx) => (
+                                    <li key={bIdx}>• {b}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <p className="text-[11px] text-zinc-500">{blueprint.confidenceNote}</p>
 
                     {/* Next steps */}
                     <div className="mt-3 flex flex-col gap-3 border-t border-white/10 pt-4 text-[13px] text-zinc-200">
