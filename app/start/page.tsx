@@ -1,321 +1,287 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import React from "react";
+import { Exo_2 } from "next/font/google";
+import SiteChrome, { G } from "../components/SiteChrome";
+import {
+  ArrowRight,
+  CalendarDays,
+  Brain,
+  Workflow,
+  LineChart,
+  Clock,
+  ShieldCheck,
+  PhoneCall,
+  UserCheck,
+} from "lucide-react";
 
-/* --------------------------- Shared Page Shell -------------------------- */
+const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
-function PageShell({ children }: { children: React.ReactNode }) {
+// TODO: replace with your real Calendly / Cal.com link when ready
+const CALENDAR_EMBED_URL =
+  "https://calendly.com/your-workspace/ai-systems-blueprint-call"; // placeholder
+
+export default function CallPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="flex h-14 items-center justify-between border-b border-white/10 bg-black/80 px-5 backdrop-blur">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500">
-            <div className="h-3 w-3 rounded-md border-2 border-white/90 border-b-transparent" />
-          </div>
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">
-            LocalLink Digital
-          </span>
-        </Link>
-        <span className="rounded-full border border-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-zinc-400">
-          Project Start
-        </span>
-      </header>
-      {children}
-    </div>
-  );
-}
-
-/* ---------------------------- Main Page Logic ---------------------------- */
-
-type ProjectFormState = {
-  name: string;
-  email: string;
-  phone: string;
-  businessName: string;
-  websiteUrl: string;
-  businessAddress: string;
-  logoUrl: string;
-  projectNotes: string;
-};
-
-export default function StartProjectPage() {
-  const router = useRouter();
-
-  const [form, setForm] = useState<ProjectFormState>({
-    name: "",
-    email: "",
-    phone: "",
-    businessName: "",
-    websiteUrl: "",
-    businessAddress: "",
-    logoUrl: "",
-    projectNotes: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/start-project", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      if (!res.ok) {
-        console.error("Error submitting:", await res.text());
-        setLoading(false);
-        return;
-      }
-
-      // ✅ After project details are saved, send them to the plan selection page
-      router.push("/plans");
-    } catch (error) {
-      console.error("Error:", error);
-      setLoading(false);
-    }
-  };
-
-  const scrollToForm = () => {
-    const el = document.getElementById("project-form");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <PageShell>
-      <main className="mx-auto flex min-h-[calc(100vh-56px)] max-w-5xl flex-col px-5 py-10 lg:px-8">
-        {/* BIG HERO SECTION */}
-        <header className="mb-12 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-emerald-300/80">
-            Next step
-          </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            Let&apos;s Build Your Website
-          </h1>
-          <p className="mt-4 mx-auto max-w-xl text-lg text-zinc-300">
-            You&apos;ve seen your homepage concept. Now choose how you want to
-            start your project and we&apos;ll turn that direction into a
-            production-ready site.
-          </p>
-        </header>
-
-        {/* TWO GIANT CTA CARDS */}
-        <section className="mb-16 grid gap-6 md:grid-cols-2">
-          {/* BOOK A CALL */}
-          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition hover:border-emerald-400/40 hover:bg-white/10">
-            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 to-cyan-400/10 opacity-0 blur-xl transition group-hover:opacity-100" />
-            <div className="relative z-10 flex h-full flex-col">
-              <h2 className="text-2xl font-semibold text-white">📞 Book a Call</h2>
-              <p className="mt-3 text-sm text-zinc-300">
-                A focused 20–30 minute intro call to walk through your concept,
-                confirm scope, and lock in timelines.
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-                <li>• Review your concept live</li>
-                <li>• Get clear pricing & timeline</li>
-                <li>• Ask questions and explore options</li>
-              </ul>
-
-              <a
-                href="https://calendly.com/your-link/intro-call"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(250,250,250,0.35)] hover:bg-zinc-200"
-              >
-                Book an Intro Call
-              </a>
-              <p className="mt-2 text-[11px] text-zinc-400">
-                Best if you like to talk things through and move fast.
-              </p>
+    <SiteChrome>
+      {/* HERO */}
+      <section className="border-b border-white/10 bg-gradient-to-b from-black via-zinc-950 to-zinc-950">
+        <div className="max-w-5xl mx-auto px-4 pb-12 pt-16 sm:pt-20">
+          <div className="mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-emerald-200 mb-4">
+              <CalendarDays className="h-3 w-3" />
+              <span>Strategy Call</span>
             </div>
-          </div>
-
-          {/* START WITH FORM */}
-          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition hover:border-emerald-400/40 hover:bg-white/10">
-            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-400/10 to-cyan-400/10 opacity-0 blur-xl transition group-hover:opacity-100" />
-            <div className="relative z-10 flex h-full flex-col">
-              <h2 className="text-2xl font-semibold text-white">📝 Start With a Form</h2>
-              <p className="mt-3 text-sm text-zinc-300">
-                Prefer to skip the call for now? Share your project details and
-                we&apos;ll follow up with a clear outline and next steps.
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-                <li>• Ideal if you&apos;re busy</li>
-                <li>• Put everything in writing</li>
-                <li>• Get a structured project breakdown</li>
-              </ul>
-
-              <button
-                type="button"
-                onClick={scrollToForm}
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-emerald-400 px-5 py-3 text-sm font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.55)] hover:bg-emerald-300"
-              >
-                Fill Out Project Form
-              </button>
-              <p className="mt-2 text-[11px] text-zinc-400">
-                We&apos;ll review this alongside your concept and respond with a
-                detailed plan.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* PROJECT FORM */}
-        <section
-          id="project-form"
-          className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 lg:p-7"
-        >
-          <h2 className="text-sm font-semibold uppercase tracking-[0.25em] text-zinc-400">
-            Project details form
-          </h2>
-          <p className="mt-2 max-w-2xl text-sm text-zinc-300">
-            This helps us scope your build properly and line it up with the
-            homepage direction you just saw.
-          </p>
-
-          <form onSubmit={handleSubmit} className="mt-5 space-y-4">
-            {/* ROW 1 */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="text-xs font-medium text-zinc-300">
-                  Your name
-                </label>
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Jane Doe"
-                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-zinc-300">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="you@business.com"
-                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                />
-              </div>
-            </div>
-
-            {/* ROW 2 */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="text-xs font-medium text-zinc-300">
-                  Phone number
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  required
-                  placeholder="(555) 123-4567"
-                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-zinc-300">
-                  Business name
-                </label>
-                <input
-                  name="businessName"
-                  value={form.businessName}
-                  onChange={handleChange}
-                  required
-                  placeholder="Your Business Name"
-                  className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-                />
-              </div>
-            </div>
-
-            {/* WEBSITE */}
-            <div>
-              <label className="text-xs font-medium text-zinc-300">
-                Current website
-              </label>
-              <input
-                name="websiteUrl"
-                value={form.websiteUrl}
-                onChange={handleChange}
-                placeholder="https://yourwebsite.com"
-                className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-              />
-            </div>
-
-            {/* BUSINESS ADDRESS */}
-            <div>
-              <label className="text-xs font-medium text-zinc-300">
-                Business address
-              </label>
-              <input
-                name="businessAddress"
-                value={form.businessAddress}
-                onChange={handleChange}
-                placeholder="123 Main St, City, State"
-                className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-              />
-            </div>
-
-            {/* LOGO URL */}
-            <div>
-              <label className="text-xs font-medium text-zinc-300">
-                Logo URL
-              </label>
-              <input
-                name="logoUrl"
-                value={form.logoUrl}
-                onChange={handleChange}
-                placeholder="https://yourdomain.com/logo.png"
-                className="mt-1 h-10 w-full rounded-lg border border-white/15 bg-black/40 px-3 text-sm"
-              />
-            </div>
-
-            {/* NOTES */}
-            <div>
-              <label className="text-xs font-medium text-zinc-300">
-                Anything else we should know?
-              </label>
-              <textarea
-                name="projectNotes"
-                value={form.projectNotes}
-                onChange={handleChange}
-                rows={4}
-                placeholder="Special features, pages needed, AI tools you’re interested in, etc."
-                className="mt-1 w-full rounded-lg border border-white/15 bg-black/40 p-3 text-sm"
-              />
-            </div>
-
-            {/* SUBMIT */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-8 text-sm font-semibold text-black disabled:opacity-60"
+            <h1
+              className={`${heroFont.className} text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4`}
             >
-              {loading ? "Submitting..." : "Submit project details"}
-            </button>
-          </form>
-        </section>
-      </main>
-    </PageShell>
+              Finalize your <span className="text-emerald-400">AI employee build plan</span>.
+            </h1>
+            <p className="text-sm sm:text-base text-zinc-300 max-w-2xl mb-4">
+              This is a focused working session to turn your AI Systems Blueprint into a concrete
+              build plan: which AI employees we’ll create first, how they plug into your tools, and
+              what rollout over the next 60–90 days looks like.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-[minmax(0,1.4fr),minmax(0,1fr)] items-start">
+            <div className="rounded-3xl border border-white/10 bg-zinc-900/80 p-5 sm:p-6 shadow-2xl">
+              <div className="flex items-center gap-2 mb-3">
+                <Brain className="h-4 w-4 text-emerald-400" />
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                  On this call, we will…
+                </p>
+              </div>
+              <ul className="space-y-3 text-[13px] text-zinc-200">
+                <li className="flex gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  <span>
+                    <span className="font-medium">Refine your blueprint.</span> We’ll validate the
+                    AI employees you need most (lead intake, scheduling, quoting, follow-up, etc.)
+                    and prioritize based on impact.
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  <span>
+                    <span className="font-medium">Map everything to your stack.</span> Phone
+                    system, CRM, calendar, invoicing, website forms — we’ll figure out where each AI
+                    employee connects so your ops stay lean, not messy.
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  <span>
+                    <span className="font-medium">Set expectations and milestones.</span> Scope,
+                    timeline, and what “success” looks like in the first 60–90 days of partnership.
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  <span>
+                    <span className="font-medium">Walk through the $2k/mo base partnership.</span>{" "}
+                    We’ll talk through how we build, maintain, and iterate on your AI employees over
+                    time — and when it makes sense to add more.
+                  </span>
+                </li>
+              </ul>
+              <p className="mt-4 text-[11px] text-zinc-400">
+                Think of this less like a “sales call” and more like a systems session. Whether we
+                work together or not, you’ll walk away with clarity on how AI can actually carry
+                weight in your business.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-zinc-900/80 p-5 sm:p-6 shadow-2xl">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex flex-col gap-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                    Who this is for
+                  </p>
+                  <G>
+                    <span className="text-[13px] text-zinc-100">
+                      Lean teams that want AI to pull real weight.
+                    </span>
+                  </G>
+                </div>
+                <div className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-300">
+                  <Clock className="h-3 w-3" />
+                  <span>~30 minutes</span>
+                </div>
+              </div>
+              <ul className="space-y-2 text-[12px] text-zinc-300 mb-3">
+                <li className="flex gap-2">
+                  <UserCheck className="h-3.5 w-3.5 text-emerald-400 mt-[3px]" />
+                  <span>Owners who are tired of carrying every conversation and task themselves.</span>
+                </li>
+                <li className="flex gap-2">
+                  <UserCheck className="h-3.5 w-3.5 text-emerald-400 mt-[3px]" />
+                  <span>Teams missing calls, reacting late, or losing leads in the chaos.</span>
+                </li>
+                <li className="flex gap-2">
+                  <UserCheck className="h-3.5 w-3.5 text-emerald-400 mt-[3px]" />
+                  <span>
+                    Businesses ready to invest from ~$2k/month for a real AI ops partner (not a
+                    toy).
+                  </span>
+                </li>
+              </ul>
+              <div className="mt-3 rounded-2xl border border-white/10 bg-zinc-950/70 px-4 py-3 text-[11px] text-zinc-400">
+                <p className="font-medium text-zinc-200 mb-1">This call is probably not a fit if:</p>
+                <ul className="space-y-1 list-disc list-inside">
+                  <li>You’re just curious about AI but not ready to implement.</li>
+                  <li>You’re looking for a one-off chatbot instead of ongoing systems.</li>
+                  <li>You’re expecting “set and forget” magic without process work.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CALENDAR + PROCESS */}
+      <section className="bg-zinc-950">
+        <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16 space-y-10">
+          {/* Calendar */}
+          <div className="rounded-3xl border border-white/10 bg-zinc-900/80 p-5 sm:p-6 shadow-2xl">
+            <div className="flex items-center gap-2 mb-3">
+              <PhoneCall className="h-4 w-4 text-emerald-400" />
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                Pick a time that works
+              </p>
+            </div>
+            <p className="text-[13px] text-zinc-300 mb-4 max-w-2xl">
+              Choose a 30-minute slot that fits your schedule. You’ll get a confirmation email with
+              a short prep checklist so we can make the most of the time.
+            </p>
+            <div className="mt-3 rounded-2xl border border-white/10 bg-zinc-950/80 p-3 text-[11px] text-zinc-400 mb-4">
+              <p>
+                <span className="font-medium text-zinc-200">Heads up:</span> If you already
+                generated your AI Systems Blueprint, we’ll have that pulled up on our side. If not,
+                we’ll quickly map out the same logic live on the call.
+              </p>
+            </div>
+
+            {/* Calendar embed placeholder */}
+            <div className="mt-4 rounded-2xl border border-white/10 bg-black/40 overflow-hidden">
+              {/* Replace this iframe src with your actual scheduling link when ready */}
+              <div className="aspect-video w-full">
+                <iframe
+                  src={CALENDAR_EMBED_URL}
+                  title="Schedule AI Systems Strategy Call"
+                  className="h-full w-full border-0"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <p className="mt-3 text-[11px] text-zinc-500">
+              If the calendar doesn’t load for any reason, you can reach out directly and we’ll lock
+              in a time manually.
+            </p>
+          </div>
+
+          {/* Simple 3-step timeline */}
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-3xl border border-white/10 bg-zinc-900/80 p-4 sm:p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400/15 text-[11px] text-emerald-300">
+                  1
+                </span>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                  The call
+                </p>
+              </div>
+              <p className="text-[13px] text-zinc-200 mb-1">
+                Clarify your bottlenecks and decide which AI employees to build first.
+              </p>
+              <p className="text-[11px] text-zinc-400">
+                We’ll keep this practical and grounded in how your business already runs today.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-zinc-900/80 p-4 sm:p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400/15 text-[11px] text-emerald-300">
+                  2
+                </span>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                  Build plan
+                </p>
+              </div>
+              <p className="text-[13px] text-zinc-200 mb-1">
+                We lay out a 60–90 day build roadmap tied to your tools, team, and budget.
+              </p>
+              <p className="text-[11px] text-zinc-400">
+                You’ll know exactly what we’re building, how we’ll measure it, and what we need from
+                you.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-zinc-900/80 p-4 sm:p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400/15 text-[11px] text-emerald-300">
+                  3
+                </span>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                  Partnership
+                </p>
+              </div>
+              <p className="text-[13px] text-zinc-200 mb-1">
+                If it’s a fit, we kick off your $2k/mo base partnership and start building.
+              </p>
+              <p className="text-[11px] text-zinc-400">
+                Our goal is simple: get AI employees handling real workload so your humans can do
+                higher-value work.
+              </p>
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className="rounded-3xl border border-white/10 bg-zinc-900/80 p-5 sm:p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <ShieldCheck className="h-4 w-4 text-emerald-400" />
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                Quick questions you might have
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 text-[13px] text-zinc-200">
+              <div>
+                <p className="font-semibold mb-1">Is this just a sales pitch?</p>
+                <p className="text-[12px] text-zinc-400">
+                  No. We treat this as a systems call first. We’ll talk about working together if it
+                 ’s clearly a fit, but the first job is giving you a clear picture of what AI
+                  employees can realistically handle in your world.
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold mb-1">Do I need technical knowledge?</p>
+                <p className="text-[12px] text-zinc-400">
+                  Not at all. If you can walk us through how your business works today, we’ll handle
+                  the architecture and implementation details. You don’t have to know the tools
+                  ahead of time.
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold mb-1">What should I prepare?</p>
+                <p className="text-[12px] text-zinc-400">
+                  A rough idea of your current call/lead volume, the main tools you use (phone,
+                  CRM, calendar, etc.), and the 2–3 parts of the business that feel heaviest or most
+                  chaotic.
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold mb-1">What if I’m not sure about the $2k/mo yet?</p>
+                <p className="text-[12px] text-zinc-400">
+                  That’s okay. The call will make it obvious whether offloading real workload to AI
+                  employees is worth that investment. If it’s not the right timing, you’ll still
+                  leave with a sharper plan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </SiteChrome>
   );
 }
