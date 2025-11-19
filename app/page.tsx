@@ -24,7 +24,7 @@ export default function HomePage() {
       <section className="relative border-b border-slate-200 bg-black text-slate-900">
         {/* Cinematic background video / visual */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Replace the src below with a real mp4/video URL when you're ready */}
+          {/* Replace src with your actual mp4 when ready */}
           <video
             className="h-full w-full object-cover"
             autoPlay
@@ -35,12 +35,12 @@ export default function HomePage() {
           >
             <source src="/hero-stars.mp4" type="video/mp4" />
           </video>
-          {/* Gradient overlay to keep text readable */}
+          {/* Gradient overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-950/90 to-black/95" />
         </div>
 
         <div className="relative mx-auto flex w-full max-w-6xl flex-col px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-14 lg:pt-14">
-          <div className="flex min-h-[78vh] flex-col justify-center">
+          <div className="flex min-height-[78vh] min-h-[78vh] flex-col justify-center">
             {/* Top label */}
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-200">
               LOCAL AI SYSTEMS PARTNER
@@ -121,7 +121,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PAIN POINTS – LIGHT SECTION (reverted) */}
+      {/* PAIN POINTS – LIGHT SECTION */}
       <section className="bg-slate-50">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <h2
@@ -168,7 +168,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* RESULTS / HOW WE HELP – LIGHT SECTION (reverted) */}
+      {/* RESULTS / HOW WE HELP – LIGHT SECTION */}
       <section className="bg-white border-t border-slate-200">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <div className="mb-8 max-w-3xl">
@@ -219,7 +219,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA / 3-STEP – LIGHT SECTION (reverted) */}
+      {/* CTA / 3-STEP – LIGHT SECTION */}
       <section className="bg-slate-50 border-t border-slate-200">
         <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
           <div className="mx-auto max-w-3xl text-center mb-8">
