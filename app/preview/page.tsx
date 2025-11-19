@@ -115,17 +115,20 @@ export default function PreviewPage() {
       {/* HERO */}
       <section className="border-b border-white/10 bg-gradient-to-b from-black to-slate-950">
         <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 text-center">
-          <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">AI SYSTEMS BLUEPRINT</p>
+          <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">
+            SYSTEMS BLUEPRINT PREVIEW
+          </p>
           <h1
             className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight text-zinc-50`}
           >
-            A directional <G>AI employee</G> plan for your business—before you commit.
+            A clear, confident blueprint for how your operation can run—built before you ever hire
+            us.
           </h1>
           <p className="mt-3 mx-auto max-w-3xl text-zinc-300">
-            Share how your operation actually runs today. We&apos;ll use AI to draft a proposed
-            systems blueprint: a small team of AI employees, the workflows they&apos;d own, and how
-            they&apos;d plug into the tools you already use. It&apos;s a first-pass direction, not a
-            final scope or a promise.
+            Tell us how your business works today, and we’ll map out a proposed direction for a
+            tighter, calmer, more responsive operation. You’ll see the roles we’d build, the
+            workflows we’d streamline, and the first steps we’d take to strengthen the backbone of
+            your business.
           </p>
         </div>
       </section>
@@ -353,7 +356,10 @@ export default function PreviewPage() {
                     <ul className="space-y-2 text-[13px] text-zinc-300">
                       <li>• 2–3 AI employee roles we&apos;d start with and what they&apos;d own.</li>
                       <li>• How they plug into the tools and workflows you already use.</li>
-                      <li>• The key operational benefits we&apos;re aiming for (clarity, speed, less chaos).</li>
+                      <li>
+                        • The key operational benefits we&apos;re aiming for (clarity, speed, less
+                        chaos).
+                      </li>
                       <li>• A first 30-day rollout broken into clear, concrete phases.</li>
                     </ul>
                     <p className="text-[12px] text-zinc-500">
