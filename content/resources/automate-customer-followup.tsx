@@ -1,64 +1,97 @@
-// content/resources/automate-customer-followup.tsx
-import type { ArticleMeta } from "./index";
-
-export const meta: ArticleMeta = {
+export const meta = {
   slug: "automate-customer-followup",
   title: "How to Automate Customer Follow-Up for Service Businesses",
   description:
-    "Most service businesses lose thousands per month by not following up on quotes. Here's how to automate it with systems and AI.",
+    "Most service businesses lose thousands per month by not following up on estimates. Here’s how to automate follow-up using simple systems and AI.",
   date: "2025-12-01",
   readingTime: "6 min read",
-  tags: ["follow-up", "CRM", "automation", "retention"],
+  tags: ["follow-up", "service business", "CRM", "automation"],
 };
 
-export default function AutomateFollowupArticle() {
+export default function Article() {
   return (
-    <article className="prose prose-invert max-w-3xl">
+    <div className="prose prose-invert max-w-none">
       <p>
-        Every quote you send is a pile of money sitting on the table — yet most
-        service businesses never follow up consistently.
+        When a customer gets an estimate but never hears back, they assume:
+        <strong> “These people don’t want my business.”</strong>
       </p>
 
-      <h2>Why follow-up is the lowest-hanging fruit</h2>
-
       <p>
-        If you close even <strong>10% more</strong> of the quotes you already
-        send, you grow revenue without spending more on ads or leads.
+        You didn’t lose that job because your price was too high — you lost it
+        because the other company followed up and you didn’t.
       </p>
 
-      <h2>The structure of an automated follow-up system</h2>
+      <h2>The Hidden Cost of Poor Follow-Up</h2>
+
+      <p>
+        Most businesses leave <strong>30–50% of potential revenue</strong> on
+        the table due to:
+      </p>
 
       <ul>
-        <li>All estimates tracked in one system (CRM or even a spreadsheet)</li>
-        <li>Clear timing rules: 1 day, 3 days, 7 days, etc.</li>
-        <li>Personalized texts or emails</li>
-        <li>A link to book or request quote updates</li>
+        <li>Quotes getting lost in inboxes</li>
+        <li>Owners forgetting to send reminders</li>
+        <li>Busy schedules causing delays</li>
+        <li>Lack of a simple, consistent follow-up process</li>
       </ul>
 
-      <h2>Adding AI to the process</h2>
+      <p>Fixing this creates an immediate revenue boost — without new leads.</p>
 
-      <p>An AI agent can:</p>
+      <h2>The 4-Step Automated Follow-Up Framework</h2>
+
+      <h3>1. Centralize All Estimates</h3>
+      <p>
+        Whether it’s a CRM or a spreadsheet, everything must be in <em>one
+        place</em>.
+      </p>
+
+      <h3>2. Define Timing Rules</h3>
+      <p>Most high-performing service businesses follow this cadence:</p>
+
       <ul>
-        <li>Detect high-interest customers</li>
-        <li>Send tailored follow-ups</li>
+        <li>Day 1 — “Thanks for the opportunity” message</li>
+        <li>Day 3 — “Any questions?” message</li>
+        <li>Day 7 — “Still interested?” message</li>
+        <li>Day 14 — “Final reminder”</li>
+      </ul>
+
+      <h3>3. Use Friendly, Human Messaging</h3>
+      <p>Don’t sound robotic. Keep messages simple, helpful, and personal.</p>
+
+      <h3>4. Add AI to Handle Repetitive Work</h3>
+      <p>AI can:</p>
+
+      <ul>
+        <li>Personalize each follow-up</li>
+        <li>Detect high-interest leads</li>
         <li>Answer common questions</li>
-        <li>Push hot leads to your team</li>
+        <li>Nudge customers toward booking</li>
       </ul>
 
-      <h2>Why businesses fail to automate this</h2>
+      <h2>Why Most Businesses Fail at Follow-Up</h2>
 
       <p>
-        Quotes get lost in inboxes, paper notes, and the owner’s brain. No
-        system = no follow-up.
+        Owners aren’t lazy — they’re overwhelmed. When the field gets busy,
+        follow-up is the first thing to die.
       </p>
-
-      <h2>Where Local Link Studio fits</h2>
 
       <p>
-        We build follow-up systems that plug directly into your tools — or help
-        you choose better ones — so you capture value from the leads you already
-        have.
+        This is why automation is powerful: it ensures{" "}
+        <strong>every quote gets touched multiple times</strong>.
       </p>
-    </article>
+
+      <h2>Where Local Link Studio Fits In</h2>
+
+      <p>
+        We build automated follow-up workflows tailored to your offers, pricing,
+        and sales process — plus AI tools that help close more jobs without you
+        lifting a finger.
+      </p>
+
+      <p>
+        It’s the easiest way to turn more quotes into cash — consistently and
+        automatically.
+      </p>
+    </div>
   );
 }

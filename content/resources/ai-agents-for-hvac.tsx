@@ -1,85 +1,120 @@
-// content/resources/ai-agents-for-hvac.tsx
-
-type ArticleMeta = {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  readingTime: string;
-  tags: string[];
-};
-
-export const meta: ArticleMeta = {
+export const meta = {
   slug: "ai-agents-for-hvac",
   title: "How AI Agents Help HVAC Companies Book More Jobs Automatically",
   description:
-    "Learn how AI agents answer calls, qualify leads, and book jobs automatically for HVAC companies without adding extra office staff.",
+    "How HVAC companies can use AI agents to answer calls, qualify leads, and book appointments automatically — without hiring more office staff.",
   date: "2025-12-01",
   readingTime: "7 min read",
   tags: ["AI agents", "HVAC", "automation", "operations"],
 };
 
-export default function AiAgentsForHvacArticle() {
+export default function Article() {
   return (
-    <article className="prose prose-invert max-w-3xl">
+    <div className="prose prose-invert max-w-none">
       <p>
-        Most HVAC companies don&apos;t have a lead problem. They have a{" "}
-        <strong>systems problem</strong>.
+        Most HVAC companies don’t have a <strong>lead problem</strong>. They
+        have a <strong>systems problem</strong>.
       </p>
 
       <p>
-        Calls come in at busy times, messages pile up, and estimates slip
-        through the cracks. The owner is stuck jumping between job sites and
-        the office, trying to keep up.
+        Calls come in during busy hours, techs are out in the field, the office
+        is overwhelmed, and suddenly customers are waiting hours — or days — for
+        a response.
       </p>
 
-      <h2>The real bottleneck: your office, not your vans</h2>
+      <p>
+        Every missed call, delayed text, or slow estimate follow-up represents{" "}
+        <strong>real money lost</strong>. And once that customer moves on to the
+        next company, they’re never coming back.
+      </p>
+
+      <h2>The Real Bottleneck Isn't the Field — It's the Office</h2>
 
       <p>
-        Every time a call is missed, a text is ignored, or a quote isn&apos;t
-        followed up on, you&apos;re losing revenue. That&apos;s where AI agents
-        come in.
+        You can hire more techs, buy more vans, or run more ads… but none of it
+        matters if your <strong>front-end systems</strong> fall apart when you
+        get busy.
+      </p>
+
+      <p>
+        That’s where AI agents become extremely valuable — not as a gimmick, but
+        as a practical way to eliminate bottlenecks.
+      </p>
+
+      <h2>What an AI Agent Can Do for HVAC Companies</h2>
+
+      <ul>
+        <li>Answer inbound calls instantly (24/7)</li>
+        <li>Respond to texts the moment they arrive</li>
+        <li>Qualify leads using your real questions</li>
+        <li>Route or book jobs automatically</li>
+        <li>Send confirmations and reminders</li>
+        <li>Follow up on old quotes</li>
+        <li>Handle repeat questions instantly</li>
+      </ul>
+
+      <p>
+        Think of it like having a <strong>virtual office staff member</strong>{" "}
+        who never takes breaks, gets tired, or misses calls.
+      </p>
+
+      <h2>What This Looks Like in Real Life</h2>
+
+      <p>Imagine a customer calling during peak summer rush:</p>
+
+      <ul>
+        <li>They explain the issue</li>
+        <li>The agent detects urgency modifiers (no AC, elderly, kids, etc.)</li>
+        <li>The system checks your availability</li>
+        <li>Books a slot directly into your calendar</li>
+        <li>Confirms the appointment automatically</li>
+      </ul>
+
+      <p>
+        Instead of the customer calling 5–6 companies until someone answers,
+        <strong>you answer instantly every time</strong>.
+      </p>
+
+      <h2>The ROI Is Obvious</h2>
+
+      <p>
+        If your average ticket is around <strong>$800–$1,500</strong>, then even
+        saving:
       </p>
 
       <ul>
-        <li>Answer inbound calls 24/7</li>
-        <li>Qualify leads with the right questions</li>
-        <li>Book appointments into your calendar</li>
-        <li>Send confirmations &amp; reminders</li>
-        <li>Follow up on old estimates</li>
+        <li>5 missed calls = $4,000–$7,500/mo in recovered revenue</li>
+        <li>10 missed calls = $8,000–$15,000/mo</li>
       </ul>
 
-      <h2>What an AI agent looks like in practice</h2>
-
-      <p>Imagine every call being answered instantly, even during summer rush:</p>
-      <ul>
-        <li>The caller describes their issue</li>
-        <li>The agent determines urgency</li>
-        <li>Checks your availability</li>
-        <li>Books the job</li>
-      </ul>
-
-      <h2>AI doesn&apos;t replace people — it removes chaos</h2>
-
       <p>
-        Instead of hiring another full-time admin, an AI agent handles the
-        repetitive interruptions while your team focuses on higher-level work.
+        AI agents don’t just replace admin work — they{" "}
+        <strong>recover jobs you’re already earning</strong>.
       </p>
 
-      <h2>The ROI</h2>
+      <h2>AI Doesn’t Replace People — It Removes Chaos</h2>
 
       <p>
-        If your average ticket is $800 and you save even{" "}
-        <strong>5–10 lost jobs per month</strong>, that&apos;s $4,000–$8,000 in
-        recovered revenue.
+        Your team can focus on actual customer service instead of juggling
+        constant interruptions.
       </p>
-
-      <h2>Where Local Link Studio fits in</h2>
 
       <p>
-        We design, build, and maintain AI agents tuned to your processes,
-        offers, and market. No generic bots — real business systems.
+        The result is fewer mistakes, faster response times, and a business that
+        runs smoother every month.
       </p>
-    </article>
+
+      <h2>Where Local Link Studio Fits In</h2>
+
+      <p>
+        We build HVAC-specific AI systems that plug into your website, phone
+        line, and scheduling tools — fully custom to your business.
+      </p>
+
+      <p>
+        If you're ready to stop losing jobs to slow response times, this is the
+        fastest and most affordable way to fix the bottleneck.
+      </p>
+    </div>
   );
 }

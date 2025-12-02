@@ -1,35 +1,59 @@
-// content/resources/index.ts
-import AiAgentsForHvacArticle, {
-  meta as aiAgentsForHvacMeta,
-} from "./ai-agents-for-hvac";
+// =======================================================
+// TYPES
+// =======================================================
+import type { JSX } from "react";
 
-import AutomateFollowupArticle, {
-  meta as automateFollowupMeta,
-} from "./automate-customer-followup";
-
-import ScaleHvacArticle, {
-  meta as scaleHvacMeta,
-} from "./how-to-scale-your-hvac-company";
-
-export type ArticleMeta = {
+export type Article = {
   slug: string;
   title: string;
   description: string;
-  date: string; // ISO string
+  date: string;
   readingTime: string;
   tags: string[];
+  component: () => JSX.Element;
 };
 
-export type Article = ArticleMeta & {
-  component: React.ComponentType;
-};
+// =======================================================
+// IMPORT YOUR ARTICLES
+// =======================================================
+import AiAgentsForHvac, {
+  meta as aiAgentsMeta,
+} from "./ai-agents-for-hvac";
+
+import AutomateCustomerFollowup, {
+  meta as automateFollowupMeta,
+} from "./automate-customer-followup";
+
+import ScaleHvacCompany, {
+  meta as scaleHvacMeta,
+} from "./how-to-scale-your-hvac-company";
+
+console.log("ARTICLE IMPORTS:", {
+  AiAgentsForHvac,
+  aiAgentsMeta,
+  AutomateCustomerFollowup,
+  automateFollowupMeta,
+  ScaleHvacCompany,
+  scaleHvacMeta,
+});
+
+// =======================================================
+// EXPORT ARTICLE LIST
+// =======================================================
 
 export const articles: Article[] = [
-  { ...aiAgentsForHvacMeta, component: AiAgentsForHvacArticle },
-  { ...automateFollowupMeta, component: AutomateFollowupArticle },
-  { ...scaleHvacMeta, component: ScaleHvacArticle },
+  { ...aiAgentsMeta, component: AiAgentsForHvac },
+  { ...automateFollowupMeta, component: AutomateCustomerFollowup },
+  { ...scaleHvacMeta, component: ScaleHvacCompany },
 ];
 
-export function getArticleBySlug(slug: string): Article | undefined {
-  return articles.find((article) => article.slug === slug);
+// =======================================================
+// GET ARTICLE BY SLUG
+// =======================================================
+export function getArticleBySlug(slug?: string) {
+  if (!slug) return undefined;
+
+  return articles.find(
+    (article) => article.slug.toLowerCase() === slug.toLowerCase()
+  );
 }
