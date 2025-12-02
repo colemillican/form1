@@ -22,21 +22,18 @@ export default function ResourcesPage() {
       {/* HERO */}
       <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
         <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8">
-          <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">
-            RESOURCES
-          </p>
+          <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">RESOURCES</p>
 
           <h1
             className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight`}
           >
-            Practical insights for{" "}
-            <G>modern small businesses</G>.
+            Practical insights for <G>modern small businesses</G>.
           </h1>
 
           <p className="mt-3 max-w-3xl text-sm sm:text-[15px] leading-relaxed text-zinc-300">
-            Articles and playbooks for HVAC and local service owners who want
-            to stay competitive with better systems, cleaner websites, and
-            practical AI—not more noise or complexity.
+            Articles and playbooks for HVAC and local service owners who want to stay
+            competitive with better systems, cleaner websites, and practical AI—not
+            more noise or complexity.
           </p>
         </div>
       </section>
@@ -56,9 +53,9 @@ export default function ResourcesPage() {
               </h2>
             </div>
             <p className="max-w-md text-sm text-zinc-300">
-              Every article is written with owners in mind—no fluff, no jargon.
-              Just clear explanations of what to fix, what to automate, and
-              what actually moves the needle.
+              Every article is written with owners in mind—no fluff, no jargon. Just
+              clear explanations of what to fix, what to automate, and what actually
+              moves the needle.
             </p>
           </div>
 
