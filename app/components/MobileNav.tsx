@@ -122,6 +122,10 @@ export default function MobileNav() {
                 onClick={() => setOpen(false)}
                 className="opacity-90 hover:opacity-100"
               >
+                <Link href="/resources" onClick={() => setOpen(false)}>
+  Resources
+</Link>
+
                 Contact
               </Link>
             </nav>
