@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
-import SiteChrome, { G } from "../../components/SiteChrome";
+import SiteChrome from "../../components/SiteChrome";
 import {
   articles,
   getArticleBySlug,
@@ -53,35 +53,9 @@ export default function ArticlePage({ params }: { params: Params }) {
   const ArticleComponent = article!.component;
   const publishedDate = new Date(article!.date);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article!.title,
-    description: article!.description,
-    datePublished: article!.date,
-    author: {
-      "@type": "Organization",
-      name: "Local Link Studio",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Local Link Studio",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://www.locallinkstudio.com/resources/${article!.slug}`,
-    },
-  };
-
   return (
     <SiteChrome>
-      {/* JSON-LD SEO data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      {/* HERO / ARTICLE HEADER */}
+      {/* HEADER */}
       <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
         <div className="mx-auto max-w-screen-2xl px-6 py-10 sm:px-8">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-emerald-300/80">
@@ -127,7 +101,7 @@ export default function ArticlePage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* ARTICLE BODY */}
+      {/* BODY */}
       <section className="bg-black">
         <div className="mx-auto max-w-screen-2xl px-6 py-10 sm:px-8">
           <div className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-zinc-950/80 p-6 sm:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.65)]">
