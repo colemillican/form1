@@ -33,4 +33,3 @@ export const articles: Article[] = [
 export function getArticleBySlug(slug: string): Article | undefined {
   return articles.find((article) => article.slug === slug);
 }
-
