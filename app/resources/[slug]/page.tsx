@@ -11,13 +11,11 @@ const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" })
 
 type Params = { slug: string };
 
-export function generateStaticParams() {
-  return articles.map((article) => ({
-    slug: article.slug,
-  }));
-}
+// ❌ No generateStaticParams here – let Next handle dynamic routing
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export async function generateMetadata(
+  { params }: { params: Params }
+): Promise<Metadata> {
   const article = getArticleBySlug(params.slug);
 
   if (!article) {
