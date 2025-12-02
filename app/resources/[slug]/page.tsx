@@ -4,18 +4,24 @@ import { articles } from "../../../content/resources";
 
 const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
-type Params = { slug: string };
+type PageParams = {
+  slug: string;
+};
 
-export default function ArticlePage({ params }: { params: Params }) {
+type PageProps = {
+  params: PageParams;
+};
+
+export default function ArticlePage({ params }: PageProps) {
   const rawSlug = params.slug;
   const normalizedSlug = decodeURIComponent(rawSlug).toLowerCase();
 
-  // Find article by slug (case-insensitive, safer)
+  // Find article by slug (case-insensitive, more forgiving)
   const article = articles.find(
     (a) => a.slug.toLowerCase() === normalizedSlug
   );
 
-  // If we somehow don't find it, show a debug view instead of 404
+  // If no article found, show a helpful debug screen instead of a 404
   if (!article) {
     return (
       <SiteChrome>
@@ -26,25 +32,32 @@ export default function ArticlePage({ params }: { params: Params }) {
             >
               Article not found
             </h1>
+
             <p className="mt-4 text-sm text-zinc-300">
-              The URL slug <code className="rounded bg-zinc-900 px-1 py-0.5">{rawSlug}</code>{" "}
+              The URL slug{" "}
+              <code className="rounded bg-zinc-900 px-1 py-0.5">
+                {rawSlug === "" ? "(empty string)" : rawSlug}
+              </code>{" "}
               didn&apos;t match any known article.
             </p>
 
-            <p className="mt-4 text-sm text-zinc-300">
+            <p className="mt-6 text-sm text-zinc-300">
               Known slugs (from <code>content/resources/index.ts</code>):
             </p>
             <ul className="mt-2 list-disc pl-6 text-sm text-zinc-200">
               {articles.map((a) => (
                 <li key={a.slug}>
-                  <code className="rounded bg-zinc-900 px-1 py-0.5">{a.slug}</code>
+                  <code className="rounded bg-zinc-900 px-1 py-0.5">
+                    {a.slug}
+                  </code>
                 </li>
               ))}
             </ul>
 
             <p className="mt-6 text-sm text-zinc-300">
-              Make sure the slug in your article&apos;s <code>meta.slug</code> matches the URL
-              after <code>/resources/</code>, and that the Resources page links use{" "}
+              Make sure the slug in your article&apos;s{" "}
+              <code>meta.slug</code> matches the part of the URL after{" "}
+              <code>/resources/</code>, and that the Resources page links use{" "}
               <code>{`/resources/${"{article.slug}"}`}</code>.
             </p>
 
@@ -63,6 +76,7 @@ export default function ArticlePage({ params }: { params: Params }) {
     );
   }
 
+  // If we DID find the article, render it nicely
   const ArticleComponent = article.component;
   const publishedDate = new Date(article.date);
 
