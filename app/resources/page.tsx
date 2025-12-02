@@ -1,4 +1,4 @@
-vimport Link from "next/link";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
 import SiteChrome, { G } from "../components/SiteChrome";
