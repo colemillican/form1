@@ -31,6 +31,8 @@ const NAV_ITEMS = [
   { href: "/pricing", label: "Pricing" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
+  { href: "/resources", label: "Resources" },
+
 ];
 
 export default function SiteChrome({ children }: SiteChromeProps) {
