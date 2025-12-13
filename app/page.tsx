@@ -1,6 +1,7 @@
 // app/page.tsx
 
 import Link from "next/link";
+import SiteChrome from "./components/SiteChrome";
 
 export default function Home() {
   return (
