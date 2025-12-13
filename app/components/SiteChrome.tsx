@@ -1,138 +1,90 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import MobileNav from "./Mobile.Nav";
 
-/**
- * Gradient text helper used in your hero:
- * <G>Stories that connect.</G>
- */
-export function G({ children }: { children: React.ReactNode }) {
+type NavItem = { label: string; href: string };
+
+export default function SiteChrome({
+  items = [
+    { label: "Services", href: "/services" },
+    { label: "Security", href: "/security" },
+    { label: "FAQ", href: "/faq" },
+    { label: "About", href: "/about" },
+  ],
+  ctaHref = "/contact",
+  ctaLabel = "Request assessment",
+  sticky = true,
+}: {
+  items?: NavItem[];
+  ctaHref?: string;
+  ctaLabel?: string;
+  sticky?: boolean;
+}) {
   return (
-    <span className="bg-gradient-to-r from-emerald-300 via-teal-300 to-sky-400 bg-clip-text text-transparent">
-      {children}
-    </span>
-  );
-}
+    <header
+      className={[
+        sticky ? "sticky top-0 z-50" : "",
+        "border-b border-slate-200/70 bg-white/70 backdrop-blur",
+      ].join(" ")}
+    >
+      <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+        {/* Mobile */}
+        <MobileNav
+          items={[
+            { label: "Home", href: "/" },
+            ...items,
+            { label: "Contact", href: "/contact" },
+          ]}
+          ctaHref={ctaHref}
+          ctaLabel={ctaLabel}
+        />
 
-type SiteChromeProps = {
-  children: React.ReactNode;
-};
-
-/**
- * FINAL NAVIGATION ROUTES (corrected)
- */
-const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },      // ✅ CHANGED "work" → "about"
-  { href: "/process", label: "Process" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
-  { href: "/resources", label: "Resources" },
-
-];
-
-export default function SiteChrome({ children }: SiteChromeProps) {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-black text-white">
-      {/* HEADER */}
-      <header
-        className={`fixed inset-x-0 top-0 z-30 transition-all duration-300 ${
-          scrolled || open
-            ? "bg-black/60 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.45)]"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4 sm:px-6">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="inline-flex items-center"
-            aria-label="LocalLink Digital home"
-          >
-            <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500 shadow-md">
-              <div className="h-4 w-4 rounded-md border-2 border-white/90 border-b-transparent" />
-            </div>
+        {/* Desktop */}
+        <div className="hidden items-center justify-between md:flex">
+          <Link href="/" className="flex items-center gap-2">
+            <LogoMark />
+            <LogoWordmark />
           </Link>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden items-center gap-8 text-sm md:flex">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-zinc-200 transition hover:text-white"
-              >
+          <nav className="flex items-center gap-8 text-sm text-slate-700">
+            {items.map((item) => (
+              <Link key={item.href} href={item.href} className="hover:text-slate-950">
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/preview"
-              className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-black shadow-sm transition hover:bg-zinc-100"
-            >
-              Start a project
-            </Link>
           </nav>
 
-          {/* MOBILE MENU BUTTON */}
-          <button
-            type="button"
-            aria-label="Toggle navigation"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/25 p-2 text-white md:hidden"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-          </button>
-        </div>
-
-        {/* MOBILE MENU PANEL */}
-        <div
-          className={`md:hidden transition-[max-height,opacity] duration-250 ease-out ${
-            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden`}
-        >
-          <div className="space-y-1 border-t border-white/10 bg-black/90 px-4 pb-4 pt-3 text-sm">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block rounded-lg px-2 py-2 text-zinc-200 hover:bg-white/5 hover:text-white"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="flex items-center gap-3">
             <Link
-              href="/contact"
-              className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-white px-4 py-2 text-xs font-semibold text-black hover:bg-zinc-100"
-              onClick={() => setOpen(false)}
+              href={ctaHref}
+              className="rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-[0_10px_24px_rgba(2,6,23,0.22)] hover:bg-slate-900"
             >
-              Start a project
+              {ctaLabel}
             </Link>
           </div>
         </div>
-      </header>
+      </div>
+    </header>
+  );
+}
 
-      {/* MAIN CONTENT */}
-      <main className="pt-14">{children}</main>
+function LogoMark() {
+  return (
+    <div className="relative flex h-9 w-9 items-center justify-center rounded-md border border-slate-300 bg-white shadow-sm">
+      <div className="absolute inset-0 rounded-md bg-gradient-to-br from-slate-50 via-white to-amber-50" />
+      <div className="relative h-3 w-3 border-l-2 border-b-2 border-slate-800" />
     </div>
   );
 }
 
-
-
+function LogoWordmark() {
+  return (
+    <div className="leading-tight">
+      <div className="text-xs font-semibold tracking-[0.18em] text-slate-700">
+        IRONGATE
+      </div>
+      <div className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
+        Systems
+      </div>
+    </div>
+  );
+}
