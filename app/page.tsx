@@ -32,50 +32,17 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Top bar */}
-      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-white shadow-sm">
-              <div className="absolute inset-0 rounded-md bg-gradient-to-br from-slate-50 via-white to-amber-50" />
-              <div className="relative h-3 w-3 border-l-2 border-b-2 border-slate-800" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-xs font-semibold tracking-[0.18em] text-slate-700">
-                IRONGATE
-              </div>
-              <div className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
-                Systems
-              </div>
-            </div>
-          </div>
+     import SiteChrome from "../components/SiteChrome"; // adjust path if needed
 
-          <nav className="hidden items-center gap-8 text-sm text-slate-700 md:flex">
-            <a href="#how-it-works" className="hover:text-slate-950">
-              How it works
-            </a>
-            <a href="#who-we-serve" className="hover:text-slate-950">
-              Who we serve
-            </a>
-            <a href="#deployment" className="hover:text-slate-950">
-              Deployment
-            </a>
-            <Link href="/about" className="hover:text-slate-950">
-              About
-            </Link>
-          </nav>
+export default function Page() {
+  return (
+    <main>
+      <SiteChrome />
+      {/* page content */}
+    </main>
+  );
+}
 
-          <div className="flex items-center gap-3">
-            <Link
-              href="#contact"
-              className="hidden rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-[0_10px_24px_rgba(2,6,23,0.25)] hover:bg-slate-900 md:inline-block"
-            >
-              Request assessment
-            </Link>
-          </div>
-        </div>
-      </header>
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
