@@ -1,249 +1,180 @@
-"use client";
-
-import React from "react";
-import { Exo_2 } from "next/font/google";
-import { Bot, BarChart3, Globe } from "lucide-react";
-import SiteChrome, { G } from "../components/SiteChrome";
-
-const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <SiteChrome>
-      {/* HERO */}
-      <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
-        <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 text-center">
-          <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">ABOUT US</p>
+    <main className="min-h-screen bg-slate-50 text-slate-900">
+      <header className="border-b border-slate-200 bg-white/75 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-white shadow-sm">
+              <div className="absolute inset-0 rounded-md bg-gradient-to-br from-slate-50 via-white to-amber-50" />
+              <div className="relative h-3 w-3 border-l-2 border-b-2 border-slate-800" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-xs font-semibold tracking-[0.18em] text-slate-700">
+                IRONGATE
+              </div>
+              <div className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
+                Systems
+              </div>
+            </div>
+          </Link>
 
-          <h1
-            className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight`}
+          <nav className="hidden items-center gap-8 text-sm text-slate-700 md:flex">
+            <Link href="/services" className="hover:text-slate-950">
+              Services
+            </Link>
+            <Link href="/security" className="hover:text-slate-950">
+              Security
+            </Link>
+            <Link href="/faq" className="hover:text-slate-950">
+              FAQ
+            </Link>
+            <Link href="/about" className="hover:text-slate-950">
+              About
+            </Link>
+          </nav>
+
+          <Link
+            href="/contact"
+            className="rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
           >
-            A modern studio built for <G>small businesses</G>.
-          </h1>
+            Request assessment
+          </Link>
+        </div>
+      </header>
 
-          <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
-            LocalLink Studio is a small, mission-driven digital studio out of Auburn, Alabama —
-            built to help local businesses stay modern, competitive, and confident in a rapidly
-            changing world of websites, funnels, and AI.
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-slate-100" />
+          <div className="absolute -top-40 -left-56 h-[680px] w-[680px] rounded-full bg-gradient-to-br from-amber-300/35 via-orange-200/18 to-transparent blur-3xl" />
+          <div className="absolute -bottom-56 -right-56 h-[720px] w-[720px] rounded-full bg-gradient-to-tr from-slate-700/18 via-sky-300/14 to-transparent blur-3xl" />
+        </div>
+
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-600">
+            About
+          </p>
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
+            Built for serious work.
+            <span className="block text-slate-600">Built to protect what matters.</span>
+          </h1>
+          <p className="mt-5 max-w-2xl text-base text-slate-700">
+            We believe the most important work is human work—care, judgment, service,
+            and presence. IronGate exists to remove the digital burden and restore
+            the human touch through the power of private AI.
           </p>
         </div>
       </section>
 
-      {/* MISSION COPY */}
-      <section className="bg-black">
-        <div className="mx-auto max-w-screen-xl px-6 py-14 sm:px-8 space-y-8 text-zinc-300 leading-relaxed">
-          {/* Long-term partnerships */}
-          <div className="space-y-4">
-            <h2
-              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
-            >
-              Built for long-term partnerships — not quick projects.
-            </h2>
+      {/* Video */}
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:items-start">
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-[0_26px_80px_rgba(15,23,42,0.2)]">
+              {/* Replace src with your hosted mp4 when ready */}
+              <video
+                className="h-auto w-full"
+                controls
+                preload="metadata"
+                poster="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80"
+              >
+                <source src="/video/irongate-brand.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
 
-            <p>
-              We don’t think like a freelance designer or a one-and-done agency. We act as a
-              dedicated partner in your corner — keeping your website sharp, your funnels working,
-              and your business aligned with the newest tech and AI tools. Your business keeps
-              evolving, and our job is to make sure your digital presence evolves with it.
-            </p>
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Mission
+              </p>
+              <p className="mt-3 text-xl font-semibold text-slate-950">
+                Enhance the human touch through the power of private AI.
+              </p>
+              <p className="mt-3 text-sm text-slate-700">
+                We build private AI infrastructure that strengthens operations, protects
+                sensitive records, and gives your people time back to do what they do best.
+              </p>
 
-            <p>
-              Our mission isn’t to sell trends or bury you in dashboards. We take care of the
-              technical work while you stay focused on what you do best: running your business,
-              serving customers, and growing your team. Meanwhile, we keep an eye on what’s coming
-              next so you’re never falling behind.
-            </p>
-          </div>
-
-          {/* Mission-focused section */}
-          <div className="space-y-4">
-            <h2
-              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
-            >
-              Our mission: modern technology, human-first business.
-            </h2>
-
-            <p>
-              In a world flooded with cheap AI tools, generic templates, and “plug it in yourself”
-              platforms, we exist to be something different: a long-term partner that keeps you
-              modern while protecting the human touch in your business. We stay on top of the AI and
-              technology landscape for you — testing, refining, and building tools that actually fit
-              how you work.
-            </p>
-
-            <p>
-              We exist to serve the heart of American business: small business. We want local
-              businesses to have the same level of technology and leverage as big brands, without
-              losing the face-to-face care, relationships, and reputation that make communities
-              thrive. Our job is to help you save time, stay current, and still feel proud of how
-              human your business is.
-            </p>
-          </div>
-
-          {/* Ownership & control */}
-          <div className="space-y-4">
-            <h2
-              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
-            >
-              You stay in control — always.
-            </h2>
-
-            <p>
-              Transparency is a core value at LocalLink Studio. You maintain full ownership of your
-              content, branding, domain, and direction. We don’t lock you in, hide access, or make
-              changes behind your back. You stay in the driver’s seat; we simply provide the engine.
-            </p>
-
-            <p>
-              Every partnership involves shared decision-making. You’ll always know what we’re doing,
-              why it matters, and how it affects your business. We guide, support, build, and
-              maintain — but you decide where we’re headed.
-            </p>
-          </div>
-
-          {/* Modern, clear, competitive */}
-          <div className="space-y-4">
-            <h2
-              className={`${heroFont.className} text-[24px] sm:text-[28px] font-semibold tracking-tight text-white`}
-            >
-              Helping businesses stay modern, clear, and competitive.
-            </h2>
-
-            <p>
-              Most small businesses don’t have time to keep up with new marketing tools, website
-              standards, AI workflows, automation, and funnel strategy. That’s where we come in —
-              translating modern technology into simple, useful systems that actually help your
-              business grow.
-            </p>
-
-            <p>
-              Whether it&apos;s a beautiful website, a streamlined booking flow, or practical AI
-              that handles busywork — our goal is to give you the same digital leverage big
-              companies enjoy, without the complexity or cost.
-            </p>
+              <div className="mt-6 flex flex-wrap gap-3 text-[0.7rem] text-slate-600">
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                  Private
+                </span>
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                  Powerful
+                </span>
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                  Human-first
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ============== AI TOOLS SECTION (ABOUT CONTEXT) ============== */}
-      <section className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
-          <div className="mb-6 max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300/80">
-              LOCAL AI SUITE (IN ACTIVE DEVELOPMENT)
-            </p>
-            <h3
-              className={`${heroFont.className} mt-2 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight`}
-            >
-              Our long-term vision: practical AI that feels like extra people on your team.
-            </h3>
-            <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-zinc-300">
-              From day one, LocalLink Studio has been built with the future in mind. Websites and
-              funnels are the foundation — but the next layer is practical AI that helps small
-              businesses handle the busywork, stay responsive, and make better decisions without
-              becoming “a tech company.”
-            </p>
-            <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-zinc-300">
-              Our Local AI Suite is a developing part of that vision. These tools are being built
-              and refined alongside real clients, with a focus on simple, trustworthy workflows:
-              answering common questions, qualifying leads, summarizing activity, and giving you
-              clear signals on what matters. Early partners get access as we roll out new
-              capabilities — and help shape where the suite goes next.
-            </p>
-          </div>
+      {/* Principles */}
+      <section className="border-b border-slate-200 bg-slate-50">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+            Principles
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-950">
+            What we believe stays true.
+          </h2>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            {/* NovaDesk AI */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-3 inline-flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
-                  <Bot className="h-4 w-4 text-black" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">NovaDesk AI</div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
-                    WEBSITE FRONT DESK
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-300">
-                An AI “front desk” on your site that can answer common questions, collect contact
-                details, and route real leads to you—so fewer calls and messages slip through the
-                cracks.
-              </p>
-            </div>
-
-            {/* PulseLead Engine */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-3 inline-flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
-                  <BarChart3 className="h-4 w-4 text-black" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">PulseLead Engine</div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
-                    LEAD CAPTURE & SCORING
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-300">
-                Every form submission flows into a simple lead engine that scores interest,
-                highlights the best opportunities, and sends you clean summaries instead of messy
-                inbox noise.
-              </p>
-            </div>
-
-            {/* EchoFlow Assistant */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-3 inline-flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
-                  <Bot className="h-4 w-4 text-black" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">EchoFlow Assistant</div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
-                    FOLLOW-UP SUPPORT
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-300">
-                Light-touch follow-up help for leads—drafted emails and messages you can approve or
-                personalize so you stay in front of people without having to remember every thread.
-              </p>
-            </div>
-
-            {/* LocalLens Insights */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-3 inline-flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
-                  <Globe className="h-4 w-4 text-black" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">LocalLens Insights</div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-400">
-                    SIMPLE PERFORMANCE SNAPSHOTS
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-zinc-300">
-                Plain-language snapshots of what your site and funnels are doing for you—no
-                analytics degree required. Just clear signals on what&apos;s working and what we
-                should tweak next.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mt-12">
-            <a
-              href="/preview"
-              className="inline-flex items-center justify-center rounded-full bg-white text-black font-semibold px-10 py-3 hover:bg-zinc-200 transition"
-            >
-              Start your free preview
-            </a>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <Principle
+              title="Privacy is not optional."
+              desc="Sensitive information should not become a training set or a public risk."
+            />
+            <Principle
+              title="Capability must be responsible."
+              desc="We build systems you can stand behind—clear boundaries, real controls."
+            />
+            <Principle
+              title="Humans stay at the center."
+              desc="AI clears the digital burden so your people can focus on service and judgment."
+            />
           </div>
         </div>
       </section>
-    </SiteChrome>
+
+      {/* CTA */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-[0_26px_80px_rgba(15,23,42,0.14)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Start the conversation
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">
+              Explore what private AI behind your own gate could look like.
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm text-slate-700">
+              Share a few details about your organization, and we will outline a clear,
+              practical path to installing a private AI system that fits your risk profile
+              and daily operations.
+            </p>
+            <div className="mt-6">
+              <Link
+                href="/contact"
+                className="rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-900"
+              >
+                Request private AI call →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function Principle({ title, desc }: { title: string; desc: string }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <p className="text-sm font-semibold text-slate-950">{title}</p>
+      <p className="mt-2 text-sm text-slate-700">{desc}</p>
+    </div>
   );
 }
