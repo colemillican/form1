@@ -1,10 +1,14 @@
 // app/page.tsx
 
 import Link from "next/link";
+import SiteChrome from "./components/SiteChrome";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
+      {/* Shared header / nav bar */}
+      <SiteChrome />
+
       {/* Subtle motion (no libs, no plugins) */}
       <style>{`
         @keyframes igFloatA {
@@ -31,18 +35,6 @@ export default function Home() {
           .ig-animA, .ig-animB, .ig-sweep, .ig-pulse { animation: none !important; }
         }
       `}</style>
-
-     import SiteChrome from "../components/SiteChrome"; // adjust path if needed
-
-export default function Page() {
-  return (
-    <main>
-      <SiteChrome />
-      {/* page content */}
-    </main>
-  );
-}
-
 
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
@@ -328,8 +320,8 @@ export default function Page() {
                 1. Assessment
               </p>
               <p className="mt-2 text-sm text-slate-600">
-                We map your systems, data flows, and confidentiality
-                requirements, then agree on where AI can operate safely.
+                We map your systems, data flows, and confidentiality requirements, then
+                agree on where AI can operate safely.
               </p>
             </div>
             <div>
@@ -337,8 +329,8 @@ export default function Page() {
                 2. Installation
               </p>
               <p className="mt-2 text-sm text-slate-600">
-                We deploy your IronGate stack on-prem or on a dedicated GPU and
-                connect it to the tools your team already uses.
+                We deploy your IronGate stack on-prem or on a dedicated GPU and connect it
+                to the tools your team already uses.
               </p>
             </div>
             <div>
@@ -346,8 +338,8 @@ export default function Page() {
                 3. Agents & support
               </p>
               <p className="mt-2 text-sm text-slate-600">
-                We design agents and workflows for tasks like drafting, intake,
-                and summarization, then support your team as usage grows.
+                We design agents and workflows for tasks like drafting, intake, and
+                summarization, then support your team as usage grows.
               </p>
             </div>
           </div>
@@ -355,7 +347,10 @@ export default function Page() {
       </section>
 
       {/* Who we serve + deployment (UNCHANGED) */}
-      <section id="who-we-serve" className="border-b border-slate-200 bg-slate-50">
+      <section
+        id="who-we-serve"
+        className="border-b border-slate-200 bg-slate-50"
+      >
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="grid gap-10 md:grid-cols-2">
             <div>
@@ -369,7 +364,9 @@ export default function Page() {
                 <li>• Law firms and legal departments</li>
                 <li>• Medical practices and hospitals</li>
                 <li>• Financial and insurance organizations</li>
-                <li>• Any team that wants AI without sending core records to public models</li>
+                <li>
+                  • Any team that wants AI without sending core records to public models
+                </li>
               </ul>
             </div>
 
@@ -386,9 +383,8 @@ export default function Page() {
                     IronGate On-Prem
                   </p>
                   <p className="mt-2">
-                    A private AI machine installed within your environment. Best
-                    for legal, medical, and any practice where compliance and
-                    sovereignty are central.
+                    A private AI machine installed within your environment. Best for legal,
+                    medical, and any practice where compliance and sovereignty are central.
                   </p>
                 </div>
                 <div className="rounded-xl border border-slate-200 bg-white p-4">
@@ -396,9 +392,9 @@ export default function Page() {
                     IronGate Secure GPU
                   </p>
                   <p className="mt-2">
-                    A dedicated GPU instance for organizations that want strong
-                    privacy without maintaining hardware. No shared models and
-                    no training on your data.
+                    A dedicated GPU instance for organizations that want strong privacy
+                    without maintaining hardware. No shared models and no training on your
+                    data.
                   </p>
                 </div>
               </div>
@@ -418,9 +414,9 @@ export default function Page() {
               Explore what private AI behind your own gate could look like.
             </p>
             <p className="mt-3 text-sm text-slate-600">
-              Share a few details about your organization, and we will outline a
-              clear, practical path to installing a private AI system that fits
-              your risk profile and daily operations.
+              Share a few details about your organization, and we will outline a clear,
+              practical path to installing a private AI system that fits your risk profile
+              and daily operations.
             </p>
           </div>
 
@@ -432,13 +428,14 @@ export default function Page() {
               Go to contact page
             </Link>
             <p className="text-xs text-slate-500">
-              No hype, no generic demos—just a direct conversation about your
-              systems and your data.
+              No hype, no generic demos—just a direct conversation about your systems and
+              your data.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="border-t border-slate-200 bg-slate-50">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-xs text-slate-500 sm:px-6 lg:px-8">
           <span>© {new Date().getFullYear()} IronGate Systems.</span>
