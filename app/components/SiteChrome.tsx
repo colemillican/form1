@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MobileNav from "./Mobile.Nav";
+import MobileNav from "./MobileNav";
 
 type NavItem = { label: string; href: string };
 
