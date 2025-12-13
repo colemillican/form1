@@ -1,142 +1,173 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
-/* Inline logo mark */
-function LogoMark({ size = 28 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
-      aria-label="LocalLink Digital logo"
-      role="img"
-    >
-      <defs>
-        <linearGradient id="llg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#23B8A5" />
-          <stop offset="100%" stopColor="#9BE564" />
-        </linearGradient>
-      </defs>
-      <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#llg)" />
-      <path
-        d="M20 20v24h12M32 44h12V20"
-        stroke="white"
-        strokeWidth="5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    </svg>
-  );
-}
+type NavItem = { label: string; href: string };
 
-export default function MobileNav() {
+export default function MobileNav({
+  items = [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Security", href: "/security" },
+    { label: "FAQ", href: "/faq" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ],
+  ctaHref = "/contact",
+  ctaLabel = "Request assessment",
+}: {
+  items?: NavItem[];
+  ctaHref?: string;
+  ctaLabel?: string;
+}) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const activeHref = useMemo(() => pathname ?? "/", [pathname]);
+
   useEffect(() => {
-    if (open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-    return () => {
-      document.body.style.overflow = "";
+    // Close the drawer on route changes
+    setOpen(false);
+  }, [activeHref]);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
     };
-  }, [open]);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   return (
-    <>
-      {/* Top header */}
-      <header className="fixed inset-x-0 top-0 z-50">
-        <div className="bg-gradient-to-b from-black/50 via-black/20 to-transparent">
-          <div className="mx-auto flex max-w-5xl items-center justify-between px-4 pt-4 pb-3 sm:px-6">
-            <Link href="/">
-              <span className="inline-flex items-center">
-                <LogoMark size={26} />
-              </span>
-            </Link>
+    <div className="md:hidden">
+      <div className="flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <LogoMark />
+          <LogoWordmark />
+        </Link>
 
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm"
-              aria-label="Open navigation"
+        <button
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded={open}
+          onClick={() => setOpen(true)}
+          className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-900 shadow-sm hover:bg-slate-50"
+        >
+          Menu
+        </button>
+      </div>
+
+      {/* Backdrop */}
+      <div
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+        className={[
+          "fixed inset-0 z-50 bg-slate-950/30 backdrop-blur-sm transition-opacity",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+        ].join(" ")}
+      />
+
+      {/* Drawer */}
+      <aside
+        role="dialog"
+        aria-modal="true"
+        className={[
+          "fixed right-0 top-0 z-50 h-full w-[88%] max-w-sm transform border-l border-slate-200 bg-white shadow-[0_30px_100px_rgba(15,23,42,0.25)] transition-transform",
+          open ? "translate-x-0" : "translate-x-full",
+        ].join(" ")}
+      >
+        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+          <div className="flex items-center gap-2">
+            <LogoMark />
+            <LogoWordmark />
+          </div>
+
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            onClick={() => setOpen(false)}
+            className="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-900 hover:bg-slate-50"
+          >
+            Close
+          </button>
+        </div>
+
+        <div className="px-5 py-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+            Navigate
+          </p>
+
+          <nav className="mt-4 space-y-2">
+            {items.map((item) => {
+              const active =
+                item.href === "/"
+                  ? activeHref === "/"
+                  : activeHref.startsWith(item.href);
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={[
+                    "flex items-center justify-between rounded-2xl border px-4 py-3 text-sm font-semibold",
+                    active
+                      ? "border-slate-300 bg-slate-50 text-slate-950"
+                      : "border-slate-200 bg-white text-slate-800 hover:bg-slate-50",
+                  ].join(" ")}
+                >
+                  <span>{item.label}</span>
+                  <span className="text-slate-400">→</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Start here
+            </p>
+            <p className="mt-2 text-sm text-slate-700">
+              No hype, no generic demos—just a direct conversation about your systems and your data.
+            </p>
+            <Link
+              href={ctaHref}
+              className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
             >
-              <div className="flex flex-col gap-1.5">
-                <span className="block h-0.5 w-5 rounded-full bg-white" />
-                <span className="block h-0.5 w-5 rounded-full bg-white" />
-                <span className="block h-0.5 w-5 rounded-full bg-white" />
-              </div>
-            </button>
+              {ctaLabel} →
+            </Link>
           </div>
         </div>
-      </header>
 
-      {/* Full-screen mobile menu */}
-      {open && (
-        <div className="fixed inset-0 z-50 bg-neutral-950/95 backdrop-blur">
-          <div className="mx-auto flex max-w-5xl flex-col px-4 pt-4 sm:px-6">
-            <div className="flex items-center justify-between pb-4">
-              <Link href="/" onClick={() => setOpen(false)}>
-                <span className="inline-flex items-center">
-                  <LogoMark size={26} />
-                </span>
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40"
-                aria-label="Close navigation"
-              >
-                <div className="relative h-4 w-4">
-                  <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 rotate-45 rounded-full bg-white" />
-                  <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 -rotate-45 rounded-full bg-white" />
-                </div>
-              </button>
-            </div>
-
-            <nav className="mt-6 flex flex-col gap-4 text-lg font-medium text-white">
-              <Link
-                href="/services"
-                onClick={() => setOpen(false)}
-                className="opacity-90 hover:opacity-100"
-              >
-                Services
-              </Link>
-              <Link
-                href="/process"
-                onClick={() => setOpen(false)}
-                className="opacity-90 hover:opacity-100"
-              >
-                Process
-              </Link>
-              <Link
-                href="/about"
-                onClick={() => setOpen(false)}
-                className="opacity-90 hover:opacity-100"
-              >
-                About
-              </Link>
-              <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
-                className="opacity-90 hover:opacity-100"
-              >
-                <Link href="/resources" onClick={() => setOpen(false)}>
-  Resources
-</Link>
-
-                Contact
-              </Link>
-            </nav>
-          </div>
+        <div className="mt-auto border-t border-slate-200 px-5 py-4">
+          <p className="text-xs text-slate-500">
+            © {new Date().getFullYear()} IronGate Systems.
+          </p>
         </div>
-      )}
-    </>
+      </aside>
+    </div>
   );
 }
 
+function LogoMark() {
+  return (
+    <div className="relative flex h-9 w-9 items-center justify-center rounded-md border border-slate-300 bg-white shadow-sm">
+      <div className="absolute inset-0 rounded-md bg-gradient-to-br from-slate-50 via-white to-amber-50" />
+      <div className="relative h-3 w-3 border-l-2 border-b-2 border-slate-800" />
+    </div>
+  );
+}
 
-
-
-
+function LogoWordmark() {
+  return (
+    <div className="leading-tight">
+      <div className="text-xs font-semibold tracking-[0.18em] text-slate-700">
+        IRONGATE
+      </div>
+      <div className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
+        Systems
+      </div>
+    </div>
+  );
+}
