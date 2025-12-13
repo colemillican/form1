@@ -5,16 +5,39 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
+      {/* Subtle motion (no libs, no tailwind plugins) */}
+      <style>{`
+        @keyframes floatA {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(18px, -14px, 0) scale(1.03); }
+          100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+        @keyframes floatB {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(-16px, 12px, 0) scale(1.04); }
+          100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+        @keyframes shimmer {
+          0% { transform: translateX(-40%); opacity: .15; }
+          50% { opacity: .28; }
+          100% { transform: translateX(40%); opacity: .15; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .ig-floatA, .ig-floatB, .ig-shimmer { animation: none !important; }
+        }
+      `}</style>
+
       {/* Top bar */}
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/75 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-slate-100">
-              <div className="h-3 w-3 border-l-2 border-b-2 border-slate-700" />
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-white shadow-sm">
+              <div className="absolute inset-0 rounded-md bg-gradient-to-br from-indigo-100 via-white to-emerald-100" />
+              <div className="relative h-3 w-3 border-l-2 border-b-2 border-slate-700" />
             </div>
             <div className="leading-tight">
-              <div className="text-xs font-semibold tracking-[0.18em] text-slate-500">
+              <div className="text-xs font-semibold tracking-[0.18em] text-slate-600">
                 IRONGATE
               </div>
               <div className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-400">
@@ -38,7 +61,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Link
               href="#contact"
-              className="hidden rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-800 md:inline-block"
+              className="hidden rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-800 md:inline-block"
             >
               Request assessment
             </Link>
@@ -47,19 +70,36 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-20 lg:px-8">
-          {/* Hero text */}
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+        {/* Cinematic light background */}
+        <div className="absolute inset-0 -z-10">
+          {/* Soft gradient base */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-slate-100" />
+          {/* Two floating color fields */}
+          <div
+            className="ig-floatA absolute -top-32 -left-40 h-[520px] w-[520px] rounded-full bg-gradient-to-br from-indigo-200/70 via-sky-200/40 to-transparent blur-3xl"
+            style={{ animation: "floatA 10s ease-in-out infinite" }}
+          />
+          <div
+            className="ig-floatB absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-gradient-to-tr from-emerald-200/60 via-teal-200/30 to-transparent blur-3xl"
+            style={{ animation: "floatB 12s ease-in-out infinite" }}
+          />
+          {/* Subtle grid texture */}
+          <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] [background-size:64px_64px]" />
+        </div>
+
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24 lg:px-8">
+          {/* Hero text (MESSAGING UNCHANGED) */}
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
               Private AI Infrastructure
             </p>
-            <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+
+            <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               Private AI, installed
-              <span className="block text-slate-500">
-                inside your walls.
-              </span>
+              <span className="block text-slate-500">inside your walls.</span>
             </h1>
+
             <p className="mt-5 max-w-xl text-base text-slate-600">
               IronGate Systems builds and maintains private AI machines for
               organizations that cannot send sensitive data to public clouds.
@@ -70,10 +110,14 @@ export default function Home() {
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <Link
                 href="#contact"
-                className="rounded-full bg-slate-900 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-800"
+                className="group inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm transition hover:bg-slate-800"
               >
                 Request private AI call
+                <span className="ml-2 inline-block transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
               </Link>
+
               <a
                 href="#how-it-works"
                 className="text-sm font-medium text-slate-700 hover:text-slate-900"
@@ -87,54 +131,96 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Simple visual card */}
+          {/* Upgraded visual: cinematic card + striking image panel */}
           <div className="flex justify-center lg:justify-end">
-            <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Your private AI stack
-              </p>
-              <p className="mt-2 text-sm text-slate-700">
-                A single, central AI machine dedicated to your organization:
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-900" />
-                  <span>Local LLM and multimodal model.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-900" />
-                  <span>Local vector database and retrieval pipelines.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-900" />
-                  <span>Optional agents and workflows tailored to your team.</span>
-                </li>
-              </ul>
-              <div className="mt-5 grid grid-cols-2 gap-3 text-xs text-slate-600">
-                <div className="rounded-xl bg-white p-3 border border-slate-200">
-                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                    On-Prem
-                  </p>
-                  <p className="mt-1">
-                    Hardware installed in your environment for maximum control.
-                  </p>
+            <div className="w-full max-w-md">
+              {/* Image / visual block */}
+              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_18px_60px_rgba(15,23,42,0.12)]">
+                {/* “Striking image” — swap this URL anytime */}
+                <div
+                  className="relative h-56 w-full"
+                  style={{
+                    backgroundImage:
+                      "url(https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80)",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  {/* cinematic overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/25 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-slate-900/10 via-transparent to-slate-900/10" />
+
+                  {/* shimmer pass */}
+                  <div
+                    className="ig-shimmer absolute -left-1/2 top-0 h-full w-[200%] bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    style={{ animation: "shimmer 6s ease-in-out infinite" }}
+                  />
                 </div>
-                <div className="rounded-xl bg-white p-3 border border-slate-200">
-                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                    Secure GPU
+
+                {/* Content card (MESSAGING UNCHANGED) */}
+                <div className="p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    Your private AI stack
                   </p>
-                  <p className="mt-1">
-                    Dedicated GPU in a locked-down cloud for teams that do not
-                    need full on-prem.
+                  <p className="mt-2 text-sm text-slate-700">
+                    A single, central AI machine dedicated to your organization:
                   </p>
+
+                  <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-900" />
+                      <span>Local LLM and multimodal model.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-900" />
+                      <span>Local vector database and retrieval pipelines.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-900" />
+                      <span>Optional agents and workflows tailored to your team.</span>
+                    </li>
+                  </ul>
+
+                  <div className="mt-5 grid grid-cols-2 gap-3 text-xs text-slate-600">
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                        On-Prem
+                      </p>
+                      <p className="mt-1">
+                        Hardware installed in your environment for maximum control.
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                        Secure GPU
+                      </p>
+                      <p className="mt-1">
+                        Dedicated GPU in a locked-down cloud for teams that do not
+                        need full on-prem.
+                      </p>
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              {/* Small “trust bar” under visual (minimal, lively) */}
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-[0.7rem] text-slate-500 lg:justify-end">
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                  On-prem capable
+                </span>
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                  Dedicated GPU option
+                </span>
+                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                  Sensitive-data ready
+                </span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Three key points */}
+      {/* Three key points (MESSAGING UNCHANGED) */}
       <section className="border-b border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-3">
@@ -169,11 +255,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How it works */}
-      <section
-        id="how-it-works"
-        className="border-b border-slate-200 bg-white"
-      >
+      {/* How it works (UNCHANGED) */}
+      <section id="how-it-works" className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="max-w-xl">
             <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -216,11 +299,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Who we serve + deployment */}
-      <section
-        id="who-we-serve"
-        className="border-b border-slate-200 bg-slate-50"
-      >
+      {/* Who we serve + deployment (UNCHANGED) */}
+      <section id="who-we-serve" className="border-b border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="grid gap-10 md:grid-cols-2">
             <div>
@@ -272,7 +352,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Final CTA (UNCHANGED) */}
       <section id="contact" className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="max-w-xl">
