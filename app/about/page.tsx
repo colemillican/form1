@@ -1,180 +1,178 @@
+// app/about/page.tsx
+import SiteChrome from "../components/SiteChrome";
 import Link from "next/link";
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white/75 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-white shadow-sm">
-              <div className="absolute inset-0 rounded-md bg-gradient-to-br from-slate-50 via-white to-amber-50" />
-              <div className="relative h-3 w-3 border-l-2 border-b-2 border-slate-800" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-xs font-semibold tracking-[0.18em] text-slate-700">
-                IRONGATE
-              </div>
-              <div className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
-                Systems
-              </div>
-            </div>
-          </Link>
+      <SiteChrome />
 
-          <nav className="hidden items-center gap-8 text-sm text-slate-700 md:flex">
-            <Link href="/services" className="hover:text-slate-950">
-              Services
-            </Link>
-            <Link href="/security" className="hover:text-slate-950">
-              Security
-            </Link>
-            <Link href="/faq" className="hover:text-slate-950">
-              FAQ
-            </Link>
-            <Link href="/about" className="hover:text-slate-950">
-              About
-            </Link>
-          </nav>
-
-          <Link
-            href="/contact"
-            className="rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
-          >
-            Request assessment
-          </Link>
-        </div>
-      </header>
-
-      {/* Hero */}
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-slate-100" />
-          <div className="absolute -top-40 -left-56 h-[680px] w-[680px] rounded-full bg-gradient-to-br from-amber-300/35 via-orange-200/18 to-transparent blur-3xl" />
-          <div className="absolute -bottom-56 -right-56 h-[720px] w-[720px] rounded-full bg-gradient-to-tr from-slate-700/18 via-sky-300/14 to-transparent blur-3xl" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "url(https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1800&q=80)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: 0.14,
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/85 to-slate-100" />
+          <div className="absolute -top-44 -left-60 h-[700px] w-[700px] rounded-full bg-gradient-to-br from-amber-300/45 via-orange-200/20 to-transparent blur-3xl" />
+          <div className="absolute -bottom-60 -right-60 h-[740px] w-[740px] rounded-full bg-gradient-to-tr from-slate-800/14 via-sky-300/22 to-transparent blur-3xl" />
         </div>
 
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-600">
-            About
+            About IronGate
           </p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Built for serious work.
-            <span className="block text-slate-600">Built to protect what matters.</span>
+            A company built for
+            <span className="block text-slate-500">order, control, and real work.</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-base text-slate-700">
-            We believe the most important work is human work—care, judgment, service,
-            and presence. IronGate exists to remove the digital burden and restore
-            the human touch through the power of private AI.
+          <p className="mt-5 max-w-3xl text-base text-slate-700">
+            IronGate Systems exists to give organizations the power of AI without handing
+            their most sensitive information to public clouds. We build private AI machines
+            and retrieval systems that live where your data lives—inside environments you
+            govern.
           </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link
+              href="/contact"
+              className="rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
+            >
+              Request assessment →
+            </Link>
+            <Link href="/security" className="text-sm font-medium text-slate-800 hover:text-slate-950">
+              Security principles →
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Video */}
-      <section className="border-b border-slate-200 bg-white">
+      <section className="border-b border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:items-start">
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-[0_26px_80px_rgba(15,23,42,0.2)]">
-              {/* Replace src with your hosted mp4 when ready */}
-              <video
-                className="h-auto w-full"
-                controls
-                preload="metadata"
-                poster="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80"
-              >
-                <source src="/video/irongate-brand.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+          <div className="grid gap-10 md:grid-cols-2 md:items-start">
+            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                The mission
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold text-slate-950">
+                Enhance the human touch through the power of private AI.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-slate-700">
+                We believe the most important work is human work—care, judgment, service,
+                craftsmanship, presence. But modern operations pull people into screens,
+                systems, and administrative noise.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-slate-700">
+                IronGate is built to move that burden away from humans. We deploy AI that
+                can handle information work—search, drafting, summarization, internal routing—
+                while keeping your data under your control. The goal is not to replace people.
+                The goal is to restore people to the work that matters.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-slate-700">
+                Done correctly, AI increases capacity. Capacity improves service. Service is
+                the purpose of business. That is the standard we aim for.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Badge text="Order" accent="amber" />
+                <Badge text="Truth" accent="sky" />
+                <Badge text="Security" accent="slate" />
+                <Badge text="Beauty" accent="amber" />
+              </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Mission
-              </p>
-              <p className="mt-3 text-xl font-semibold text-slate-950">
-                Enhance the human touch through the power of private AI.
-              </p>
-              <p className="mt-3 text-sm text-slate-700">
-                We build private AI infrastructure that strengthens operations, protects
-                sensitive records, and gives your people time back to do what they do best.
-              </p>
+            <div className="space-y-6">
+              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+                <div
+                  className="h-56 w-full"
+                  style={{
+                    backgroundImage:
+                      "url(https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=80)",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+                <div className="relative p-7">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    What we build
+                  </p>
+                  <p className="mt-3 text-sm text-slate-700">
+                    A private AI core: local LLM, local vector database, retrieval pipelines,
+                    and optional multimodal capability—deployed on-prem or on a dedicated secure GPU.
+                  </p>
+                </div>
+              </div>
 
-              <div className="mt-6 flex flex-wrap gap-3 text-[0.7rem] text-slate-600">
-                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                  Private
-                </span>
-                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                  Powerful
-                </span>
-                <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                  Human-first
-                </span>
+              <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-950 to-slate-800 p-7 text-white shadow-[0_26px_80px_rgba(15,23,42,0.22)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                  The IronGate standard
+                </p>
+                <ul className="mt-4 space-y-2 text-sm text-white/80">
+                  <li>• Your data stays under your control.</li>
+                  <li>• Systems are built with clear boundaries.</li>
+                  <li>• Capability must serve real people doing real work.</li>
+                </ul>
+                <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
+                <p className="mt-4 text-xs text-white/70">
+                  Private AI, installed inside your walls.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Principles */}
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-            Principles
-          </p>
-          <h2 className="mt-2 text-2xl font-semibold text-slate-950">
-            What we believe stays true.
-          </h2>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <Principle
-              title="Privacy is not optional."
-              desc="Sensitive information should not become a training set or a public risk."
-            />
-            <Principle
-              title="Capability must be responsible."
-              desc="We build systems you can stand behind—clear boundaries, real controls."
-            />
-            <Principle
-              title="Humans stay at the center."
-              desc="AI clears the digital burden so your people can focus on service and judgment."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-[0_26px_80px_rgba(15,23,42,0.14)]">
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              Start the conversation
+              If you’re a fit
             </p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">
-              Explore what private AI behind your own gate could look like.
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm text-slate-700">
-              Share a few details about your organization, and we will outline a clear,
-              practical path to installing a private AI system that fits your risk profile
-              and daily operations.
+            <p className="mt-2 text-xl font-semibold text-slate-950">
+              We should talk if confidentiality is non-negotiable.
             </p>
-            <div className="mt-6">
-              <Link
-                href="/contact"
-                className="rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-900"
-              >
-                Request private AI call →
-              </Link>
-            </div>
+            <p className="mt-3 text-sm text-slate-700">
+              Law, healthcare, finance, insurance—any organization where data control is central.
+              We’ll scope the right deployment and draw clean boundaries before anything goes live.
+            </p>
+            <Link
+              href="/contact"
+              className="mt-6 inline-flex items-center rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-900"
+            >
+              Request assessment →
+            </Link>
           </div>
         </div>
       </section>
+
+      <footer className="border-t border-slate-200 bg-slate-50">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-xs text-slate-500 sm:px-6 lg:px-8">
+          <span>© {new Date().getFullYear()} IronGate Systems.</span>
+          <span>Private AI, built for serious work.</span>
+        </div>
+      </footer>
     </main>
   );
 }
 
-function Principle({ title, desc }: { title: string; desc: string }) {
+function Badge({ text, accent }: { text: string; accent: "amber" | "sky" | "slate" }) {
+  const cls =
+    accent === "amber"
+      ? "border-amber-300/60 bg-amber-50 text-slate-900"
+      : accent === "sky"
+      ? "border-sky-300/60 bg-sky-50 text-slate-900"
+      : "border-slate-300 bg-white text-slate-900";
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5">
-      <p className="text-sm font-semibold text-slate-950">{title}</p>
-      <p className="mt-2 text-sm text-slate-700">{desc}</p>
-    </div>
+    <span className={`rounded-full border px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] ${cls}`}>
+      {text}
+    </span>
   );
 }

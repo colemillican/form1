@@ -1,5 +1,4 @@
 // app/pricing/page.tsx
-
 import Link from "next/link";
 import SiteChrome from "../components/SiteChrome";
 
@@ -8,9 +7,15 @@ export default function PricingPage() {
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <SiteChrome />
 
-      {/* Header */}
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-slate-100" />
+          <div className="absolute -top-44 -left-60 h-[680px] w-[680px] rounded-full bg-gradient-to-br from-amber-300/45 via-orange-200/20 to-transparent blur-3xl" />
+          <div className="absolute -bottom-60 -right-60 h-[720px] w-[720px] rounded-full bg-gradient-to-tr from-slate-800/16 via-sky-300/22 to-transparent blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] [background-size:96px_96px]" />
+        </div>
+
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-600">
             Pricing
           </p>
@@ -28,14 +33,11 @@ export default function PricingPage() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/contact"
-              className="rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-[0_18px_40px_rgba(2,6,23,0.22)] hover:bg-slate-900"
+              className="rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
             >
               Request assessment →
             </Link>
-            <Link
-              href="/security"
-              className="text-sm font-medium text-slate-800 hover:text-slate-950"
-            >
+            <Link href="/security" className="text-sm font-medium text-slate-800 hover:text-slate-950">
               Review security approach →
             </Link>
           </div>
@@ -46,97 +48,82 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Plans */}
       <section className="border-b border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-3">
-            {/* On-Prem */}
             <PlanCard
               eyebrow="Most Control"
               title="IronGate On-Prem"
               subtitle="Installed inside your environment."
-              priceLine="Project + monthly support"
               bullets={[
                 "Dedicated on-site AI machine (LLM + vector DB + retrieval).",
                 "Designed for sensitive records and compliance-driven teams.",
                 "Network isolation, access control, and logging by design.",
                 "Optional multimodal capability based on scope.",
               ]}
-              footnote="Best for legal, medical, and any organization where sovereignty is central."
+              accent="amber"
               ctaHref="/contact"
               ctaLabel="Scope on-prem deployment"
             />
 
-            {/* Secure GPU (Featured) */}
-            <div className="relative">
-              <div className="absolute -inset-0.5 rounded-[28px] bg-gradient-to-br from-amber-300/50 via-orange-200/20 to-sky-300/25 blur-xl" />
-              <PlanCard
-                featured
-                eyebrow="Fastest Path"
-                title="IronGate Secure GPU"
-                subtitle="Dedicated GPU instance, locked down."
-                priceLine="Monthly subscription"
-                bullets={[
-                  "Dedicated GPU (no shared model endpoints).",
-                  "Private vector DB + retrieval pipelines per organization.",
-                  "Strong privacy without managing hardware.",
-                  "Great fit when full on-prem isn’t required.",
-                ]}
-                footnote="Best for teams that want strong privacy and speed to deployment."
-                ctaHref="/contact"
-                ctaLabel="Scope secure GPU deployment"
-              />
-            </div>
+            <PlanCard
+              featured
+              eyebrow="Fastest Path"
+              title="IronGate Secure GPU"
+              subtitle="Dedicated GPU instance, locked down."
+              bullets={[
+                "Dedicated GPU (no shared model endpoints).",
+                "Private vector DB + retrieval pipelines per organization.",
+                "Strong privacy without managing hardware.",
+                "Great fit when full on-prem isn’t required.",
+              ]}
+              accent="sky"
+              ctaHref="/contact"
+              ctaLabel="Scope secure GPU deployment"
+            />
 
-            {/* Agents */}
             <PlanCard
               eyebrow="Add Capability"
               title="Agents & Workflows"
               subtitle="Tailored automations on top of your stack."
-              priceLine="Add-on packages"
               bullets={[
                 "Document drafting and summarization agents.",
                 "Intake, triage, and internal routing.",
                 "Knowledge base Q&A grounded in your documents.",
                 "Integration with your existing tools (scope-based).",
               ]}
-              footnote="Best when you want measurable operational lift beyond the core AI machine."
+              accent="slate"
               ctaHref="/services"
               ctaLabel="Explore services"
             />
           </div>
 
-          {/* Pricing notes */}
           <div className="mt-12 grid gap-8 md:grid-cols-2">
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                What drives pricing
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                <li>• Deployment model (on-prem vs dedicated GPU)</li>
-                <li>• Model size / performance requirements</li>
-                <li>• Data volume and retrieval complexity</li>
-                <li>• Required controls (audit, logging, isolation)</li>
-                <li>• Number of agents, workflows, and integrations</li>
-              </ul>
-            </div>
-
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                What you get
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                <li>• Dedicated AI stack aligned to your risk profile</li>
-                <li>• Clear operating boundaries and data ownership</li>
-                <li>• Ongoing maintenance, updates, and hardening</li>
-                <li>• Practical rollout support as adoption grows</li>
-              </ul>
-            </div>
+            <InfoBox
+              title="What drives pricing"
+              items={[
+                "Deployment model (on-prem vs dedicated GPU)",
+                "Model size / performance requirements",
+                "Data volume and retrieval complexity",
+                "Required controls (audit, logging, isolation)",
+                "Number of agents, workflows, and integrations",
+              ]}
+              accent="amber"
+            />
+            <InfoBox
+              title="What you get"
+              items={[
+                "Dedicated AI stack aligned to your risk profile",
+                "Clear operating boundaries and data ownership",
+                "Ongoing maintenance, updates, and hardening",
+                "Practical rollout support as adoption grows",
+              ]}
+              accent="sky"
+            />
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="grid gap-10 md:grid-cols-2 md:items-center">
@@ -148,17 +135,17 @@ export default function PricingPage() {
                 We’ll outline the right deployment and scope in one call.
               </p>
               <p className="mt-3 text-sm text-slate-700">
-                Share your confidentiality requirements, systems, and what “success” looks
+                Share your confidentiality requirements, systems, and what success looks
                 like. We’ll return a clear plan: deployment recommendation, controls, and a
                 build roadmap.
               </p>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">
+            <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-950 to-slate-800 p-7 text-white shadow-[0_26px_80px_rgba(15,23,42,0.22)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
                 What to bring
               </p>
-              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+              <ul className="mt-3 space-y-2 text-sm text-white/80">
                 <li>• What data types you handle (PHI, PII, legal docs, etc.)</li>
                 <li>• Where your documents live today</li>
                 <li>• The top 3 workflows you want AI to assist</li>
@@ -166,14 +153,25 @@ export default function PricingPage() {
               </ul>
               <Link
                 href="/contact"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-950 hover:bg-slate-100"
               >
                 Request assessment →
               </Link>
+              <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
+              <p className="mt-4 text-xs text-white/70">
+                Restoring the human touch by letting AI handle the rest.
+              </p>
             </div>
           </div>
         </div>
       </section>
+
+      <footer className="border-t border-slate-200 bg-slate-50">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-xs text-slate-500 sm:px-6 lg:px-8">
+          <span>© {new Date().getFullYear()} IronGate Systems.</span>
+          <span>Private AI, built for serious work.</span>
+        </div>
+      </footer>
     </main>
   );
 }
@@ -182,23 +180,28 @@ function PlanCard({
   eyebrow,
   title,
   subtitle,
-  priceLine,
   bullets,
-  footnote,
   ctaHref,
   ctaLabel,
   featured = false,
+  accent,
 }: {
   eyebrow: string;
   title: string;
   subtitle: string;
-  priceLine: string;
   bullets: string[];
-  footnote: string;
   ctaHref: string;
   ctaLabel: string;
   featured?: boolean;
+  accent: "amber" | "sky" | "slate";
 }) {
+  const bar =
+    accent === "amber"
+      ? "from-amber-300/80 via-amber-200/20 to-transparent"
+      : accent === "sky"
+      ? "from-sky-300/80 via-sky-200/20 to-transparent"
+      : "from-slate-900/25 via-slate-400/10 to-transparent";
+
   return (
     <div
       className={[
@@ -206,47 +209,70 @@ function PlanCard({
         featured ? "border-slate-300" : "border-slate-200",
       ].join(" ")}
     >
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-300/70 via-slate-200 to-sky-300/50" />
-
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-        {eyebrow}
-      </p>
-      <h2 className="mt-3 text-xl font-semibold text-slate-950">{title}</h2>
-      <p className="mt-1 text-sm text-slate-600">{subtitle}</p>
-
-      <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">
-          {priceLine}
+      {featured && (
+        <div className="absolute -inset-0.5 rounded-[28px] bg-gradient-to-br from-amber-300/35 via-orange-200/12 to-sky-300/20 blur-xl" />
+      )}
+      <div className={`relative`}>
+        <div className={`absolute inset-x-0 top-0 h-1 rounded-t-[28px] bg-gradient-to-r ${bar}`} />
+        <p className="relative text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+          {eyebrow}
         </p>
-        <p className="mt-1 text-sm text-slate-700">
-          Scoped after assessment to match your data, workload, and controls.
-        </p>
+        <h2 className="relative mt-3 text-xl font-semibold text-slate-950">
+          {title}
+        </h2>
+        <p className="relative mt-1 text-sm text-slate-600">{subtitle}</p>
+
+        <ul className="relative mt-5 space-y-2 text-sm text-slate-700">
+          {bullets.map((b) => (
+            <li key={b} className="flex items-start gap-2">
+              <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-950" />
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="relative mt-6">
+          <Link
+            href={ctaHref}
+            className={[
+              "inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] shadow-sm transition",
+              featured
+                ? "bg-slate-950 text-white hover:bg-slate-900"
+                : "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50",
+            ].join(" ")}
+          >
+            {ctaLabel} →
+          </Link>
+        </div>
       </div>
+    </div>
+  );
+}
 
-      <ul className="mt-5 space-y-2 text-sm text-slate-700">
-        {bullets.map((b) => (
-          <li key={b} className="flex items-start gap-2">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-950" />
-            <span>{b}</span>
+function InfoBox({
+  title,
+  items,
+  accent,
+}: {
+  title: string;
+  items: string[];
+  accent: "amber" | "sky";
+}) {
+  const tint = accent === "amber" ? "to-amber-50/50" : "to-sky-50/50";
+  const dot = accent === "amber" ? "bg-amber-400" : "bg-sky-400";
+  return (
+    <div className={`rounded-3xl border border-slate-200 bg-gradient-to-b from-white ${tint} p-7 shadow-sm`}>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+        {title}
+      </p>
+      <ul className="mt-4 space-y-2 text-sm text-slate-700">
+        {items.map((i) => (
+          <li key={i} className="flex items-start gap-2">
+            <span className={`mt-2 h-1.5 w-1.5 rounded-full ${dot}`} />
+            <span>{i}</span>
           </li>
         ))}
       </ul>
-
-      <p className="mt-5 text-xs text-slate-500">{footnote}</p>
-
-      <div className="mt-6">
-        <Link
-          href={ctaHref}
-          className={[
-            "inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] shadow-sm transition",
-            featured
-              ? "bg-slate-950 text-white hover:bg-slate-900"
-              : "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50",
-          ].join(" ")}
-        >
-          {ctaLabel} →
-        </Link>
-      </div>
     </div>
   );
 }
