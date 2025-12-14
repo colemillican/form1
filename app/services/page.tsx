@@ -33,6 +33,12 @@ export default function ServicesPage() {
             <Link href="/about" className="hover:text-slate-950">
               About
             </Link>
+            <Link href="/contact" className="hover:text-slate-950">
+              Contact
+            </Link>
+            <Link href="/pricing" className="hover:text-slate-950">
+              Pricing
+            </Link>
           </nav>
 
           <Link
