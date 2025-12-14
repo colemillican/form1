@@ -9,6 +9,8 @@ export default function SiteChrome({
     { label: "Security", href: "/security" },
     { label: "FAQ", href: "/faq" },
     { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+    { label: "Pricing", href: "/pricing" },
   ],
   ctaHref = "/contact",
   ctaLabel = "Request assessment",
