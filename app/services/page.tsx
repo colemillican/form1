@@ -1,190 +1,128 @@
+// app/services/page.tsx
 import Link from "next/link";
+import SiteChrome from "../components/SiteChrome";
 
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white/75 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-white shadow-sm">
-              <div className="absolute inset-0 rounded-md bg-gradient-to-br from-slate-50 via-white to-amber-50" />
-              <div className="relative h-3 w-3 border-l-2 border-b-2 border-slate-800" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-xs font-semibold tracking-[0.18em] text-slate-700">
-                IRONGATE
-              </div>
-              <div className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-500">
-                Systems
-              </div>
-            </div>
-          </Link>
+      <SiteChrome />
 
-          <nav className="hidden items-center gap-8 text-sm text-slate-700 md:flex">
-            <Link href="/services" className="hover:text-slate-950">
-              Services
-            </Link>
-            <Link href="/security" className="hover:text-slate-950">
-              Security
-            </Link>
-            <Link href="/faq" className="hover:text-slate-950">
-              FAQ
-            </Link>
-            <Link href="/about" className="hover:text-slate-950">
-              About
-            </Link>
-            <Link href="/contact" className="hover:text-slate-950">
-              Contact
-            </Link>
-            <Link href="/pricing" className="hover:text-slate-950">
-              Pricing
-            </Link>
-          </nav>
-
-          <Link
-            href="/contact"
-            className="rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
-          >
-            Request assessment
-          </Link>
-        </div>
-      </header>
-
-      {/* Hero */}
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-slate-100" />
-          <div className="absolute -top-40 -left-56 h-[680px] w-[680px] rounded-full bg-gradient-to-br from-amber-300/40 via-orange-200/20 to-transparent blur-3xl" />
-          <div className="absolute -bottom-56 -right-56 h-[720px] w-[720px] rounded-full bg-gradient-to-tr from-slate-700/18 via-sky-300/16 to-transparent blur-3xl" />
-          <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] [background-size:72px_72px]" />
+          <div className="absolute -top-44 -left-56 h-[640px] w-[640px] rounded-full bg-gradient-to-br from-amber-300/45 via-orange-200/20 to-transparent blur-3xl" />
+          <div className="absolute -bottom-56 -right-56 h-[680px] w-[680px] rounded-full bg-gradient-to-tr from-slate-800/16 via-sky-300/22 to-transparent blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] [background-size:92px_92px]" />
         </div>
 
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-600">
             Services
           </p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Private AI infrastructure,
-            <span className="block text-slate-600">installed and maintained.</span>
+            Private AI systems,
+            <span className="block text-slate-500">engineered and maintained.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-base text-slate-700">
             IronGate Systems builds and maintains private AI machines for organizations
-            that cannot send sensitive data to public clouds. Your team gets the power of AI
-            while your data stays under your control.
+            that cannot send sensitive data to public clouds. Your team gets the power
+            of AI while your data stays under your control.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/contact"
               className="rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm hover:bg-slate-900"
             >
-              Request private AI call →
+              Request assessment →
             </Link>
-            <Link
-              href="/security"
-              className="rounded-full border border-slate-300 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-900 shadow-sm hover:bg-slate-50"
-            >
-              View security posture
+            <Link href="/security" className="text-sm font-medium text-slate-800 hover:text-slate-950">
+              Review security approach →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Offer blocks */}
+      {/* Offerings */}
       <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_22px_70px_rgba(15,23,42,0.12)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              Deployment tier
-            </p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-950">
-              IronGate On-Prem
-            </h2>
-            <p className="mt-3 text-sm text-slate-700">
-              A private AI machine installed within your environment. Best for legal,
-              medical, and any practice where compliance and sovereignty are central.
-            </p>
-
-            <div className="mt-5 grid gap-3 text-sm text-slate-700">
-              <Item title="Local LLM + multimodal model" desc="Runs where your data lives." />
-              <Item title="Local vector database + retrieval" desc="Private search over your documents." />
-              <Item title="Role-based access" desc="Aligned with your org structure." />
-              <Item title="Ongoing maintenance" desc="Updates, monitoring, and refinements." />
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="rounded-full bg-slate-950 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-900"
-              >
-                Request assessment
-              </Link>
-              <Link
-                href="/faq"
-                className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-900 hover:bg-slate-50"
-              >
-                Read FAQ
-              </Link>
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_22px_70px_rgba(15,23,42,0.12)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              Deployment tier
-            </p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-950">
-              IronGate Secure GPU
-            </h2>
-            <p className="mt-3 text-sm text-slate-700">
-              A dedicated GPU instance for organizations that want strong privacy without
-              maintaining hardware. No shared models and no training on your data.
-            </p>
-
-            <div className="mt-5 grid gap-3 text-sm text-slate-700">
-              <Item title="Dedicated GPU compute" desc="Single-tenant environment." />
-              <Item title="Private retrieval stack" desc="Vector memory + RAG pipelines." />
-              <Item title="Controlled integrations" desc="Only the connectors you approve." />
-              <Item title="Operational support" desc="Monitoring, upgrades, iteration." />
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="rounded-full bg-slate-950 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-900"
-              >
-                Request assessment
-              </Link>
-              <Link
-                href="/security"
-                className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-900 hover:bg-slate-50"
-              >
-                Security details
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Add-ons */}
-      <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              Add-ons
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">
-              Agents and workflows, built around your practice.
-            </h2>
-            <p className="mt-3 text-sm text-slate-700">
-              We can build additional agents and workflows onto your IronGate system—
-              tailored to your team, your permissions, and your daily operations.
-            </p>
+          <div className="grid gap-6 lg:grid-cols-3">
+            <ServiceCard
+              tag="Core"
+              title="Private AI Machine"
+              desc="A dedicated AI stack: local LLM, local vector database, retrieval pipelines, and optional multimodal capability."
+              bullets={[
+                "Dedicated to your org (no shared endpoints)",
+                "Grounded answers from your documents",
+                "Designed around confidentiality boundaries",
+              ]}
+              accent="amber"
+            />
+            <ServiceCard
+              tag="Deployment"
+              title="On-Prem Installation"
+              desc="Hardware installed within your environment for maximum sovereignty and control."
+              bullets={[
+                "Network isolation and access control",
+                "Local data flow with clear boundaries",
+                "Best for legal, medical, regulated teams",
+              ]}
+              accent="slate"
+            />
+            <ServiceCard
+              tag="Deployment"
+              title="Secure GPU Hosting"
+              desc="A dedicated GPU instance for teams that want strong privacy without maintaining physical hardware."
+              bullets={[
+                "Dedicated instance (not shared)",
+                "Private vector DB + retrieval per org",
+                "Fast path to production capability",
+              ]}
+              accent="sky"
+            />
           </div>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <Card title="Drafting & summarization" desc="Draft internal docs, summarize records, and generate structured outputs." />
-            <Card title="Intake & routing" desc="Automate intake, triage, and routing to the right person with context." />
-            <Card title="Knowledge base Q&A" desc="Ask questions over your internal knowledge without exposing it publicly." />
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Agents & workflows
+              </p>
+              <p className="mt-3 text-sm text-slate-700">
+                For organizations that want more than Q&A: we build agents and workflows
+                on top of your private stack—scoped to your tools, your data, and your risk
+                profile.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                <li>• Drafting, summarization, and internal knowledge support</li>
+                <li>• Intake, triage, routing, and structured data capture</li>
+                <li>• Secure retrieval over policies, SOPs, and case material</li>
+              </ul>
+            </div>
+
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+              <div
+                className="h-56 w-full"
+                style={{
+                  backgroundImage:
+                    "url(https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80)",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent" />
+              <div className="relative p-7">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  Maintenance & hardening
+                </p>
+                <p className="mt-3 text-sm text-slate-700">
+                  Infrastructure requires stewardship. We maintain the system as your usage
+                  grows—upgrades, monitoring, performance tuning, and security hardening.
+                </p>
+                <p className="mt-4 text-xs uppercase tracking-[0.18em] text-slate-600">
+                  Built for serious work. Built to last.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -192,50 +130,87 @@ export default function ServicesPage() {
       {/* CTA */}
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-[0_26px_80px_rgba(15,23,42,0.14)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              Start the conversation
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">
-              Explore what private AI behind your own gate could look like.
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm text-slate-700">
-              Share a few details about your organization, and we will outline a clear,
-              practical path to installing a private AI system that fits your risk profile
-              and daily operations.
-            </p>
-            <div className="mt-6">
+          <div className="grid gap-10 md:grid-cols-2 md:items-center">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Next step
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-slate-950">
+                Let’s scope your private AI deployment.
+              </p>
+              <p className="mt-3 text-sm text-slate-700">
+                We’ll map your data flows, tools, and confidentiality requirements, then
+                recommend on-prem vs secure GPU and a practical build plan.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-950 to-slate-800 p-7 text-white shadow-[0_26px_80px_rgba(15,23,42,0.22)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                Request assessment
+              </p>
+              <p className="mt-3 text-sm text-white/80">
+                One call. Clear boundaries. Clear scope.
+              </p>
               <Link
                 href="/contact"
-                className="rounded-full bg-slate-950 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-slate-900"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-950 hover:bg-slate-100"
               >
-                Request private AI call →
+                Contact IronGate →
               </Link>
+              <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
+              <p className="mt-4 text-xs text-white/70">
+                Restoring the human touch by letting AI handle the rest.
+              </p>
             </div>
           </div>
         </div>
       </section>
+
+      <footer className="border-t border-slate-200 bg-slate-50">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-xs text-slate-500 sm:px-6 lg:px-8">
+          <span>© {new Date().getFullYear()} IronGate Systems.</span>
+          <span>Private AI, built for serious work.</span>
+        </div>
+      </footer>
     </main>
   );
 }
 
-function Item({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div className="flex gap-3">
-      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-950" />
-      <div>
-        <p className="text-sm font-semibold text-slate-900">{title}</p>
-        <p className="mt-1 text-sm text-slate-600">{desc}</p>
-      </div>
-    </div>
-  );
-}
+function ServiceCard({
+  tag,
+  title,
+  desc,
+  bullets,
+  accent,
+}: {
+  tag: string;
+  title: string;
+  desc: string;
+  bullets: string[];
+  accent: "amber" | "sky" | "slate";
+}) {
+  const bar =
+    accent === "amber"
+      ? "from-amber-300/70 via-amber-200/20 to-transparent"
+      : accent === "sky"
+      ? "from-sky-300/70 via-sky-200/20 to-transparent"
+      : "from-slate-900/25 via-slate-400/10 to-transparent";
 
-function Card({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-      <p className="text-sm font-semibold text-slate-950">{title}</p>
-      <p className="mt-2 text-sm text-slate-700">{desc}</p>
+    <div className="relative rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+      <div className={`absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-gradient-to-r ${bar}`} />
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+        {tag}
+      </p>
+      <h3 className="mt-3 text-lg font-semibold text-slate-950">{title}</h3>
+      <p className="mt-3 text-sm text-slate-700">{desc}</p>
+      <ul className="mt-4 space-y-2 text-sm text-slate-700">
+        {bullets.map((b) => (
+          <li key={b} className="flex items-start gap-2">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-950" />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
